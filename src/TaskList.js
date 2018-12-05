@@ -7,7 +7,8 @@ export default class TaskList extends Component {
         super(props)
         this.state = {
             searchTerm: '',
-            tasks: []
+            tasks: [],
+            selectedTask: null
         }
     }
 
@@ -42,6 +43,44 @@ export default class TaskList extends Component {
         })
     }
 
+    _selectTask = taskToSelect => {
+        // update search box text to task name
+        this.setState({
+            searchTerm: taskToSelect.name,
+            selectedTask: taskToSelect
+        })
+    }
+
+    _updateName = taskToUpdate => {
+        fetch('/test-react-name', {
+            method: 'post',
+            body: JSON.stringify({taskToUpdate, name: this.state.searchTerm}),
+            headers: {'Content-Type': 'application/json'}
+        })
+        .then(res => res.json())
+        .then(tasks => {
+            this.setState({
+                searchTerm: '',
+                tasks,
+                selectedTask: null
+            })
+        })
+    }
+
+    _completeTask = taskToComplete => {
+        fetch('/test-react-complete', {
+            method: 'post',
+            body: JSON.stringify(taskToComplete),
+            headers: {'Content-Type': 'application/json'}
+        })
+        .then(res => res.json())
+        .then(tasks => {
+            this.setState({
+                tasks
+            })
+        })
+    }
+
     _deleteTask = iDToDelete => {
         fetch('/test-react-delete', {
             method: 'delete', 
@@ -63,12 +102,16 @@ export default class TaskList extends Component {
                 <TaskForm searchTerm={this.state.searchTerm} 
                 onSubmit={event => {
                     event.preventDefault()
-                    this._addTask()
+                    this.state.selectedTask ? this._updateName(this.state.selectedTask) : this._addTask()
                 }} 
                 onChange={event => this._updateSearch(event.target.value)}
                 />
                 <Tasks tasks={this.state.tasks} 
+                selectTask={this._selectTask}
+                completeTask={this._completeTask}
                 deleteTask={this._deleteTask}
+                searchTerm={this.state.searchTerm}
+                selectedTask={this.state.selectedTask}
                 />
             </div>
         )
