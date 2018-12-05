@@ -51,9 +51,25 @@ export default class TaskList extends Component {
         })
     }
 
+    _updateName = taskToUpdate => {
+        fetch('/test-react-name', {
+            method: 'post',
+            body: JSON.stringify({taskToUpdate, name: this.state.searchTerm}),
+            headers: {'Content-Type': 'application/json'}
+        })
+        .then(res => res.json())
+        .then(tasks => {
+            this.setState({
+                searchTerm: '',
+                tasks,
+                selectedTask: null
+            })
+        })
+    }
+
     _completeTask = taskToComplete => {
         fetch('/test-react-complete', {
-            method: 'update',
+            method: 'post',
             body: JSON.stringify(taskToComplete),
             headers: {'Content-Type': 'application/json'}
         })
@@ -86,7 +102,7 @@ export default class TaskList extends Component {
                 <TaskForm searchTerm={this.state.searchTerm} 
                 onSubmit={event => {
                     event.preventDefault()
-                    this._addTask()
+                    this.state.selectedTask ? this._updateName(this.state.selectedTask) : this._addTask()
                 }} 
                 onChange={event => this._updateSearch(event.target.value)}
                 />
