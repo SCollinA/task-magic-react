@@ -4,7 +4,7 @@ export default function TaskForm(props) {
     return (
         <form onSubmit={props.onSubmit}>
             <input
-                value={props.term} 
+                value={props.searchTerm} 
                 onChange={props.onChange} 
                 type='text'
                 placeholder='Input Task'

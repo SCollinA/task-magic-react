@@ -30,7 +30,7 @@ export default class TaskList extends Component {
     _addTask() {
         fetch('/test-react', { 
             method: 'post', 
-            body: JSON.stringify({taskName: this.state.term}),
+            body: JSON.stringify({taskName: this.state.searchTerm}),
             headers: {'Content-Type': 'application/json'}
         })
         .then(res => res.json())
@@ -60,7 +60,7 @@ export default class TaskList extends Component {
         return (
             <div className="taskList">
                 <h1>Task List!!!</h1>
-                <TaskForm term={this.state.term} 
+                <TaskForm searchTerm={this.state.searchTerm} 
                 onSubmit={event => {
                     event.preventDefault()
                     this._addTask()
