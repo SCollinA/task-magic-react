@@ -29,25 +29,30 @@ export default class TaskList extends Component {
     }
 
     _addTask() {
-        fetch('/test-react', { 
-            method: 'post', 
-            body: JSON.stringify({taskName: this.state.searchTerm}),
-            headers: {'Content-Type': 'application/json'}
-        })
-        .then(res => res.json())
-        .then(tasks => {
-            this.setState({
-                searchTerm: '',
-                tasks
+        const taskExists = this.state.tasks.filter(task => task.name === this.state.searchTerm)
+        console.log(taskExists)
+        if (!taskExists.length > 0) {
+            fetch('/test-react', { 
+                method: 'post', 
+                body: JSON.stringify({taskName: this.state.searchTerm}),
+                headers: {'Content-Type': 'application/json'}
             })
-        })
+            .then(res => res.json())
+            .then(tasks => {
+                this.setState({
+                    searchTerm: '',
+                    tasks
+                })
+            })
+        }
     }
 
     _selectTask = taskToSelect => {
+        const deselect = this.state.selectedTask === taskToSelect
         // update search box text to task name
         this.setState({
-            searchTerm: taskToSelect.name,
-            selectedTask: taskToSelect
+            searchTerm: deselect ? '' : taskToSelect.name,
+            selectedTask: deselect ? null : taskToSelect
         })
     }
 
