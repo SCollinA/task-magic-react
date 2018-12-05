@@ -35,3 +35,7 @@
   display: flex;
   justify-content: space-around;
 }
+
+#Selected {
+  background-color: grey;
+}
