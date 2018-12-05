@@ -1,26 +1,43 @@
 import React, {Component} from 'react'
 import Tasks from './Tasks'
 import TaskForm from './TaskForm'
+import TaskHeader from './TaskHeader'
 
 export default class TaskList extends Component {
     constructor(props) {
         super(props)
         this.state = {
             searchTerm: '',
-            tasks: [],
-            selectedTask: null
+            children: [],
+            selectedTask: null,
+            user: null,
+            currentTask: null
         }
     }
 
     componentDidMount() {
         fetch('/test-react')
         .then(res => res.json())
-        .then(tasks => {
-            this.setState({
-                tasks
-            })
-        })
+        .then(data => this.setState({...data}))
     }
+
+    _login = (username, password) => {
+        fetch('/login', {
+            method: 'post',
+            body: JSON.stringify({username, password}),
+            headers: {'Content-Type': 'application/json'}
+        })
+        .then(res => res.json())
+        .then(data => this.setState({...data}))
+        .catch(console.log)
+    }
+
+    _logout = () => {
+        fetch('/logout')
+        .then(res => res.json())
+        .then(data => this.setState({...data}))
+    }
+
     _updateSearch = searchTerm => {
         console.log(`Search Term: ${searchTerm}`)
         this.setState({
@@ -29,7 +46,7 @@ export default class TaskList extends Component {
     }
 
     _addTask() {
-        const taskExists = this.state.tasks.filter(task => task.name === this.state.searchTerm)
+        const taskExists = this.state.children.filter(task => task.name === this.state.searchTerm)
         console.log(taskExists)
         if (!taskExists.length > 0) {
             fetch('/test-react', { 
@@ -38,10 +55,10 @@ export default class TaskList extends Component {
                 headers: {'Content-Type': 'application/json'}
             })
             .then(res => res.json())
-            .then(tasks => {
+            .then(data => {
                 this.setState({
                     searchTerm: '',
-                    tasks
+                    ...data
                 })
             })
         }
@@ -63,11 +80,11 @@ export default class TaskList extends Component {
             headers: {'Content-Type': 'application/json'}
         })
         .then(res => res.json())
-        .then(tasks => {
+        .then(data => {
             this.setState({
                 searchTerm: '',
-                tasks,
-                selectedTask: null
+                selectedTask: null,
+                ...data
             })
         })
     }
@@ -79,10 +96,8 @@ export default class TaskList extends Component {
             headers: {'Content-Type': 'application/json'}
         })
         .then(res => res.json())
-        .then(tasks => {
-            this.setState({
-                tasks
-            })
+        .then(data => {
+            this.setState({...data})
         })
     }
 
@@ -93,25 +108,36 @@ export default class TaskList extends Component {
             headers: {'Content-Type': 'application/json'}
         })
         .then(res => res.json())
-        .then(tasks => {
-            this.setState({
-                tasks
-            })
+        .then(data => {
+            this.setState({...data})
         })
     }
 
     render() {
         return (
             <div className="taskList">
-                <h1>Task List!!!</h1>
-                <TaskForm searchTerm={this.state.searchTerm} 
-                onSubmit={event => {
-                    event.preventDefault()
-                    this.state.selectedTask ? this._updateName(this.state.selectedTask) : this._addTask()
-                }} 
-                onChange={event => this._updateSearch(event.target.value)}
-                />
-                <Tasks tasks={this.state.tasks} 
+                <div className="header">
+                    <TaskForm searchTerm={this.state.searchTerm} 
+                    onSubmit={event => {
+                        event.preventDefault()
+                        this.state.selectedTask ? this._updateName(this.state.selectedTask) : this._addTask()
+                    }} 
+                    onChange={event => this._updateSearch(event.target.value)}
+                    />
+                    <TaskHeader user={this.state.user} 
+                    task={this.state.currentTask} 
+                    login={event => {
+                        event.preventDefault()
+                        this._login(event.target.username.value, event.target.password.value)
+                        }
+                    }
+                    logout={event => {
+                        event.preventDefault()
+                        this._logout()
+                    }
+                    }/>
+                </div>
+                <Tasks tasks={this.state.children} 
                 selectTask={this._selectTask}
                 completeTask={this._completeTask}
                 deleteTask={this._deleteTask}
