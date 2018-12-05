@@ -14,7 +14,7 @@ export default function Tasks(props){
     return (
         <div className="Tasks">
             {selectedTask}
-            {props.tasks.filter(task => task.name.includes(props.searchTerm) && (!props.selectedTask || props.selectedTask && task.id !== props.selectedTask.id))
+            {props.tasks.filter(task => task.name.includes(props.searchTerm) && (!props.selectedTask || (props.selectedTask && task.id !== props.selectedTask.id)))
             .map(task => {
             return (
             <Task
