@@ -4,7 +4,8 @@ import Task from './Task'
 export default function Tasks(props){
     return (
         <div className="Tasks">
-            {props.tasks.map(task => {
+            {props.tasks.filter(task => task.name.includes(props.searchTerm))
+            .map(task => {
             return (
             <Task
             task={task} 

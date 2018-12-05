@@ -10,8 +10,8 @@ export default function Task(props) {
             {props.selectedTask && props.selectedTask.id === props.task.id ? props.searchTerm : props.task.name}
             </h1>
             <div className="taskTimes">
-                <h4>{props.task.time_created}</h4>
                 <h4>{props.task.time_changed}</h4>
+                <h6>{props.task.time_created}</h6>
             </div>
             <h4 onClick={() => {
                 console.log(`${props.task.name} changed`)
