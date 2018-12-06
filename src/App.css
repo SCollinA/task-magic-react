@@ -66,3 +66,7 @@ html, body {
   display: flex;
   justify-content: space-around;
 }
+
+.parent {
+  background-color: lightgray;
+}

@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Task(props) {
     return (
-        <div className="Task" id={props.id}>
+        <div className={`Task ${props.parent}`} id={props.id}>
             <h1 onClick={() => {
                 console.log(`${props.task.name} selected`)
                 props.selectTask(props.task)

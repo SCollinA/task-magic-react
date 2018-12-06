@@ -12,6 +12,7 @@ export default class TaskList extends Component {
             currentTask: null,
             children: [],
             user: null,
+            userTasks: []
         }
     }
 
@@ -31,6 +32,7 @@ export default class TaskList extends Component {
         .then(res => res.json())
         .then(data => this.setState({...data}))
         .catch(console.log)
+        .then(() => this._getAllTasks())
     }
 
     _register = (userForm) => { 
@@ -67,6 +69,16 @@ export default class TaskList extends Component {
                 })
             })
         }
+    }
+
+    _getAllTasks = () => {
+        fetch('/test-react-all-tasks')
+        .then(res => res.json())
+        .then(userTasks => {
+            this.setState({
+                userTasks
+            })
+        })
     }
 
     _selectTask = taskToSelect => {
@@ -164,13 +176,11 @@ export default class TaskList extends Component {
                     }
                     }/>
                 </div>
-                <Tasks children={this.state.children}
-                parents={this.state.parents}
+                <Tasks children={this.state.searchTerm ? this.state.userTasks : this.state.children}
+                parents={this.state.searchTerm ? [] : this.state.parents}
                 selectTask={this._selectTask}
                 completeTask={this._completeTask}
                 deleteTask={this._deleteTask}
-                searchTerm={this.state.searchTerm}
-                selectedTask={this.state.selectedTask}
                 />
             </div>
         )
