@@ -22,7 +22,7 @@ export default class TaskList extends Component {
     }
 
     _login = (eventTarget) => {
-        const url = eventTarget.login === 'login' ? '/login' : '/register'
+        const url = eventTarget.login.name === 'login' ? '/login' : '/register'
         fetch(url, {
             method: 'post',
             body: JSON.stringify({username: eventTarget.username.value, password: eventTarget.password.value}),
