@@ -8,10 +8,10 @@ export default class TaskList extends Component {
         super(props)
         this.state = {
             searchTerm: '',
+            parents: [],
+            currentTask: null,
             children: [],
-            selectedTask: null,
             user: null,
-            currentTask: null
         }
     }
 
@@ -70,12 +70,22 @@ export default class TaskList extends Component {
     }
 
     _selectTask = taskToSelect => {
-        const deselect = this.state.selectedTask === taskToSelect
         // update search box text to task name
-        this.setState({
-            searchTerm: deselect ? '' : taskToSelect.name,
-            selectedTask: deselect ? null : taskToSelect
+        fetch('/test-react-task', {
+            method: 'post',
+            body: JSON.stringify({taskToSelect}),
+            headers: {'Content-Type': 'application/json'}
         })
+        .then(res => res.json())
+        .then(data => {
+            this.setState({
+                ...data
+            })
+        })
+        // this.setState({
+        //     currentTask: taskToSelect,
+        //     children: taskToSelect.children
+        // })
     }
 
     _updateName = taskToUpdate => {
@@ -128,7 +138,7 @@ export default class TaskList extends Component {
                         this.state.selectedTask ? this._updateName(this.state.selectedTask) : this._addTask()
                     }} 
                     onChange={event => this._updateSearch(event.target.value)}
-                    task={this.state.currentTask} 
+                    currentTask={this.state.currentTask} 
                     />
                     <UserForm user={this.state.user} 
                     login={event => {
@@ -143,7 +153,8 @@ export default class TaskList extends Component {
                     }
                     }/>
                 </div>
-                <Tasks tasks={this.state.children} 
+                <Tasks children={this.state.children}
+                parents={this.state.parents}
                 selectTask={this._selectTask}
                 completeTask={this._completeTask}
                 deleteTask={this._deleteTask}

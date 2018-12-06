@@ -7,11 +7,12 @@ export default function Task(props) {
                 console.log(`${props.task.name} selected`)
                 props.selectTask(props.task)
             }}>
-                {props.selectedTask && props.selectedTask.id === props.task.id ? props.searchTerm : props.task.name}
+                {props.task.name}
+                {/* {props.selectedTask && props.selectedTask.id === props.task.id ? props.searchTerm : props.task.name} */}
             </h1>
             <div className="childNames">
                 <p>
-                    {props.task.children.map(child => child.name).join(', ')}
+                    {props.task.children && props.task.children.map(child => child.name).join(', ')}
                 </p>
             </div>
             <div className="taskTimes">
