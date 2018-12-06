@@ -40,10 +40,12 @@
   /* margin: auto; */
 }
 
-.UserLogin {
+.UserForm {
   display: flex;
   flex-direction: column;
 }
+
+
 
 .Task {
   display: flex;

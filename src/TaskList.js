@@ -21,16 +21,20 @@ export default class TaskList extends Component {
         .then(data => this.setState({...data}))
     }
 
-    _login = (eventTarget) => {
-        const url = eventTarget.login.name === 'login' ? '/login' : '/register'
+    _login = (username, password, login) => {
+        const url = login ? '/login' : '/register'
         fetch(url, {
             method: 'post',
-            body: JSON.stringify({username: eventTarget.username.value, password: eventTarget.password.value}),
+            body: JSON.stringify({username, password}),
             headers: {'Content-Type': 'application/json'}
         })
         .then(res => res.json())
         .then(data => this.setState({...data}))
         .catch(console.log)
+    }
+
+    _register = (userForm) => { 
+        this._login(userForm.username.value, userForm.password.value, false)
     }
 
     _logout = () => {
@@ -124,16 +128,17 @@ export default class TaskList extends Component {
                         this.state.selectedTask ? this._updateName(this.state.selectedTask) : this._addTask()
                     }} 
                     onChange={event => this._updateSearch(event.target.value)}
+                    task={this.state.currentTask} 
                     />
                     <UserForm user={this.state.user} 
-                    task={this.state.currentTask} 
                     login={event => {
                         event.preventDefault()
-                        this._login(event.target)
-                        }
-                    }
-                    logout={event => {
-                        event.preventDefault()
+                        this._login(event.target.username.value, event.target.password.value, true)
+                    }}
+                    register={event => {
+                        this._register(event.nativeEvent.path[1])
+                    }}
+                    logout={() => {
                         this._logout()
                     }
                     }/>
