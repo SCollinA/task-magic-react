@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import Tasks from './Tasks'
 import TaskForm from './TaskForm'
-import TaskHeader from './TaskHeader'
+import UserForm from './UserForm'
 
 export default class TaskList extends Component {
     constructor(props) {
@@ -21,10 +21,11 @@ export default class TaskList extends Component {
         .then(data => this.setState({...data}))
     }
 
-    _login = (username, password) => {
-        fetch('/login', {
+    _login = (eventTarget) => {
+        const url = eventTarget.login === 'login' ? '/login' : '/register'
+        fetch(url, {
             method: 'post',
-            body: JSON.stringify({username, password}),
+            body: JSON.stringify({username: eventTarget.username.value, password: eventTarget.password.value}),
             headers: {'Content-Type': 'application/json'}
         })
         .then(res => res.json())
@@ -124,11 +125,11 @@ export default class TaskList extends Component {
                     }} 
                     onChange={event => this._updateSearch(event.target.value)}
                     />
-                    <TaskHeader user={this.state.user} 
+                    <UserForm user={this.state.user} 
                     task={this.state.currentTask} 
                     login={event => {
                         event.preventDefault()
-                        this._login(event.target.username.value, event.target.password.value)
+                        this._login(event.target)
                         }
                     }
                     logout={event => {
