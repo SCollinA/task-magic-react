@@ -118,8 +118,8 @@ export default class TaskList extends Component {
 
     _deleteTask = iDToDelete => {
         fetch('/test-react-delete', {
-            method: 'delete', 
-            body: JSON.stringify({taskID: iDToDelete}),
+            method: 'post', 
+            body: JSON.stringify({iDToDelete}),
             headers: {'Content-Type': 'application/json'}
         })
         .then(res => res.json())
@@ -140,6 +140,17 @@ export default class TaskList extends Component {
                     onChange={event => this._updateSearch(event.target.value)}
                     currentTask={this.state.currentTask} 
                     />
+                    <div className='TaskInfo'>
+                        <ul>
+                            <li>Active: {this.state.currentTask && ((this.state.currentTask.active && 'true') || 'false')} </li>
+                            <li>Time Changed: {this.state.currentTask && this.state.currentTask.time_changed}</li>
+                            <li>Time Created: {this.state.currentTask && this.state.currentTask.time_created}</li>
+                        </ul>
+                        <button 
+                        name='deleteTask' 
+                        onClick={() => this._deleteTask(this.state.currentTask.id)}
+                        >Delete this task</button>
+                    </div>
                     <UserForm user={this.state.user} 
                     login={event => {
                         event.preventDefault()
