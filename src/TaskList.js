@@ -20,6 +20,7 @@ export default class TaskList extends Component {
         fetch('/test-react')
         .then(res => res.json())
         .then(data => this.setState({...data}))
+        .then(() => this._getAllTasks())
     }
 
     _login = (username, password, login) => {
@@ -176,7 +177,7 @@ export default class TaskList extends Component {
                     }
                     }/>
                 </div>
-                <Tasks children={this.state.searchTerm ? this.state.userTasks : this.state.children}
+                <Tasks children={this.state.searchTerm ? this.state.userTasks.filter(task => task.name.includes(this.state.searchTerm)) : this.state.children}
                 parents={this.state.searchTerm ? [] : this.state.parents}
                 selectTask={this._selectTask}
                 completeTask={this._completeTask}
