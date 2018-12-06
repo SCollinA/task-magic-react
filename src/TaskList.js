@@ -130,7 +130,7 @@ export default class TaskList extends Component {
 
     render() {
         return (
-            <div className="taskList">
+            <div className="TaskList">
                 <div className="header">
                     <TaskForm searchTerm={this.state.searchTerm} 
                     onSubmit={event => {
