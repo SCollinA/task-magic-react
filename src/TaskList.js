@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import Tasks from './Tasks'
 import TaskForm from './TaskForm'
 import UserForm from './UserForm'
+const urlPrefix = '/api'
 
 export default class TaskList extends Component {
     constructor(props) {
@@ -24,7 +25,7 @@ export default class TaskList extends Component {
     }
 
     _login = (username, password, login) => {
-        const url = login ? '/login' : '/register'
+        const url = login ? `${urlPrefix}/login` : `${urlPrefix}/register`
         fetch(url, {
             method: 'post',
             body: JSON.stringify({username, password}),
@@ -41,7 +42,7 @@ export default class TaskList extends Component {
     }
 
     _logout = () => {
-        fetch('/logout')
+        fetch(`${urlPrefix}/logout`)
         .then(res => res.json())
         .then(data => this.setState({...data}))
     }
@@ -57,7 +58,7 @@ export default class TaskList extends Component {
         const taskExists = this.state.children.filter(task => task.name === this.state.searchTerm)
         console.log(taskExists)
         if (!taskExists.length > 0) {
-            fetch('/test-react', { 
+            fetch(`${urlPrefix}/test-react`, { 
                 method: 'post', 
                 body: JSON.stringify({taskName: this.state.searchTerm}),
                 headers: {'Content-Type': 'application/json'}
@@ -84,7 +85,7 @@ export default class TaskList extends Component {
 
     _selectTask = taskToSelect => {
         // update search box text to task name
-        fetch('/test-react-task', {
+        fetch(`${urlPrefix}/test-react-task`, {
             method: 'post',
             body: JSON.stringify({taskToSelect}),
             headers: {'Content-Type': 'application/json'}
@@ -99,7 +100,7 @@ export default class TaskList extends Component {
     }
 
     _updateName = taskToUpdate => {
-        fetch('/test-react-name', {
+        fetch(`${urlPrefix}/test-react-name`, {
             method: 'post',
             body: JSON.stringify({taskToUpdate, name: this.state.searchTerm}),
             headers: {'Content-Type': 'application/json'}
@@ -115,7 +116,7 @@ export default class TaskList extends Component {
     }
 
     _completeTask = taskToComplete => {
-        fetch('/test-react-complete', {
+        fetch(`${urlPrefix}/test-react-complete`, {
             method: 'post',
             body: JSON.stringify(taskToComplete),
             headers: {'Content-Type': 'application/json'}
@@ -127,7 +128,7 @@ export default class TaskList extends Component {
     }
 
     _deleteTask = iDToDelete => {
-        fetch('/test-react-delete', {
+        fetch(`${urlPrefix}/test-react-delete`, {
             method: 'post', 
             body: JSON.stringify({iDToDelete}),
             headers: {'Content-Type': 'application/json'}
