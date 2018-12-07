@@ -12,6 +12,7 @@ export default class TaskList extends Component {
             currentTask: null,
             children: [],
             user: null,
+            userTasks: []
         }
     }
 
@@ -19,6 +20,7 @@ export default class TaskList extends Component {
         fetch('/test-react')
         .then(res => res.json())
         .then(data => this.setState({...data}))
+        // .then(() => this.state.user && this._getAllTasks())
     }
 
     _login = (username, password, login) => {
@@ -31,6 +33,7 @@ export default class TaskList extends Component {
         .then(res => res.json())
         .then(data => this.setState({...data}))
         .catch(console.log)
+        // .then(() => this.state.user && this._getAllTasks())
     }
 
     _register = (userForm) => { 
@@ -69,6 +72,16 @@ export default class TaskList extends Component {
         }
     }
 
+    // _getAllTasks = () => {
+    //     fetch('/test-react-all-tasks')
+    //     .then(res => res.json())
+    //     .then(userTasks => {
+    //         this.setState({
+    //             userTasks
+    //         })
+    //     })
+    // }
+
     _selectTask = taskToSelect => {
         // update search box text to task name
         fetch('/test-react-task', {
@@ -79,13 +92,10 @@ export default class TaskList extends Component {
         .then(res => res.json())
         .then(data => {
             this.setState({
-                ...data
+                ...data,
+                searchTerm: ''
             })
         })
-        // this.setState({
-        //     currentTask: taskToSelect,
-        //     children: taskToSelect.children
-        // })
     }
 
     _updateName = taskToUpdate => {
@@ -118,8 +128,8 @@ export default class TaskList extends Component {
 
     _deleteTask = iDToDelete => {
         fetch('/test-react-delete', {
-            method: 'delete', 
-            body: JSON.stringify({taskID: iDToDelete}),
+            method: 'post', 
+            body: JSON.stringify({iDToDelete}),
             headers: {'Content-Type': 'application/json'}
         })
         .then(res => res.json())
@@ -140,6 +150,13 @@ export default class TaskList extends Component {
                     onChange={event => this._updateSearch(event.target.value)}
                     currentTask={this.state.currentTask} 
                     />
+                    <div className='TaskInfo'>
+                        <ul>
+                            <li>Active: {this.state.currentTask && ((this.state.currentTask.active && 'true') || 'false')} </li>
+                            <li>Time Changed: {this.state.currentTask && this.state.currentTask.time_changed}</li>
+                            <li>Time Created: {this.state.currentTask && this.state.currentTask.time_created}</li>
+                        </ul>
+                    </div>
                     <UserForm user={this.state.user} 
                     login={event => {
                         event.preventDefault()
@@ -153,13 +170,11 @@ export default class TaskList extends Component {
                     }
                     }/>
                 </div>
-                <Tasks children={this.state.children}
-                parents={this.state.parents}
+                <Tasks children={this.state.searchTerm ? this.state.userTasks.filter(task => task.name.includes(this.state.searchTerm)) : this.state.children}
+                parents={this.state.searchTerm ? [] : this.state.parents}
                 selectTask={this._selectTask}
                 completeTask={this._completeTask}
                 deleteTask={this._deleteTask}
-                searchTerm={this.state.searchTerm}
-                selectedTask={this.state.selectedTask}
                 />
             </div>
         )

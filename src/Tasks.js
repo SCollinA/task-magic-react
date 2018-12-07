@@ -2,20 +2,9 @@ import React from 'react'
 import Task from './Task'
 
 export default function Tasks(props){
-    // const selectedTask = props.selectedTask ? <Task task={props.selectedTask}
-    // key={props.selectedTask.id}
-    // selectTask={props.selectTask}
-    // completeTask={props.completeTask}
-    // deleteTask={props.deleteTask} 
-    // searchTerm={props.searchTerm}
-    // selectedTask={props.selectedTask}
-    // id="Selected"
-    // /> : null
     return (
         <div className="Tasks">
-            {/* {selectedTask} */}
-            {props.children.filter(child => child.name.includes(props.searchTerm))
-            .map(child => {
+            {props.children.map(child => {
             return (
             <Task
             task={child} 
@@ -23,11 +12,10 @@ export default function Tasks(props){
             selectTask={props.selectTask}
             completeTask={props.completeTask}
             deleteTask={props.deleteTask} 
-            searchTerm={props.searchTerm}
+            parent={''}
             />
             )})}
-            {props.parents.filter(parent => parent.name.includes(props.searchTerm))
-            .map(parent => {
+            {props.parents.map(parent => {
             return (
             <Task
             task={parent} 
@@ -35,7 +23,7 @@ export default function Tasks(props){
             selectTask={props.selectTask}
             completeTask={props.completeTask}
             deleteTask={props.deleteTask} 
-            searchTerm={props.searchTerm}
+            parent={'parent'}
             />
             )})}
         </div>
