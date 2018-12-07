@@ -53,6 +53,11 @@ export default class TaskList extends Component {
         this.setState({
             searchTerm
         }, () => console.log('updated search term'))
+        if (this.state.taskToEdit) {
+            this.setState({
+                currentTask: {...this.state.currentTask, name: this.state.searchTerm}
+            }, () => console.log('edited current task name'))   
+        }
     }
 
     _addTask() {
@@ -175,8 +180,8 @@ export default class TaskList extends Component {
                     }
                     }/>
                 </div>
-                <Tasks children={this.state.searchTerm ? this.state.userTasks.filter(task => task.name.includes(this.state.searchTerm)) : this.state.children}
-                parents={this.state.searchTerm ? [] : this.state.parents}
+                <Tasks children={(this.state.searchTerm && !this.state.taskToEdit) ? this.state.userTasks.filter(task => task.name.includes(this.state.searchTerm)) : this.state.children}
+                parents={(this.state.searchTerm && !this.state.taskToEdit) ? [] : this.state.parents}
                 selectTask={this._selectTask}
                 completeTask={this._completeTask}
                 deleteTask={this._deleteTask}
