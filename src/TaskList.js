@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import Tasks from './Tasks'
 import TaskForm from './TaskForm'
+import TaskInfo from './TaskInfo'
 import UserForm from './UserForm'
 const urlPrefix = '/api'
 
@@ -94,8 +95,16 @@ export default class TaskList extends Component {
         .then(data => {
             this.setState({
                 ...data,
-                searchTerm: ''
+                searchTerm: '',
+                taskToEdit: null
             })
+        })
+    }
+
+    _editTask = taskToEdit => {
+        this.setState({
+            searchTerm: taskToEdit.name,
+            taskToEdit
         })
     }
 
@@ -109,7 +118,7 @@ export default class TaskList extends Component {
         .then(data => {
             this.setState({
                 searchTerm: '',
-                selectedTask: null,
+                taskToEdit: null,
                 ...data
             })
         })
@@ -146,18 +155,13 @@ export default class TaskList extends Component {
                     <TaskForm searchTerm={this.state.searchTerm} 
                     onSubmit={event => {
                         event.preventDefault()
-                        this.state.selectedTask ? this._updateName(this.state.selectedTask) : this._addTask()
+                        this.state.taskToEdit ? this._updateName(this.state.taskToEdit) : this._addTask()
                     }} 
+                    editTask={this._editTask}
                     onChange={event => this._updateSearch(event.target.value)}
                     currentTask={this.state.currentTask} 
                     />
-                    <div className='TaskInfo'>
-                        <ul>
-                            <li>Active: {this.state.currentTask && ((this.state.currentTask.active && 'true') || 'false')} </li>
-                            <li>Time Changed: {this.state.currentTask && this.state.currentTask.time_changed}</li>
-                            <li>Time Created: {this.state.currentTask && this.state.currentTask.time_created}</li>
-                        </ul>
-                    </div>
+                    <TaskInfo currentTask={this.state.currentTask}/>
                     <UserForm user={this.state.user} 
                     login={event => {
                         event.preventDefault()
