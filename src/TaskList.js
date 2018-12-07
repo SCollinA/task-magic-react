@@ -51,10 +51,10 @@ export default class TaskList extends Component {
 
     _updateSearch = searchTerm => {
         console.log(`Search Term: ${searchTerm}`)
-        const currentTask = this.state.taskToEdit ? {...this.state.currentTask, name: searchTerm} : this.state.currentTask
+        // const currentTask = this.state.taskToEdit ? {...this.state.currentTask, name: searchTerm} : this.state.currentTask
         this.setState({
             searchTerm,
-            currentTask
+            // currentTask
         }
         // , () => {
         //     console.log('updated search term')
@@ -65,6 +65,13 @@ export default class TaskList extends Component {
         //     }
         // }
         )
+    }
+
+    _resetSearch = () => {
+        this.setState({
+            searchTerm: '',
+            taskToEdit: null,
+        })
     }
 
     _addTask() {
@@ -176,7 +183,8 @@ export default class TaskList extends Component {
                         this.state.taskToEdit ? this._updateName(this.state.taskToEdit) : this._addTask()}} 
                     editTask={this._editTask}
                     onChange={event => this._updateSearch(event.target.value)}
-                    currentTask={this.state.currentTask} 
+                    currentTask={this.state.taskToEdit ? {...this.state.currentTask, name: this.state.searchTerm} : this.state.currentTask}
+                    onReset={this._resetSearch} 
                     />
                     <TaskInfo currentTask={this.state.currentTask}/>
                     <UserForm user={this.state.user} 
