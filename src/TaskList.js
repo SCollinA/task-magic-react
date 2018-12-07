@@ -52,15 +52,18 @@ export default class TaskList extends Component {
     _updateSearch = searchTerm => {
         console.log(`Search Term: ${searchTerm}`)
         this.setState({
-            searchTerm
-        }, () => {
-            console.log('updated search term')
-            if (this.state.taskToEdit) {
-                this.setState({
-                    currentTask: {...this.state.currentTask, name: this.state.searchTerm}
-                }, () => console.log('edited current task name'))   
-            }
-        })
+            searchTerm,
+            currentTask: {...this.state.currentTask, name: searchTerm}
+        }
+        // , () => {
+        //     console.log('updated search term')
+        //     if (this.state.taskToEdit) {
+        //         this.setState({
+        //             currentTask: {...this.state.currentTask, name: this.state.searchTerm}
+        //         }, () => console.log('edited current task name'))   
+        //     }
+        // }
+        )
     }
 
     _addTask() {
