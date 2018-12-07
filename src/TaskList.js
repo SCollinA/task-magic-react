@@ -18,7 +18,7 @@ export default class TaskList extends Component {
     }
 
     componentDidMount() {
-        fetch('/test-react')
+        fetch(`${urlPrefix}/test-react`)
         .then(res => res.json())
         .then(data => this.setState({...data}))
         // .then(() => this.state.user && this._getAllTasks())
