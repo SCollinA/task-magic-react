@@ -14,7 +14,8 @@ export default class TaskList extends Component {
             currentTask: null,
             children: [],
             user: null,
-            userTasks: []
+            userTasks: [],
+            taskToEdit: null
         }
     }
 
@@ -52,12 +53,14 @@ export default class TaskList extends Component {
         console.log(`Search Term: ${searchTerm}`)
         this.setState({
             searchTerm
-        }, () => console.log('updated search term'))
-        if (this.state.taskToEdit) {
-            this.setState({
-                currentTask: {...this.state.currentTask, name: this.state.searchTerm}
-            }, () => console.log('edited current task name'))   
-        }
+        }, () => {
+            console.log('updated search term')
+            if (this.state.taskToEdit) {
+                this.setState({
+                    currentTask: {...this.state.currentTask, name: this.state.searchTerm}
+                }, () => console.log('edited current task name'))   
+            }
+        })
     }
 
     _addTask() {
@@ -110,7 +113,13 @@ export default class TaskList extends Component {
         this.setState({
             searchTerm: taskToEdit.name,
             taskToEdit
-        })
+        }
+        // , () => {
+        //     this.setState({
+        //         currentTask: {...this.state.currentTask, name: this.state.searchTerm}
+        //     }, () => console.log(`set current task to ${this.state.searchTerm}`))
+        // }
+        )
     }
 
     _updateName = taskToUpdate => {
@@ -160,8 +169,7 @@ export default class TaskList extends Component {
                     <TaskForm searchTerm={this.state.searchTerm} 
                     onSubmit={event => {
                         event.preventDefault()
-                        this.state.taskToEdit ? this._updateName(this.state.taskToEdit) : this._addTask()
-                    }} 
+                        this.state.taskToEdit ? this._updateName(this.state.taskToEdit) : this._addTask()}} 
                     editTask={this._editTask}
                     onChange={event => this._updateSearch(event.target.value)}
                     currentTask={this.state.currentTask} 
