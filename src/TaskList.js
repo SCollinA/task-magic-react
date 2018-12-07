@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import Tasks from './Tasks'
 import TaskForm from './TaskForm'
+import TaskInfo from './TaskInfo'
 import UserForm from './UserForm'
 const urlPrefix = '/api'
 
@@ -13,7 +14,8 @@ export default class TaskList extends Component {
             currentTask: null,
             children: [],
             user: null,
-            userTasks: []
+            userTasks: [],
+            taskToEdit: null
         }
     }
 
@@ -49,9 +51,27 @@ export default class TaskList extends Component {
 
     _updateSearch = searchTerm => {
         console.log(`Search Term: ${searchTerm}`)
+        // const currentTask = this.state.taskToEdit ? {...this.state.currentTask, name: searchTerm} : this.state.currentTask
         this.setState({
-            searchTerm
-        }, () => console.log('updated search term'))
+            searchTerm,
+            // currentTask
+        }
+        // , () => {
+        //     console.log('updated search term')
+        //     if (this.state.taskToEdit) {
+        //         this.setState({
+        //             currentTask: {...this.state.currentTask, name: this.state.searchTerm}
+        //         }, () => console.log('edited current task name'))   
+        //     }
+        // }
+        )
+    }
+
+    _resetSearch = () => {
+        this.setState({
+            searchTerm: '',
+            taskToEdit: null,
+        })
     }
 
     _addTask() {
@@ -94,9 +114,23 @@ export default class TaskList extends Component {
         .then(data => {
             this.setState({
                 ...data,
-                searchTerm: ''
+                searchTerm: '',
+                taskToEdit: null
             })
         })
+    }
+
+    _editTask = taskToEdit => {
+        this.setState({
+            searchTerm: taskToEdit.name,
+            taskToEdit
+        }
+        // , () => {
+        //     this.setState({
+        //         currentTask: {...this.state.currentTask, name: this.state.searchTerm}
+        //     }, () => console.log(`set current task to ${this.state.searchTerm}`))
+        // }
+        )
     }
 
     _updateName = taskToUpdate => {
@@ -109,7 +143,7 @@ export default class TaskList extends Component {
         .then(data => {
             this.setState({
                 searchTerm: '',
-                selectedTask: null,
+                taskToEdit: null,
                 ...data
             })
         })
@@ -146,18 +180,13 @@ export default class TaskList extends Component {
                     <TaskForm searchTerm={this.state.searchTerm} 
                     onSubmit={event => {
                         event.preventDefault()
-                        this.state.selectedTask ? this._updateName(this.state.selectedTask) : this._addTask()
-                    }} 
+                        this.state.taskToEdit ? this._updateName(this.state.taskToEdit) : this._addTask()}} 
+                    editTask={this._editTask}
                     onChange={event => this._updateSearch(event.target.value)}
-                    currentTask={this.state.currentTask} 
+                    currentTask={this.state.taskToEdit ? {...this.state.currentTask, name: this.state.searchTerm} : this.state.currentTask}
+                    onReset={this._resetSearch} 
                     />
-                    <div className='TaskInfo'>
-                        <ul>
-                            <li>Active: {this.state.currentTask && ((this.state.currentTask.active && 'true') || 'false')} </li>
-                            <li>Time Changed: {this.state.currentTask && this.state.currentTask.time_changed}</li>
-                            <li>Time Created: {this.state.currentTask && this.state.currentTask.time_created}</li>
-                        </ul>
-                    </div>
+                    <TaskInfo currentTask={this.state.currentTask}/>
                     <UserForm user={this.state.user} 
                     login={event => {
                         event.preventDefault()
@@ -171,8 +200,8 @@ export default class TaskList extends Component {
                     }
                     }/>
                 </div>
-                <Tasks children={this.state.searchTerm ? this.state.userTasks.filter(task => task.name.includes(this.state.searchTerm)) : this.state.children}
-                parents={this.state.searchTerm ? [] : this.state.parents}
+                <Tasks children={(this.state.searchTerm && !this.state.taskToEdit) ? this.state.userTasks.filter(task => task.name.includes(this.state.searchTerm)) : this.state.children}
+                parents={(this.state.searchTerm && !this.state.taskToEdit) ? [] : this.state.parents}
                 selectTask={this._selectTask}
                 completeTask={this._completeTask}
                 deleteTask={this._deleteTask}
