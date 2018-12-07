@@ -20,7 +20,7 @@ export default class TaskList extends Component {
         fetch('/test-react')
         .then(res => res.json())
         .then(data => this.setState({...data}))
-        .then(() => this._getAllTasks())
+        // .then(() => this.state.user && this._getAllTasks())
     }
 
     _login = (username, password, login) => {
@@ -33,7 +33,7 @@ export default class TaskList extends Component {
         .then(res => res.json())
         .then(data => this.setState({...data}))
         .catch(console.log)
-        .then(() => this._getAllTasks())
+        // .then(() => this.state.user && this._getAllTasks())
     }
 
     _register = (userForm) => { 
@@ -72,15 +72,15 @@ export default class TaskList extends Component {
         }
     }
 
-    _getAllTasks = () => {
-        fetch('/test-react-all-tasks')
-        .then(res => res.json())
-        .then(userTasks => {
-            this.setState({
-                userTasks
-            })
-        })
-    }
+    // _getAllTasks = () => {
+    //     fetch('/test-react-all-tasks')
+    //     .then(res => res.json())
+    //     .then(userTasks => {
+    //         this.setState({
+    //             userTasks
+    //         })
+    //     })
+    // }
 
     _selectTask = taskToSelect => {
         // update search box text to task name
@@ -92,13 +92,10 @@ export default class TaskList extends Component {
         .then(res => res.json())
         .then(data => {
             this.setState({
-                ...data
+                ...data,
+                searchTerm: ''
             })
         })
-        // this.setState({
-        //     currentTask: taskToSelect,
-        //     children: taskToSelect.children
-        // })
     }
 
     _updateName = taskToUpdate => {
@@ -159,10 +156,6 @@ export default class TaskList extends Component {
                             <li>Time Changed: {this.state.currentTask && this.state.currentTask.time_changed}</li>
                             <li>Time Created: {this.state.currentTask && this.state.currentTask.time_created}</li>
                         </ul>
-                        <button 
-                        name='deleteTask' 
-                        onClick={() => this._deleteTask(this.state.currentTask.id)}
-                        >Delete this task</button>
                     </div>
                     <UserForm user={this.state.user} 
                     login={event => {

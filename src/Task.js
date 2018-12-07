@@ -10,11 +10,18 @@ export default function Task(props) {
                 {props.task.name}
                 {/* {props.selectedTask && props.selectedTask.id === props.task.id ? props.searchTerm : props.task.name} */}
             </h1>
-            <div className="childNames">
+            {
+                props.task.active ? 
+            (<div className="childNames">
                 <p>
                     {props.task.children && props.task.children.map(child => child.name).join(', ')}
                 </p>
-            </div>
+            </div>) :
+            (<button 
+                name='deleteTask' 
+                onClick={() => props.deleteTask(props.task.id)}
+                >Delete task</button>) 
+            }
             <div className="taskTimes">
                 <h4>{props.task.time_changed}</h4>
                 <h6>{props.task.time_created}</h6>
