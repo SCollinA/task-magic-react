@@ -22,7 +22,7 @@ export default function Tasks(props){
             task={parent} 
             key={parent.id} 
             selectTask={props.selectTask}
-            editTask={props.editTask}
+            editTask={props.selectTask}
             completeTask={props.completeTask}
             deleteTask={props.deleteTask} 
             className={'parent'/* this adds the parent class*/}

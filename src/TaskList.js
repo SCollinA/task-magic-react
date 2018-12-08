@@ -104,7 +104,7 @@ export default class TaskList extends Component {
     // }
     
     _selectTask = taskToSelect => {
-        if (this.state.taskToEdit && taskToSelect.id == this.state.taskToEdit.id) {
+        // if (this.state.taskToEdit && taskToSelect.id == this.state.taskToEdit.id) {
             console.log(`selecting task ${taskToSelect.name}`)
             // update search box text to task name
             fetch(`${urlPrefix}/test-react-task`, {
@@ -120,7 +120,7 @@ export default class TaskList extends Component {
                     taskToEdit: null
                 })
             })
-        }
+        // }
     }
 
     _editTask = taskToEdit => {
@@ -210,7 +210,8 @@ export default class TaskList extends Component {
                 </div>
                 <Tasks children={(this.state.searchTerm && !this.state.taskToEdit) ? this.state.userTasks.filter(task => task.name.includes(this.state.searchTerm)) : this.state.children}
                 parents={(this.state.searchTerm && !this.state.taskToEdit) ? [] : this.state.parents}
-                selectTask={!this.state.taskToEdit || this._selectTask}
+                selectTask={this._selectTask}
+                // selectTask={!this.state.taskToEdit || this._selectTask}
                 editTask={this._editTask}
                 completeTask={this._completeTask}
                 deleteTask={this._deleteTask}

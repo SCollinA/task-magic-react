@@ -7,7 +7,7 @@ export default function Task(props) {
         id={props.id} 
         onClick={() => {
             // should select task for editing
-            console.log('editing task')
+            console.log('clicked task div')
             props.editTask(props.task)
         }}>
             <h1 >
@@ -18,8 +18,8 @@ export default function Task(props) {
             (<div 
             className="childNames" 
             onClick={() => {
-                console.log(`${props.task.name} selected`)
-                props.selectTask(props.task)
+                // console.log(`${props.task.name} selected`)
+                // props.selectTask(props.task)
             }}>
                 <p>
                     {props.task.children && props.task.children.map(child => child.name).join(', ')}
