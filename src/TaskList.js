@@ -121,16 +121,19 @@ export default class TaskList extends Component {
     }
 
     _editTask = taskToEdit => {
-        this.setState({
-            searchTerm: taskToEdit.name,
-            taskToEdit
+        // if there is no current task to edit, OR this is a new taskToEdit
+        if (!this.state.taskToEdit || taskToEdit.id != this.state.taskToEdit.id) {
+            this.setState({
+                searchTerm: taskToEdit.name,
+                taskToEdit
+            })
+        } else {
+            // there is a current task and this task to edit is already being edited, so deselect
+            this.setState({
+                searchTerm: '',
+                taskToEdit: null
+            })
         }
-        // , () => {
-        //     this.setState({
-        //         currentTask: {...this.state.currentTask, name: this.state.searchTerm}
-        //     }, () => console.log(`set current task to ${this.state.searchTerm}`))
-        // }
-        )
     }
 
     _updateName = taskToUpdate => {
