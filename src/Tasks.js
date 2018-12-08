@@ -10,9 +10,10 @@ export default function Tasks(props){
             task={child} 
             key={child.id} 
             selectTask={props.selectTask}
+            editTask={props.editTask}
             completeTask={props.completeTask}
             deleteTask={props.deleteTask} 
-            parent={''}
+            className={''}
             />
             )})}
             {props.parents.map(parent => {
@@ -21,9 +22,10 @@ export default function Tasks(props){
             task={parent} 
             key={parent.id} 
             selectTask={props.selectTask}
+            editTask={props.editTask}
             completeTask={props.completeTask}
             deleteTask={props.deleteTask} 
-            parent={'parent'}
+            className={'parent'/* this adds the parent class*/}
             />
             )})}
         </div>

@@ -202,7 +202,8 @@ export default class TaskList extends Component {
                 </div>
                 <Tasks children={(this.state.searchTerm && !this.state.taskToEdit) ? this.state.userTasks.filter(task => task.name.includes(this.state.searchTerm)) : this.state.children}
                 parents={(this.state.searchTerm && !this.state.taskToEdit) ? [] : this.state.parents}
-                selectTask={this._selectTask}
+                selectTask={!this.state.taskToEdit || this._selectTask}
+                editTask={this._editTask}
                 completeTask={this._completeTask}
                 deleteTask={this._deleteTask}
                 />
