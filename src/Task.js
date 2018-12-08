@@ -4,23 +4,25 @@ export default function Task(props) {
     return (
         <div className={`Task ${props.parent}`} id={props.id}>
             <h1 onClick={() => {
-                console.log(`${props.task.name} selected`)
-                props.selectTask(props.task)
+                // should select task for editing
             }}>
                 {props.task.name}
                 {/* {props.selectedTask && props.selectedTask.id === props.task.id ? props.searchTerm : props.task.name} */}
             </h1>
             {
                 props.task.active ? 
-            (<div className="childNames">
-                <p>
-                    {props.task.children && props.task.children.map(child => child.name).join(', ')}
-                </p>
-            </div>) :
-            (<button 
-                name='deleteTask' 
-                onClick={() => props.deleteTask(props.task.id)}
-                >Delete task</button>) 
+                (<div className="childNames" onClick={() => {
+                        console.log(`${props.task.name} selected`)
+                        props.selectTask(props.task)
+                }}>
+                    <p>
+                        {props.task.children && props.task.children.map(child => child.name).join(', ')}
+                    </p>
+                </div>) :
+                (<button 
+                    name='deleteTask' 
+                    onClick={() => props.deleteTask(props.task.id)}
+                    >Delete task</button>) 
             }
             <div className="taskTimes">
                 <h4>{props.task.time_changed}</h4>
