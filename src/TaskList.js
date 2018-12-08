@@ -51,10 +51,10 @@ export default class TaskList extends Component {
 
     _updateSearch = searchTerm => {
         console.log(`Search Term: ${searchTerm}`)
-        // const currentTask = this.state.taskToEdit ? {...this.state.currentTask, name: searchTerm} : this.state.currentTask
+        const taskToEdit = this.state.taskToEdit ? {...this.state.taskToEdit, name: searchTerm} : null
         this.setState({
             searchTerm,
-            // currentTask
+            taskToEdit
         }
         // , () => {
         //     console.log('updated search term')
@@ -93,18 +93,7 @@ export default class TaskList extends Component {
         }
     }
 
-    // _getAllTasks = () => {
-    //     fetch('/test-react-all-tasks')
-    //     .then(res => res.json())
-    //     .then(userTasks => {
-    //         this.setState({
-    //             userTasks
-    //         })
-    //     })
-    // }
-    
     _selectTask = taskToSelect => {
-        // if (this.state.taskToEdit && taskToSelect.id == this.state.taskToEdit.id) {
             console.log(`selecting task ${taskToSelect.name}`)
             // update search box text to task name
             fetch(`${urlPrefix}/test-react-task`, {
@@ -120,7 +109,6 @@ export default class TaskList extends Component {
                     taskToEdit: null
                 })
             })
-        // }
     }
 
     _editTask = taskToEdit => {
@@ -191,10 +179,10 @@ export default class TaskList extends Component {
                         this.state.taskToEdit ? this._updateName(this.state.taskToEdit) : this._addTask()}} 
                     editTask={this._editTask}
                     onChange={event => this._updateSearch(event.target.value)}
-                    currentTask={this.state.taskToEdit ? {...this.state.currentTask, name: this.state.searchTerm} : this.state.currentTask}
+                    currentTask={this.state.taskToEdit || this.state.currentTask}
+                    // currentTask={this.state.taskToEdit ? {...this.state.currentTask, name: this.state.searchTerm} : this.state.currentTask}
                     onReset={this._resetSearch} 
                     />
-                    <TaskInfo currentTask={this.state.currentTask}/>
                     <UserForm user={this.state.user} 
                     login={event => {
                         event.preventDefault()
@@ -215,7 +203,9 @@ export default class TaskList extends Component {
                 editTask={this._editTask}
                 completeTask={this._completeTask}
                 deleteTask={this._deleteTask}
+                taskToEdit={this.state.taskToEdit}
                 />
+                <TaskInfo currentTask={this.state.currentTask}/>
             </div>
         )
     }
