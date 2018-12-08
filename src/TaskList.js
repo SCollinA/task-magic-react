@@ -102,25 +102,29 @@ export default class TaskList extends Component {
     //         })
     //     })
     // }
-
+    
     _selectTask = taskToSelect => {
-        // update search box text to task name
-        fetch(`${urlPrefix}/test-react-task`, {
-            method: 'post',
-            body: JSON.stringify({taskToSelect}),
-            headers: {'Content-Type': 'application/json'}
-        })
-        .then(res => res.json())
-        .then(data => {
-            this.setState({
-                ...data,
-                searchTerm: '',
-                taskToEdit: null
+        if (this.state.taskToEdit && taskToSelect.id == this.state.taskToEdit.id) {
+            console.log(`selecting task ${taskToSelect.name}`)
+            // update search box text to task name
+            fetch(`${urlPrefix}/test-react-task`, {
+                method: 'post',
+                body: JSON.stringify({taskToSelect}),
+                headers: {'Content-Type': 'application/json'}
             })
-        })
+            .then(res => res.json())
+            .then(data => {
+                this.setState({
+                    ...data,
+                    searchTerm: '',
+                    taskToEdit: null
+                })
+            })
+        }
     }
 
     _editTask = taskToEdit => {
+        console.log(`editing task ${taskToEdit.name}`)
         // if there is no current task to edit, OR this is a new taskToEdit
         if (!this.state.taskToEdit || taskToEdit.id != this.state.taskToEdit.id) {
             this.setState({
@@ -128,11 +132,12 @@ export default class TaskList extends Component {
                 taskToEdit
             })
         } else {
+            this._selectTask(taskToEdit)
             // there is a current task and this task to edit is already being edited, so deselect
-            this.setState({
-                searchTerm: '',
-                taskToEdit: null
-            })
+            // this.setState({
+            //     searchTerm: '',
+            //     taskToEdit: null
+            // })
         }
     }
 
