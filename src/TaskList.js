@@ -106,6 +106,18 @@ export default class TaskList extends Component {
             // if there are no current children with search term, add global result
             if (!localSearchResult) {
                 console.log(`adding existing task ${globalSearchResult.name}`)
+                fetch(`${urlPrefix}/test-react-sub-task`, { 
+                    method: 'post', 
+                    body: JSON.stringify({taskID: globalSearchResult.id}),
+                    headers: {'Content-Type': 'application/json'}
+                })
+                .then(res => res.json())
+                .then(data => {
+                    this.setState({
+                        searchTerm: '',
+                        ...data
+                    })
+                })
             } else {
                 // do nothing
             }
