@@ -82,9 +82,8 @@ export default class TaskList extends Component {
     }
 
     _addTask() {
-        const taskExists = this.state.children.filter(task => task.name === this.state.searchTerm)
-        console.log(taskExists)
-        if (!taskExists.length > 0) {
+        const taskExists = this.state.children.filter(task => task.name === this.state.searchTerm).length == 0 ? true : false
+        if (taskExists) {
             fetch(`${urlPrefix}/test-react`, { 
                 method: 'post', 
                 body: JSON.stringify({taskName: this.state.searchTerm}),
@@ -97,6 +96,8 @@ export default class TaskList extends Component {
                     ...data
                 })
             })
+        } else {
+            console.log('herro')
         }
     }
 
