@@ -8,24 +8,19 @@ export default class TaskDashboard extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            task: props.task,
-            content: null
+            contentChoice: 0
         }
-        this.content = [
-            <TaskInfo task={this.state.task}/>,
-
-        ]
     }
 
-    componentDidMount() {
-        this.setState({
-            content: this.content[0]
-        })
-    }
+    // componentDidMount() {
+    //     this.setState({
+    //         content: this.content[0]
+    //     })
+    // }
 
     _updateContent = contentIndex => {
         this.setState({
-            content: this.content[contentIndex]
+            contentChoice: contentIndex
         })
     }
 
@@ -33,7 +28,7 @@ export default class TaskDashboard extends Component {
         return (
             <div className="TaskDashboard">
                 {/* <TaskContent task={props.task}/> */}
-                <TaskContent content={this.state.content}/>
+                <TaskContent task={props.task} contentChoice={this.state.contentChoice}/>
                 <TaskToolbar updateContent={this._updateContent}/>
             </div>
         )
