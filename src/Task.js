@@ -5,12 +5,12 @@ export default function Task(props) {
         <div 
         className={`Task ${props.className}`} 
         id={props.id} 
-        onClick={() => {
+        >
+            <h1 onClick={() => {
             // should select task for editing
             console.log('clicked task div')
             props.editTask(props.task)
-        }}>
-            <h1 >
+            }}>
                 {props.task.name}
                 {/* {props.selectedTask && props.selectedTask.id === props.task.id ? props.searchTerm : props.task.name} */}
             </h1>
