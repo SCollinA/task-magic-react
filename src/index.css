@@ -31,10 +31,15 @@ html, body {
 .header {
   display: flex;
   justify-content: space-around;
+  margin: 1% 2% 5%;
 }
 
 .TaskForm {
   flex: 1;
+}
+
+.TaskForm > h1 {
+  margin: 1%;
 }
 
 .searchTasks {
@@ -96,6 +101,5 @@ html, body {
 }
 
 .toolbarIcon {
-  margin-right: 5%;
-  margin-left: 5%;
+  margin: 0 5%;
 }
