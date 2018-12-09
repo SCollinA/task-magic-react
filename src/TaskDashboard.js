@@ -7,7 +7,7 @@ export default class TaskDashboard extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            task: props.task,
+            // task: props.task,
             contentChoice: 1
         }
     }
@@ -33,7 +33,7 @@ export default class TaskDashboard extends Component {
         return (
             <div className="TaskDashboard">
                 {/* <TaskContent task={props.task}/> */}
-                <TaskContent task={this.state.task} contentChoice={this.state.contentChoice}/>
+                <TaskContent task={this.props.task} contentChoice={this.state.contentChoice}/>
                 <TaskToolbar updateContent={this._updateContent}/>
             </div>
         )

@@ -189,8 +189,12 @@ export default class TaskList extends Component {
             headers: {'Content-Type': 'application/json'}
         })
         .then(res => res.json())
-        .then(data => {
-            this.setState({...data})
+        .then(data => this.setState({...data}))
+        .then(() => {
+            // get the child task with task to edit id
+            const taskToEdit = this.state.children.filter(child => child.id === this.state.taskToEdit.id)[0]
+            // set task to edit equal to that to update
+            this.setState({taskToEdit})
         })
     }
 
@@ -237,7 +241,7 @@ export default class TaskList extends Component {
                 parents={(this.state.searchTerm && !this.state.taskToEdit) ? [] : this.state.parents}
                 selectTask={this._selectTask}
                 // selectTask={!this.state.taskToEdit || this._selectTask}
-                editTask={this.state.searchTerm ? this._selectTask : this._editTask}
+                editTask={this.state.searchTerm && !this.state.taskToEdit ? this._selectTask : this._editTask}
                 completeTask={this._completeTask}
                 deleteTask={this._deleteTask}
                 taskToEdit={this.state.taskToEdit}
