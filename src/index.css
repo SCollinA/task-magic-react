@@ -92,6 +92,7 @@ html, body {
   border-radius: 10%;
   border: solid gray 4px;
   background-color: lightgray;
+  margin: auto 0;
 }
 
 .Checkbox > h1 {

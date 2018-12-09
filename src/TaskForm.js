@@ -1,10 +1,19 @@
 import React from 'react'
+import Task from './Task'
 
 export default function TaskForm(props) {
     return (
         // <form className="TaskForm" onSubmit={props.onSubmit}>
         <form className="TaskForm" onSubmit={props.onSubmit} onReset={props.onReset}>
-            <h1 onClick={() => props.editTask(props.currentTask)}>{props.currentTask ? props.currentTask.name : 'Login -->'}</h1>
+            {props.currentTask 
+                && 
+            <Task id={props.currentTask && props.currentTask.id} 
+            task={props.currentTask} 
+            selectTask={() => props.editTask(props.currentTask)}
+            completeTask={() => props.completeTask(props.currentTask)}/>
+                ||
+            <h1>Login --></h1>}
+            {/* <h1 onClick={() => props.editTask(props.currentTask)}>{props.currentTask ? props.currentTask.name : 'Login -->'}</h1> */}
             <div className="searchTasks">
                 <input
                     value={props.searchTerm} 

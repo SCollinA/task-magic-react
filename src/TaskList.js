@@ -226,10 +226,12 @@ export default class TaskList extends Component {
                         event.preventDefault()
                         this.state.taskToEdit ? this._updateName(this.state.taskToEdit) : this._addTask()}} 
                     editTask={this._editTask}
+                    completeTask={this._completeTask}
                     onChange={event => this._updateSearch(event.target.value)}
-                    currentTask={this.state.taskToEdit || this.state.currentTask}
+                    currentTask={this.state.currentTask}
+                    // currentTask={this.state.taskToEdit || this.state.currentTask}
                     // currentTask={this.state.taskToEdit ? {...this.state.currentTask, name: this.state.searchTerm} : this.state.currentTask}
-                    onReset={this._resetSearch} 
+                    onReset={this._resetSearch}
                     />
                     <UserForm user={this.state.user} 
                     login={event => {
