@@ -86,6 +86,7 @@ export default class TaskList extends Component {
         const globalSearchResult = this.state.userTasks.filter(task => task.name === this.state.searchTerm)[0]
         // if there are no matches
         if (!globalSearchResult) { 
+            console.log(`adding new task ${this.state.searchTerm}`)
             // then add the new task
             fetch(`${urlPrefix}/test-react`, { 
                 method: 'post', 
@@ -105,47 +106,53 @@ export default class TaskList extends Component {
             const localSearchResult = this.state.children.filter(task => task.name === this.state.searchTerm)[0]
             // if there are no current children with search term, add global result
             if (!localSearchResult) {
-                console.log(`adding existing task ${globalSearchResult.name}`)
-                fetch(`${urlPrefix}/test-react-sub-task`, { 
-                    method: 'post', 
-                    body: JSON.stringify({taskID: globalSearchResult.id}),
-                    headers: {'Content-Type': 'application/json'}
-                })
-                .then(res => res.json())
-                .then(data => {
-                    this.setState({
-                        searchTerm: '',
-                        ...data
-                    })
-                })
+                this._subTask(globalSearchResult)
             } else {
                 // do nothing
             }
         }
     }
 
-    _selectTask = taskToSelect => {
-        // if searching, add selected task to current task
-        if (false) {
-            console.log(`adding existing task from click ${taskToSelect.name}`)
-
-        } else {
-            console.log(`selecting task ${taskToSelect.name}`)
-            // update search box text to task name
-            fetch(`${urlPrefix}/test-react-task`, {
-                method: 'post',
-                body: JSON.stringify({taskToSelect}),
+    _subTask = taskToSubtask => {
+        const taskExists = this.state.children.map(child => child.id).filter(childID => childID === taskToSubtask.id)
+        if (taskExists.length === 0) {
+            console.log(`adding existing task ${taskToSubtask.name}`)
+            fetch(`${urlPrefix}/test-react-sub-task`, { 
+                method: 'post', 
+                body: JSON.stringify({taskID: taskToSubtask.id}),
                 headers: {'Content-Type': 'application/json'}
             })
             .then(res => res.json())
             .then(data => {
                 this.setState({
-                    ...data,
                     searchTerm: '',
-                    taskToEdit: null
+                    ...data
                 })
             })
+        } else {
+            console.log(`${taskToSubtask.name} already a child`)
+            this.setState({
+                searchTerm: ''
+            })
         }
+    }
+
+    _selectTask = taskToSelect => {
+        console.log(`selecting task ${taskToSelect.name}`)
+        // update search box text to task name
+        fetch(`${urlPrefix}/test-react-task`, {
+            method: 'post',
+            body: JSON.stringify({taskToSelect}),
+            headers: {'Content-Type': 'application/json'}
+        })
+        .then(res => res.json())
+        .then(data => {
+            this.setState({
+                ...data,
+                searchTerm: '',
+                taskToEdit: null
+            })
+        })
     }
 
     _editTask = taskToEdit => {
@@ -192,7 +199,7 @@ export default class TaskList extends Component {
         .then(data => this.setState({...data}))
         .then(() => {
             // get the child task with task to edit id
-            const taskToEdit = this.state.children.filter(child => child.id === this.state.taskToEdit.id)[0]
+            const taskToEdit = this.state.taskToEdit && this.state.children.filter(child => child.id === this.state.taskToEdit.id)[0]
             // set task to edit equal to that to update
             this.setState({taskToEdit})
         })
@@ -241,13 +248,13 @@ export default class TaskList extends Component {
                 parents={(this.state.searchTerm && !this.state.taskToEdit) ? [] : this.state.parents}
                 selectTask={this._selectTask}
                 // selectTask={!this.state.taskToEdit || this._selectTask}
-                editTask={this.state.searchTerm && !this.state.taskToEdit ? this._selectTask : this._editTask}
-                completeTask={this._completeTask}
+                // editTask={this.state.searchTerm && !this.state.taskToEdit ? this._selectTask : this._editTask}
+                completeTask={this.state.searchTerm && !this.state.taskToEdit ? this._subTask : this._completeTask}
                 deleteTask={this._deleteTask}
-                taskToEdit={this.state.taskToEdit}
+                // taskToEdit={this.state.taskToEdit}
                 />
                 {/* <TaskDashboard task={this.state.taskToEdit || this.state.currentTask} goHome={this._goHome}/> */}
-                <TaskDashboard task={this.state.taskToEdit || this.state.currentTask} goHome={this._goHome} key={(this.state.taskToEdit && this.state.taskToEdit.id) || (this.state.currentTask && this.state.currentTask.id)}/>
+                <TaskDashboard task={this.state.currentTask} goHome={this._goHome} key={(this.state.currentTask && this.state.currentTask.id)}/>
             </div>
         )
     }

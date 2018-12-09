@@ -10,7 +10,7 @@ export default function Task(props) {
             onClick={() => {
             // should select task for editing
             console.log('clicked task div')
-            props.editTask(props.task)
+            props.selectTask(props.task)
             }}>
                 {props.task.name}
                 {/* {props.selectedTask && props.selectedTask.id === props.task.id ? props.searchTerm : props.task.name} */}
@@ -23,7 +23,9 @@ export default function Task(props) {
                 props.selectTask(props.task)
             }}>
                 <p>
-                    {props.task.children && props.task.children.map(child => child.name).join(', ')}
+                    {props.task.children && 
+                        props.task.children.map(child => child.active && child.name)
+                        .filter(child => child !== false).join(', ')}
                 </p>
             </div>) :
             (<button className="deleteTask"

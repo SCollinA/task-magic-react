@@ -5,7 +5,7 @@ export default function TaskInfo(props) {
     <div className='TaskInfo'>
         {props.task ? 
             <ul>
-                <li>Active: {props.task.active.toString()} </li>
+                <li>Active: {props.task.active.toString()} ID: {props.task.id}</li>
                 <li>Time Changed: {props.task.time_changed}</li>
                 <li>Time Created: {props.task.time_created}</li>
             </ul>
