@@ -121,7 +121,7 @@ export default class TaskList extends Component {
     _editTask = taskToEdit => {
         console.log(`editing task ${taskToEdit.name}`)
         // if there is no current task to edit, OR this is a new taskToEdit
-        if (!this.state.taskToEdit || taskToEdit.id != this.state.taskToEdit.id) {
+        if (!this.state.taskToEdit || taskToEdit.id !== this.state.taskToEdit.id) {
             this.setState({
                 searchTerm: taskToEdit.name,
                 taskToEdit

@@ -20,7 +20,7 @@ export default class TaskDashboard extends Component {
 
     _updateContent = contentIndex => {
         console.log(`updating content to ${contentIndex}`)
-        if (contentIndex == 0) {
+        if (contentIndex === 0) {
             this.props.goHome()
         } else {
             this.setState({

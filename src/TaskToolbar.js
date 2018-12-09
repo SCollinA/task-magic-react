@@ -25,7 +25,7 @@ export default function TaskToolbar(props) {
             })} */}
             {iconArray.map((icon, iconIndex) => {
                 return (
-                    <h1 className="toolbarIcon"
+                    <h1 className="toolbarIcon" key={iconIndex}
                     onClick={() => props.updateContent(iconIndex)}>
                         {icon}
                     </h1>
