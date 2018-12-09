@@ -125,6 +125,11 @@ export default class TaskList extends Component {
     }
 
     _selectTask = taskToSelect => {
+        // if searching, add selected task to current task
+        if (false) {
+            console.log(`adding existing task from click ${taskToSelect.name}`)
+
+        } else {
             console.log(`selecting task ${taskToSelect.name}`)
             // update search box text to task name
             fetch(`${urlPrefix}/test-react-task`, {
@@ -140,6 +145,7 @@ export default class TaskList extends Component {
                     taskToEdit: null
                 })
             })
+        }
     }
 
     _editTask = taskToEdit => {
@@ -231,12 +237,13 @@ export default class TaskList extends Component {
                 parents={(this.state.searchTerm && !this.state.taskToEdit) ? [] : this.state.parents}
                 selectTask={this._selectTask}
                 // selectTask={!this.state.taskToEdit || this._selectTask}
-                editTask={this._editTask}
+                editTask={this.state.searchTerm ? this._selectTask : this._editTask}
                 completeTask={this._completeTask}
                 deleteTask={this._deleteTask}
                 taskToEdit={this.state.taskToEdit}
                 />
-                <TaskDashboard task={this.state.taskToEdit} goHome={this._goHome} key={this.state.taskToEdit && this.state.taskToEdit.id}/>
+                {/* <TaskDashboard task={this.state.taskToEdit || this.state.currentTask} goHome={this._goHome}/> */}
+                <TaskDashboard task={this.state.taskToEdit || this.state.currentTask} goHome={this._goHome} key={(this.state.taskToEdit && this.state.taskToEdit.id) || (this.state.currentTask && this.state.currentTask.id)}/>
             </div>
         )
     }

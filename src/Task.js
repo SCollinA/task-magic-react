@@ -26,7 +26,7 @@ export default function Task(props) {
                     {props.task.children && props.task.children.map(child => child.name).join(', ')}
                 </p>
             </div>) :
-            (<button 
+            (<button className="deleteTask"
             name='deleteTask' 
             onClick={() => props.deleteTask(props.task.id)}
             >

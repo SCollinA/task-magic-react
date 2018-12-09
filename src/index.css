@@ -77,6 +77,11 @@ html, body {
   padding: 0 5%;
 }
 
+.deleteTask {
+  margin: 2%;
+  border-radius: 15px;
+}
+
 .parent {
   background-color: lightgray;
 }
