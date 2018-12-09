@@ -1,4 +1,5 @@
 import React from 'react'
+import TaskInfo from './TaskInfo'
 
 export default function TaskContent(props) {
     const contentOptions = [

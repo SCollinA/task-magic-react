@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import TaskContent from './TaskContent'
-import TaskInfo from './TaskInfo'
 import TaskToolbar from './TaskToolbar'
 
 // export default function TaskDashboard(props) {
@@ -8,6 +7,7 @@ export default class TaskDashboard extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            // task: props.task
             contentChoice: 0
         }
     }
@@ -19,6 +19,7 @@ export default class TaskDashboard extends Component {
     // }
 
     _updateContent = contentIndex => {
+        console.log(`updating content to ${contentIndex}`)
         this.setState({
             contentChoice: contentIndex
         })
@@ -28,7 +29,7 @@ export default class TaskDashboard extends Component {
         return (
             <div className="TaskDashboard">
                 {/* <TaskContent task={props.task}/> */}
-                <TaskContent task={props.task} contentChoice={this.state.contentChoice}/>
+                <TaskContent task={this.props.task} contentChoice={this.state.contentChoice}/>
                 <TaskToolbar updateContent={this._updateContent}/>
             </div>
         )
