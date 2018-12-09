@@ -51,10 +51,10 @@ export default class TaskList extends Component {
 
     _updateSearch = searchTerm => {
         console.log(`Search Term: ${searchTerm}`)
-        // const currentTask = this.state.taskToEdit ? {...this.state.currentTask, name: searchTerm} : this.state.currentTask
+        const taskToEdit = this.state.taskToEdit ? {...this.state.taskToEdit, name: searchTerm} : null
         this.setState({
             searchTerm,
-            // currentTask
+            taskToEdit
         }
         // , () => {
         //     console.log('updated search term')
@@ -93,44 +93,40 @@ export default class TaskList extends Component {
         }
     }
 
-    // _getAllTasks = () => {
-    //     fetch('/test-react-all-tasks')
-    //     .then(res => res.json())
-    //     .then(userTasks => {
-    //         this.setState({
-    //             userTasks
-    //         })
-    //     })
-    // }
-
     _selectTask = taskToSelect => {
-        // update search box text to task name
-        fetch(`${urlPrefix}/test-react-task`, {
-            method: 'post',
-            body: JSON.stringify({taskToSelect}),
-            headers: {'Content-Type': 'application/json'}
-        })
-        .then(res => res.json())
-        .then(data => {
-            this.setState({
-                ...data,
-                searchTerm: '',
-                taskToEdit: null
+            console.log(`selecting task ${taskToSelect.name}`)
+            // update search box text to task name
+            fetch(`${urlPrefix}/test-react-task`, {
+                method: 'post',
+                body: JSON.stringify({taskToSelect}),
+                headers: {'Content-Type': 'application/json'}
             })
-        })
+            .then(res => res.json())
+            .then(data => {
+                this.setState({
+                    ...data,
+                    searchTerm: '',
+                    taskToEdit: null
+                })
+            })
     }
 
     _editTask = taskToEdit => {
-        this.setState({
-            searchTerm: taskToEdit.name,
-            taskToEdit
+        console.log(`editing task ${taskToEdit.name}`)
+        // if there is no current task to edit, OR this is a new taskToEdit
+        if (!this.state.taskToEdit || taskToEdit.id != this.state.taskToEdit.id) {
+            this.setState({
+                searchTerm: taskToEdit.name,
+                taskToEdit
+            })
+        } else {
+            this._selectTask(taskToEdit)
+            // there is a current task and this task to edit is already being edited, so deselect
+            // this.setState({
+            //     searchTerm: '',
+            //     taskToEdit: null
+            // })
         }
-        // , () => {
-        //     this.setState({
-        //         currentTask: {...this.state.currentTask, name: this.state.searchTerm}
-        //     }, () => console.log(`set current task to ${this.state.searchTerm}`))
-        // }
-        )
     }
 
     _updateName = taskToUpdate => {
@@ -183,10 +179,10 @@ export default class TaskList extends Component {
                         this.state.taskToEdit ? this._updateName(this.state.taskToEdit) : this._addTask()}} 
                     editTask={this._editTask}
                     onChange={event => this._updateSearch(event.target.value)}
-                    currentTask={this.state.taskToEdit ? {...this.state.currentTask, name: this.state.searchTerm} : this.state.currentTask}
+                    currentTask={this.state.taskToEdit || this.state.currentTask}
+                    // currentTask={this.state.taskToEdit ? {...this.state.currentTask, name: this.state.searchTerm} : this.state.currentTask}
                     onReset={this._resetSearch} 
                     />
-                    <TaskInfo currentTask={this.state.currentTask}/>
                     <UserForm user={this.state.user} 
                     login={event => {
                         event.preventDefault()
@@ -203,9 +199,13 @@ export default class TaskList extends Component {
                 <Tasks children={(this.state.searchTerm && !this.state.taskToEdit) ? this.state.userTasks.filter(task => task.name.includes(this.state.searchTerm)) : this.state.children}
                 parents={(this.state.searchTerm && !this.state.taskToEdit) ? [] : this.state.parents}
                 selectTask={this._selectTask}
+                // selectTask={!this.state.taskToEdit || this._selectTask}
+                editTask={this._editTask}
                 completeTask={this._completeTask}
                 deleteTask={this._deleteTask}
+                taskToEdit={this.state.taskToEdit}
                 />
+                <TaskInfo currentTask={this.state.currentTask}/>
             </div>
         )
     }
