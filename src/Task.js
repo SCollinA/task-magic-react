@@ -18,8 +18,8 @@ export default function Task(props) {
             (<div 
             className="childNames" 
             onClick={() => {
-                // console.log(`${props.task.name} selected`)
-                // props.selectTask(props.task)
+                console.log(`${props.task.name} selected`)
+                props.selectTask(props.task)
             }}>
                 <p>
                     {props.task.children && props.task.children.map(child => child.name).join(', ')}
