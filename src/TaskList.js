@@ -205,7 +205,7 @@ export default class TaskList extends Component {
                 deleteTask={this._deleteTask}
                 taskToEdit={this.state.taskToEdit}
                 />
-                <TaskDashboard task={this.state.taskToEdit}/>
+                <TaskDashboard task={this.state.taskToEdit} key={this.state.taskToEdit && this.state.taskToEdit.id}/>
             </div>
         )
     }
