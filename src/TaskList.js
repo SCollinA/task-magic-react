@@ -74,6 +74,13 @@ export default class TaskList extends Component {
         })
     }
 
+    _goHome = () => {
+        fetch('/home')
+        .then(res => res.json())
+        .then(data => this.setState({...data}))
+        .then(this._resetSearch)
+    }
+
     _addTask() {
         const taskExists = this.state.children.filter(task => task.name === this.state.searchTerm)
         console.log(taskExists)
@@ -205,7 +212,7 @@ export default class TaskList extends Component {
                 deleteTask={this._deleteTask}
                 taskToEdit={this.state.taskToEdit}
                 />
-                <TaskDashboard task={this.state.taskToEdit} key={this.state.taskToEdit && this.state.taskToEdit.id}/>
+                <TaskDashboard task={this.state.taskToEdit} goHome={this._goHome} key={this.state.taskToEdit && this.state.taskToEdit.id}/>
             </div>
         )
     }
