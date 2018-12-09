@@ -120,12 +120,12 @@ export default class TaskList extends Component {
                 taskToEdit
             })
         } else {
-            this._selectTask(taskToEdit)
+            // this._selectTask(taskToEdit)
             // there is a current task and this task to edit is already being edited, so deselect
-            // this.setState({
-            //     searchTerm: '',
-            //     taskToEdit: null
-            // })
+            this.setState({
+                searchTerm: '',
+                taskToEdit: null
+            })
         }
     }
 
