@@ -31,11 +31,19 @@ html, body {
 .header {
   display: flex;
   justify-content: space-around;
-  margin: 1% 2% 5%;
+  margin: 2%;
 }
 
 .TaskForm {
   flex: 1;
+}
+
+.currentTask {
+  margin-bottom: 2%; 
+}
+
+.currentTask .taskName {
+  margin: auto;
 }
 
 .TaskForm > h1 {

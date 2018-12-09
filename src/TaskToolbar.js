@@ -14,6 +14,7 @@ export default function TaskToolbar(props) {
         '📝',
         '🔔',
         '->',
+        '🗑',
     ]
     // const imgSrcArray = [
         

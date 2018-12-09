@@ -22,7 +22,9 @@ export default class TaskDashboard extends Component {
         console.log(`updating content to ${contentIndex}`)
         if (contentIndex === 0) {
             this.props.goHome()
-        } else {
+        } else if (contentIndex === 12){
+            this.props.deleteTask(this.props.task.id)
+        } else {    
             this.setState({
                 contentChoice: contentIndex
             })

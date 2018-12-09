@@ -5,14 +5,18 @@ export default function TaskForm(props) {
     return (
         // <form className="TaskForm" onSubmit={props.onSubmit}>
         <form className="TaskForm" onSubmit={props.onSubmit} onReset={props.onReset}>
-            {props.currentTask 
+            {(
+                props.currentTask 
                 && 
-            <Task id={props.currentTask && props.currentTask.id} 
-            task={props.currentTask} 
-            selectTask={() => props.editTask(props.currentTask)}
-            completeTask={() => props.completeTask(props.currentTask)}/>
-                ||
-            <h1>Login --></h1>}
+                <Task className='currentTask' id={props.currentTask && props.currentTask.id} 
+                task={props.currentTask} 
+                currentTask={true}
+                selectTask={() => props.editTask(props.currentTask)}
+                completeTask={() => props.completeTask(props.currentTask)}/>
+            )
+            ||
+                <h1>Login --></h1>
+            }
             {/* <h1 onClick={() => props.editTask(props.currentTask)}>{props.currentTask ? props.currentTask.name : 'Login -->'}</h1> */}
             <div className="searchTasks">
                 <input

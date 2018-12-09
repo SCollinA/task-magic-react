@@ -206,15 +206,14 @@ export default class TaskList extends Component {
     }
 
     _deleteTask = iDToDelete => {
+        console.log(`deleting task id ${iDToDelete}`)
         fetch(`${urlPrefix}/test-react-delete`, {
             method: 'post', 
             body: JSON.stringify({iDToDelete}),
             headers: {'Content-Type': 'application/json'}
         })
         .then(res => res.json())
-        .then(data => {
-            this.setState({...data})
-        })
+        .then(data => { this.setState({...data})})
     }
 
     render() {
@@ -256,7 +255,11 @@ export default class TaskList extends Component {
                 // taskToEdit={this.state.taskToEdit}
                 />
                 {/* <TaskDashboard task={this.state.taskToEdit || this.state.currentTask} goHome={this._goHome}/> */}
-                <TaskDashboard task={this.state.currentTask} goHome={this._goHome} key={(this.state.currentTask && this.state.currentTask.id)}/>
+                <TaskDashboard key={(this.state.currentTask && this.state.currentTask.id)}
+                task={this.state.currentTask} 
+                goHome={this._goHome} 
+                deleteTask={this._deleteTask}
+                />
             </div>
         )
     }

@@ -3,7 +3,7 @@ import React from 'react'
 export default function Task(props) {
     return (
         <div 
-        className={`Task ${props.className}`} 
+        className={`Task ${props.className || 'child'}`} 
         id={props.id} 
         >
             <h1 className='taskName'
@@ -15,8 +15,8 @@ export default function Task(props) {
                 {props.task.name}
                 {/* {props.selectedTask && props.selectedTask.id === props.task.id ? props.searchTerm : props.task.name} */}
             </h1>
-            {props.task.active ? 
-            (<div 
+            {(!props.currentTask && props.task.active) && (
+            <div 
             className="childNames" 
             onClick={() => {
                 console.log(`${props.task.name} selected`)
@@ -27,13 +27,9 @@ export default function Task(props) {
                         props.task.children.map(child => child.active && child.name)
                         .filter(child => child !== false).join(', ')}
                 </p>
-            </div>) :
-            (<button className="deleteTask"
-            name='deleteTask' 
-            onClick={() => props.deleteTask(props.task.id)}
-            >
-                Delete task
-            </button>)}
+            </div>
+            )}
+            {!props.currentTask && (
             <div className='Checkbox'
             onClick={() => {
                 console.log(`${props.task.name} changed`)
@@ -43,6 +39,7 @@ export default function Task(props) {
                     {props.task.active ? '' : '✔️'}
                 </h1>
             </div>
+            )}
         </div>
         )
 }
