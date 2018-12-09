@@ -82,8 +82,11 @@ export default class TaskList extends Component {
     }
 
     _addTask() {
-        const taskExists = this.state.children.filter(task => task.name === this.state.searchTerm).length == 0 ? true : false
-        if (taskExists) {
+        // find exact matches for search term in all of users tasks
+        const globalSearchResult = this.state.userTasks.filter(task => task.name === this.state.searchTerm)[0]
+        // if there are no matches
+        if (!globalSearchResult) { 
+            // then add the new task
             fetch(`${urlPrefix}/test-react`, { 
                 method: 'post', 
                 body: JSON.stringify({taskName: this.state.searchTerm}),
@@ -97,7 +100,15 @@ export default class TaskList extends Component {
                 })
             })
         } else {
-            console.log('herro')
+            // some global search results found
+            // find exact matches for search result in current task
+            const localSearchResult = this.state.children.filter(task => task.name === this.state.searchTerm)[0]
+            // if there are no current children with search term, add global result
+            if (!localSearchResult) {
+                console.log(`adding existing task ${globalSearchResult.name}`)
+            } else {
+                // do nothing
+            }
         }
     }
 
