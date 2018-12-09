@@ -2,19 +2,18 @@ import React from 'react'
 
 export default function TaskToolbar(props) {
     const iconArray = [
+        '🏠',
         'ℹ️',
         '💬',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
+        '🗺',
+        '📅',
+        '🌎',
+        '📷',
+        '🎵',
+        '⏱',
+        '📝',
+        '🔔',
+        '->',
     ]
     // const imgSrcArray = [
         
