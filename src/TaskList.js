@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
-import Tasks from './Tasks'
 import TaskForm from './TaskForm'
-import TaskInfo from './TaskInfo'
 import UserForm from './UserForm'
+import Tasks from './Tasks'
+import TaskDashboard from './TaskDashboard'
 const urlPrefix = '/api'
 
 export default class TaskList extends Component {
@@ -205,7 +205,7 @@ export default class TaskList extends Component {
                 deleteTask={this._deleteTask}
                 taskToEdit={this.state.taskToEdit}
                 />
-                <TaskInfo currentTask={this.state.currentTask}/>
+                <TaskDashboard task={this.state.taskToEdit}/>
             </div>
         )
     }
