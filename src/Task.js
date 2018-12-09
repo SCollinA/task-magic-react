@@ -30,16 +30,14 @@ export default function Task(props) {
             onClick={() => props.deleteTask(props.task.id)}
             >
                 Delete task
-            </button>) 
-            }
-            {/* <div className="taskTimes">
-                <h4>{props.task.time_changed}</h4>
-                <h6>{props.task.time_created}</h6>
-            </div> */}
-            <h4 onClick={() => {
+            </button>)}
+            <div className='Checkbox'
+            onClick={() => {
                 console.log(`${props.task.name} changed`)
                 props.completeTask(props.task)
-            }}>{props.task.active.toString()}</h4>
+            }}>
+                {props.task.active ? '' : '✔️'}
+            </div>
         </div>
         )
 }
