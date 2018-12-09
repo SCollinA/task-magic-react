@@ -6,7 +6,8 @@ export default function Task(props) {
         className={`Task ${props.className}`} 
         id={props.id} 
         >
-            <h1 onClick={() => {
+            <h1 className='taskName'
+            onClick={() => {
             // should select task for editing
             console.log('clicked task div')
             props.editTask(props.task)
@@ -36,7 +37,9 @@ export default function Task(props) {
                 console.log(`${props.task.name} changed`)
                 props.completeTask(props.task)
             }}>
-                {props.task.active ? '' : '✔️'}
+                <h1>
+                    {props.task.active ? '' : '✔️'}
+                </h1>
             </div>
         </div>
         )
