@@ -7,8 +7,8 @@ export default function Tasks(props){
             {props.children.map(child => {
             return (
             <Task
-            task={child}
-            // task={props.taskToEdit && child.id === props.taskToEdit.id ? {...child, name: props.taskToEdit.name} : child} 
+            // task={child}
+            task={props.taskToEdit && child.id === props.taskToEdit.id ? {...child, name: props.taskToEdit.name} : child} 
             key={child.id} 
             selectTask={props.selectTask}
             editTask={props.editTask}
