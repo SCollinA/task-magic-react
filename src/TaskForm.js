@@ -13,7 +13,8 @@ export default function TaskForm(props) {
                 currentTask={true}
                 editTask={() => props.editTask(props.currentTask)}
                 // selectTask={() => props.editTask(props.currentTask)}
-                completeTask={() => props.completeTask(props.currentTask)}/>
+                completeTask={() => props.completeTask(props.currentTask)}
+                currentChildren={props.currentChildren}/>
             )
             ||
                 <h1>Login --></h1>

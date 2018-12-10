@@ -17,6 +17,7 @@ export default function Tasks(props){
             deleteTask={props.deleteTask} 
             className={props.taskToEdit && child.id === props.taskToEdit.id ? 'selectedTask' : ''}
             isSearching={props.isSearching}
+            currentChildren={props.currentChildren}
             />
             )})}
             {props.parents.map(parent => {
@@ -29,6 +30,7 @@ export default function Tasks(props){
             completeTask={props.completeTask}
             deleteTask={props.deleteTask} 
             className={'parent'/* this adds the parent class*/}
+            currentChildren={props.currentChildren}
             />
             )})}
         </div>

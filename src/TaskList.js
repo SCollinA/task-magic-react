@@ -230,6 +230,7 @@ export default class TaskList extends Component {
                     // currentTask={this.state.currentTask}
                     // currentTask={this.state.taskToEdit || this.state.currentTask}
                     currentTask={this.state.taskToEdit && this.state.taskToEdit.id === this.state.currentTask.id ? {...this.state.currentTask, name: this.state.searchTerm} : this.state.currentTask}
+                    currentChildren={this.state.children}
                     onReset={this._resetSearch}
                     />
                     <UserForm user={this.state.user} 
@@ -246,6 +247,7 @@ export default class TaskList extends Component {
                     }/>
                 </div>
                 <Tasks children={(this.state.searchTerm && !this.state.taskToEdit) ? this.state.userTasks.filter(task => task.name.includes(this.state.searchTerm)) : this.state.children}
+                currentChildren={this.state.children}
                 parents={(this.state.searchTerm && !this.state.taskToEdit) ? [] : this.state.parents}
                 selectTask={this._selectTask}
                 subTask={this._subTask}

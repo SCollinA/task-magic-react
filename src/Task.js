@@ -31,7 +31,9 @@ export default function Task(props) {
                 </p>
             </div>
             )}
-            {!props.currentTask && (!props.isSearching ? (
+            {/* This is not the current task */}
+            {/* the task list is not searching */}
+            {((!props.currentTask && !props.isSearching) && (
                 <div className='Checkbox'
                 onClick={() => {
                     console.log(`${props.task.name} changed`)
@@ -41,7 +43,9 @@ export default function Task(props) {
                         <span role="img" aria-label="sheep">{props.task.active ? '' : '✔️'}</span>
                     </h1>
                 </div>
-            ) : (
+            )) || 
+            // {/* The task is not a current child */}
+            ((!props.currentTask && !props.currentChildren.map(child => child.id).includes(props.task.id)) && (
                 <div className='addButton'
                 onClick={() => {
                     console.log(`${props.task.name} being added`)
