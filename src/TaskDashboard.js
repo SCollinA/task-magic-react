@@ -12,11 +12,11 @@ export default class TaskDashboard extends Component {
         }
     }
 
-    // componentDidMount() {
-    //     this.setState({
-    //         content: this.content[0]
-    //     })
-    // }
+    componentDidMount() {
+        this.setState({
+            contentChoice: 1
+        })
+    }
 
     _updateContent = contentIndex => {
         console.log(`updating content to ${contentIndex}`)
