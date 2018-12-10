@@ -38,7 +38,7 @@ export default function Task(props) {
                     props.completeTask(props.task)
                 }}>
                     <h1>
-                        {props.task.active ? '' : '✔️'}
+                        <span role="img" aria-label="sheep">{props.task.active ? '' : '✔️'}</span>
                     </h1>
                 </div>
             ) : (
@@ -47,7 +47,7 @@ export default function Task(props) {
                     console.log(`${props.task.name} being added`)
                     props.subTask(props.task)
                 }}>
-                    <h1>➕</h1>
+                    <h1><span role="img" aria-label="sheep">➕</span></h1>
                 </div>
             ))}
         </div>

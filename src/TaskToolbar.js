@@ -29,7 +29,7 @@ export default function TaskToolbar(props) {
                     <h1 className={iconIndex === props.contentChoice ? "toolbarIcon toolChoice" : "toolbarIcon"} 
                     key={iconIndex}
                     onClick={() => props.updateContent(iconIndex)}>
-                        {icon}
+                        <span role="img" aria-label="">{icon}</span>
                     </h1>
                 )
             })}
