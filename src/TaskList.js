@@ -113,6 +113,23 @@ export default class TaskList extends Component {
         }
     }
 
+    _shareTask = userToShare => {
+        const taskToEdit = this.state.taskToEdit
+        const currentTask = this.state.currentTask
+        console.log(userToShare, taskToEdit, currentTask)
+        fetch(`${urlPrefix}/test-react-share-task`, {
+            method: 'post',
+            body: JSON.stringify({username: userToShare, taskID: (taskToEdit && taskToEdit.id) || (currentTask && currentTask.id)}),
+            headers: {'Content-Type': 'application/json'}
+        })
+        .then(res => res.json())
+        .then(data => {
+            this.setState({
+                ...data
+            })
+        })
+    }
+
     _subTask = taskToSubtask => {
         const taskExists = this.state.children.map(child => child.id).filter(childID => childID === taskToSubtask.id)
         if (taskExists.length === 0) {
@@ -264,6 +281,7 @@ export default class TaskList extends Component {
                 task={this.state.taskToEdit || this.state.currentTask} 
                 goHome={this._goHome} 
                 deleteTask={this._deleteTask}
+                shareTask={this._shareTask}
                 />
             </div>
         )
