@@ -260,8 +260,8 @@ export default class TaskList extends Component {
                 isSearching={this.state.searchTerm && !this.state.taskToEdit}
                 />
                 {/* <TaskDashboard task={this.state.taskToEdit || this.state.currentTask} goHome={this._goHome}/> */}
-                <TaskDashboard key={(this.state.currentTask && this.state.currentTask.id)}
-                task={this.state.taskToEdit} 
+                <TaskDashboard key={(this.state.taskToEdit && this.state.taskToEdit.id) || (this.state.currentTask && this.state.currentTask.id)}
+                task={this.state.taskToEdit || this.state.currentTask} 
                 goHome={this._goHome} 
                 deleteTask={this._deleteTask}
                 />
