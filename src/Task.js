@@ -6,15 +6,15 @@ export default function Task(props) {
         className={`Task ${props.className || 'child'}`} 
         id={props.id} 
         >
-            <h1 className='taskName'
+            <div className='taskName'
             onClick={() => {
             // should select task for editing
             console.log('clicked task div')
             props.editTask(props.task)
             }}>
-                {props.task.name}
+                <h1>{props.task.name}</h1>
                 {/* {props.selectedTask && props.selectedTask.id === props.task.id ? props.searchTerm : props.task.name} */}
-            </h1>
+            </div>
             {(!props.currentTask && props.task.active) && (
             <div 
             className="childNames" 

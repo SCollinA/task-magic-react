@@ -85,6 +85,10 @@ html, body {
   padding: 0 5%;
 }
 
+.childTasks {
+  flex: 1;
+}
+
 .deleteTask {
   margin: 2%;
   border-radius: 15px;
