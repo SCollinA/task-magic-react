@@ -10,7 +10,7 @@ export default function Task(props) {
             onClick={() => {
             // should select task for editing
             console.log('clicked task div')
-            props.selectTask(props.task)
+            props.editTask(props.task)
             }}>
                 {props.task.name}
                 {/* {props.selectedTask && props.selectedTask.id === props.task.id ? props.searchTerm : props.task.name} */}

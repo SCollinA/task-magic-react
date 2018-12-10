@@ -227,9 +227,9 @@ export default class TaskList extends Component {
                     editTask={this._editTask}
                     completeTask={this._completeTask}
                     onChange={event => this._updateSearch(event.target.value)}
-                    currentTask={this.state.currentTask}
+                    // currentTask={this.state.currentTask}
                     // currentTask={this.state.taskToEdit || this.state.currentTask}
-                    // currentTask={this.state.taskToEdit ? {...this.state.currentTask, name: this.state.searchTerm} : this.state.currentTask}
+                    currentTask={this.state.taskToEdit && this.state.taskToEdit.id === this.state.currentTask.id ? {...this.state.currentTask, name: this.state.searchTerm} : this.state.currentTask}
                     onReset={this._resetSearch}
                     />
                     <UserForm user={this.state.user} 
@@ -249,14 +249,14 @@ export default class TaskList extends Component {
                 parents={(this.state.searchTerm && !this.state.taskToEdit) ? [] : this.state.parents}
                 selectTask={this._selectTask}
                 // selectTask={!this.state.taskToEdit || this._selectTask}
-                // editTask={this.state.searchTerm && !this.state.taskToEdit ? this._selectTask : this._editTask}
+                editTask={this.state.searchTerm && !this.state.taskToEdit ? this._selectTask : this._editTask}
                 completeTask={this.state.searchTerm && !this.state.taskToEdit ? this._subTask : this._completeTask}
                 deleteTask={this._deleteTask}
-                // taskToEdit={this.state.taskToEdit}
+                taskToEdit={this.state.taskToEdit}
                 />
                 {/* <TaskDashboard task={this.state.taskToEdit || this.state.currentTask} goHome={this._goHome}/> */}
                 <TaskDashboard key={(this.state.currentTask && this.state.currentTask.id)}
-                task={this.state.currentTask} 
+                task={this.state.taskToEdit} 
                 goHome={this._goHome} 
                 deleteTask={this._deleteTask}
                 />
