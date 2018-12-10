@@ -15,7 +15,9 @@ export default function Task(props) {
                 <h1>{props.task.name}</h1>
                 {/* {props.selectedTask && props.selectedTask.id === props.task.id ? props.searchTerm : props.task.name} */}
             </div>
-            {(!props.currentTask && props.task.active) && (
+            {/* This is not the current task and is active */}
+            {(!props.currentTask) && (
+            // {(!props.currentTask && props.task.active) && (
             <div 
             className="childNames" 
             onClick={() => {
