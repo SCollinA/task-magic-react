@@ -10,7 +10,7 @@ export default function TaskForm(props) {
                 && 
                 <Task className='currentTask' id={props.currentTask && props.currentTask.id} 
                 task={props.currentTask} 
-                currentTask={true}
+                isCurrentTask={true}
                 editTask={() => props.editTask(props.currentTask)}
                 // selectTask={() => props.editTask(props.currentTask)}
                 completeTask={() => props.completeTask(props.currentTask)}

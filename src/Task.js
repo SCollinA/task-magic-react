@@ -16,8 +16,8 @@ export default function Task(props) {
                 {/* {props.selectedTask && props.selectedTask.id === props.task.id ? props.searchTerm : props.task.name} */}
             </div>
             {/* This is not the current task and is active */}
-            {(!props.currentTask) && (
-            // {(!props.currentTask && props.task.active) && (
+            {(!props.isCurrentTask) && (
+            // {(!props.isCurrentTask && props.task.active) && (
             <div 
             className="childNames" 
             onClick={() => {
@@ -33,7 +33,7 @@ export default function Task(props) {
             )}
             {/* This is not the current task */}
             {/* the task list is not searching */}
-            {((!props.currentTask && !props.isSearching) && (
+            {((!props.isCurrentTask && !props.isSearching) && (
                 <div className='Checkbox'
                 onClick={() => {
                     console.log(`${props.task.name} changed`)
@@ -45,7 +45,7 @@ export default function Task(props) {
                 </div>
             )) || 
             // {/* The task is not a current child */}
-            ((!props.currentTask && !props.currentChildren.map(child => child.id).includes(props.task.id)) && (
+            ((!props.isCurrentTask && (props.task.id !== props.currentTask.id && !props.currentChildren.map(child => child.id).includes(props.task.id))) && (
                 <div className='addButton'
                 onClick={() => {
                     console.log(`${props.task.name} being added`)

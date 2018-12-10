@@ -10,6 +10,7 @@ export default function Tasks(props){
             // task={child}
             task={props.taskToEdit && child.id === props.taskToEdit.id ? {...child, name: props.taskToEdit.name} : child} 
             key={child.id} 
+            currentTask={props.currentTask}
             selectTask={props.selectTask}
             editTask={props.editTask}
             completeTask={props.completeTask}
