@@ -85,6 +85,10 @@ html, body {
   padding: 0 5%;
 }
 
+.selectedTask {
+  background-color: aquamarine;
+}
+
 .childNames {
   flex: 1;
 }
@@ -119,5 +123,10 @@ html, body {
 }
 
 .toolbarIcon {
-  margin: 0 5%;
+  padding: 0 5%;
+  flex: 1;
+}
+
+.toolChoice {
+  background-color: palevioletred;
 }

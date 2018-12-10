@@ -20,15 +20,15 @@ export default class TaskDashboard extends Component {
 
     _updateContent = contentIndex => {
         console.log(`updating content to ${contentIndex}`)
-        if (contentIndex === 0) {
-            this.props.goHome()
-        } else if (contentIndex === 12){
-            this.props.deleteTask(this.props.task.id)
-        } else {    
-            this.setState({
-                contentChoice: contentIndex
-            })
-        }
+        this.setState({
+            contentChoice: contentIndex
+        }, () => {
+            if (contentIndex === 0) {
+                this.props.goHome()
+            } else if (contentIndex === 12){
+                this.props.deleteTask(this.props.task.id)
+            }
+        })
     }
 
     render() {
@@ -36,7 +36,7 @@ export default class TaskDashboard extends Component {
             <div className="TaskDashboard">
                 {/* <TaskContent task={props.task}/> */}
                 <TaskContent task={this.props.task} contentChoice={this.state.contentChoice}/>
-                <TaskToolbar updateContent={this._updateContent}/>
+                <TaskToolbar updateContent={this._updateContent} contentChoice={this.state.contentChoice}/>
             </div>
         )
     }

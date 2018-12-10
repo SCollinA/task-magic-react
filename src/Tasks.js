@@ -15,7 +15,7 @@ export default function Tasks(props){
             completeTask={props.completeTask}
             subTask={props.subTask}
             deleteTask={props.deleteTask} 
-            className={''}
+            className={props.taskToEdit && child.id === props.taskToEdit.id ? 'selectedTask' : ''}
             isSearching={props.isSearching}
             />
             )})}
