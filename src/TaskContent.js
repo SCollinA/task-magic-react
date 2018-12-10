@@ -1,5 +1,6 @@
 import React from 'react'
 import TaskInfo from './TaskInfo'
+import TaskShare from './TaskShare'
 
 export default function TaskContent(props) {
     const contentOptions = [
@@ -14,7 +15,7 @@ export default function TaskContent(props) {
         <div/>,
         <div/>,
         <div/>,
-        <div/>
+        <TaskShare shareTask={props.shareTask} />
     ]
     return (
         <div className="TaskContent">

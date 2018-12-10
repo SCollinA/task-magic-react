@@ -35,8 +35,13 @@ export default class TaskDashboard extends Component {
         return (
             <div className="TaskDashboard">
                 {/* <TaskContent task={props.task}/> */}
-                <TaskContent task={this.props.task} contentChoice={this.state.contentChoice}/>
-                <TaskToolbar updateContent={this._updateContent} contentChoice={this.state.contentChoice}/>
+                <TaskContent 
+                task={this.props.task} 
+                contentChoice={this.state.contentChoice}
+                shareTask={this.props.shareTask}/>
+                <TaskToolbar 
+                updateContent={this._updateContent} 
+                contentChoice={this.state.contentChoice}/>
             </div>
         )
     }
