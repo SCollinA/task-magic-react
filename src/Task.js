@@ -29,17 +29,25 @@ export default function Task(props) {
                 </p>
             </div>
             )}
-            {!props.currentTask && (
-            <div className='Checkbox'
-            onClick={() => {
-                console.log(`${props.task.name} changed`)
-                props.completeTask(props.task)
-            }}>
-                <h1>
-                    {props.task.active ? '' : '✔️'}
-                </h1>
-            </div>
-            )}
+            {!props.currentTask && (!props.isSearching ? (
+                <div className='Checkbox'
+                onClick={() => {
+                    console.log(`${props.task.name} changed`)
+                    props.completeTask(props.task)
+                }}>
+                    <h1>
+                        {props.task.active ? '' : '✔️'}
+                    </h1>
+                </div>
+            ) : (
+                <div className='addButton'
+                onClick={() => {
+                    console.log(`${props.task.name} being added`)
+                    props.subTask(props.task)
+                }}>
+                    <h1>➕</h1>
+                </div>
+            ))}
         </div>
-        )
+    )
 }
