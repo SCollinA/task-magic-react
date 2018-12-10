@@ -13,8 +13,10 @@ export default function Tasks(props){
             selectTask={props.selectTask}
             editTask={props.editTask}
             completeTask={props.completeTask}
+            subTask={props.subTask}
             deleteTask={props.deleteTask} 
             className={''}
+            isSearching={props.isSearching}
             />
             )})}
             {props.parents.map(parent => {
