@@ -15,7 +15,7 @@ code {
 
 html, body {
   overflow: hidden;
-  height: 101%;
+  height: 100%;
   /* 101% hides scrollbar at bottom */
   background-color: black;
 }
@@ -29,6 +29,14 @@ html, body {
   border-radius: 15px;
   color: limegreen;
   font-family: 'Courier New', Courier, monospace;
+  padding: 1%;
+  margin: 1%;
+}
+
+.stickyContain {
+  position: sticky;
+  top: 0;
+  bottom: 0;
 }
 
 .TaskList {
@@ -86,7 +94,9 @@ html, body {
   overflow: auto;
   flex: 1;
   padding-top: 20px;
-  width: 102%
+  right: -15px;
+  position: relative;
+  /* width: 102% */
 }
 
 .Task {
@@ -136,8 +146,8 @@ html, body {
 }
 
 .toolbarIcon {
-  padding: 1%;
-  margin: 1%;
+  /* padding: 1%;
+  margin: 1%; */
   /* flex: 1; */
   display: inline-block;
 }

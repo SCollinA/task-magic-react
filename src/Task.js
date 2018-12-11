@@ -3,7 +3,7 @@ import React from 'react'
 export default function Task(props) {
     return (
         <div 
-        className={`Task ${props.className || 'child'}`} 
+        className={`Task stickyContain ${props.className || 'child'}`} 
         id={props.id} 
         >
             <div className='taskName'
