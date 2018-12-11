@@ -74,11 +74,34 @@ input, button, label {
   overflow: auto;
 }
 
+.UserForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  border-color: limegreen;
+}
+
 .TaskSearch {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
   font-size: 2rem;
+}
+
+.TaskSearch > * {
+  flex: 1;
+}
+
+.taskInput {
   width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.taskInput > input {
+  flex: 1;
 }
 
 .currentTask .taskName {
@@ -87,17 +110,6 @@ input, button, label {
 
 .currentTask .taskName > * {
   margin: 0;
-}
-
-.taskInput {
-  flex: 1;
-}
-
-.UserForm {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  border-color: limegreen;
 }
 
 .Tasks {
