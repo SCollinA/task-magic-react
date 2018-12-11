@@ -242,7 +242,6 @@ export default class TaskDisplay extends Component {
                 }}
                 register={event => this._register(event.nativeEvent.path[1])}
                 logout={() => this._logout()}
-                className={(!this.state.taskToEdit || this.state.taskToEdit.id === this.state.currentTask.id) && 'selectedTask'}
                 searchTerm={this.state.searchTerm} 
                 onSubmit={event => {
                     event.preventDefault()

@@ -4,6 +4,24 @@ import Task from './Task'
 export default function TaskList(props){
     return (
         <div className={`TaskList`}>
+            {props.parents && props.parents.map(parent => {
+                return (
+                <Task
+                task={parent} 
+                key={parent.id} 
+                selectTask={props.selectTask}
+                editTask={props.selectTask}
+                completeTask={props.completeTask}
+                deleteTask={props.deleteTask} 
+                className={'parent'/* this adds the parent class*/}
+                currentChildren={props.currentChildren}
+                />)
+            })}
+            {props.currentTask && (
+                <Task 
+                task={props.currentTask}
+                />
+            )}
             {props.children && props.children.map((child, index, arr) => {
                 return (
                 <Task
@@ -22,19 +40,7 @@ export default function TaskList(props){
                 currentChildren={props.currentChildren}
                 />)
             })}
-            {props.parents && props.parents.map(parent => {
-                return (
-                <Task
-                task={parent} 
-                key={parent.id} 
-                selectTask={props.selectTask}
-                editTask={props.selectTask}
-                completeTask={props.completeTask}
-                deleteTask={props.deleteTask} 
-                className={'parent'/* this adds the parent class*/}
-                currentChildren={props.currentChildren}
-                />)
-            })}
+            
         </div>
     )
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import UserForm from './UserForm'
-import TaskForm from './TaskForm'
+import TaskSearch from './TaskSearch'
 import TaskList from './TaskList'
 
 export default function TaskContent(props) {
@@ -14,7 +14,7 @@ export default function TaskContent(props) {
             logout={props.logout}/>
 
             {props.user && (
-            <TaskForm className={props.className}
+            <TaskSearch
             searchTerm={props.searchTerm} 
             onSubmit={props.onSubmit} 
             editTask={props.editTask}
@@ -24,7 +24,7 @@ export default function TaskContent(props) {
             currentChildren={props.currentChildren}
             onReset={props.onReset}
             />)}
-            
+
             {props.user && (
             <TaskList
             children={props.children}

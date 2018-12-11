@@ -1,3 +1,10 @@
+html, body {
+  overflow: hidden;
+  height: 100%;
+  background-color: black;
+  font-size: 10px;
+}
+
 body, ::before, ::after {
   margin: 0;
   padding: 0;
@@ -14,21 +21,13 @@ code {
     monospace;
 }
 
+#root {
+  height: 100%;
+}
+
 ::-webkit-scrollbar {
   width: 0px;  /* remove scrollbar space */
   background: transparent;  /* optional: just make scrollbar invisible */
-}
-
-html, body {
-  overflow: hidden;
-  height: 100%;
-  /* 101% hides scrollbar at bottom */
-  background-color: black;
-  font-size: 10px;
-}
-
-#root {
-  height: 100%;
 }
 
 .hackerStyle {
@@ -41,10 +40,7 @@ html, body {
   background-color: rgba(0, 0, 0, 0.95)
 }
 
-/* input[type="text"], input[type="password"] { */
-input, button {
-  /* border: groove whitesmoke 5px; */
-  /* border-radius: 15px; */
+input, button, label {
   color: limegreen;
   font-family: 'Courier New', Courier, monospace;
   font-size: 2rem;
@@ -53,7 +49,6 @@ input, button {
   background-color: rgba(0, 0, 0, 0.95);
   border: none;
   cursor: crosshair;
-  /* caret-color: mediumvioletred; */
 }
 
 *:focus {
@@ -68,13 +63,6 @@ input, button {
   right: 0;
 }
 
-/* .TaskList {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  overflow: auto;
-} */
-
 .TaskDisplay {
   height: 100%;
   display: flex;
@@ -85,28 +73,13 @@ input, button {
   height: 100%;
   overflow: auto;
 }
-/* .header {
-  display: flex;
-  justify-content: space-around;
-  margin: 2%;
-  position: absolute;
-  width: 100%;
-  z-index: 1;
-} */
 
-.TaskForm {
-  flex: 1;
+.TaskSearch {
   display: flex;
-  flex-direction: column;
   justify-content: space-around;
   font-size: 2rem;
+  width: 100%;
 }
-
-/* .currentTask {
-  margin-bottom: 2%; 
-} */
-
-/* .currentTask */
 
 .currentTask .taskName {
   margin: auto;
@@ -116,51 +89,14 @@ input, button {
   margin: 0;
 }
 
-/* 
-.TaskForm > *:first-child {
-  margin: 0;
-} */
-
-.searchTasks {
-  flex: 1;
-  /* display: flex;
-  justify-content: space-around; */
-  margin: 0 2%;
-  /* margin: 2% auto; */
-  /* width: 100%; */
-}
-
 .taskInput {
-  /* margin: 0 5%; */
-  flex: 1;
-  /* display: flex; */
-  /* align-items: center; */
-  border-radius: 15px;
-  white-space: nowrap;
-}
-
-.taskInput label {
-  display: flex;
-  align-items: center;
-}
-
-.taskInput label > input {
   flex: 1;
 }
-
-/* .searchTasks > input:first-child {
-  flex: 1;
-  font-size: 2em;
-  padding: 0 10px;
-  width: 100%;
-} */
 
 .UserForm {
-  /* flex: 1; */
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  /* align-items: center; */
   border-color: limegreen;
 }
 
@@ -168,12 +104,6 @@ input, button {
   overflow: auto;
   flex: 1;
   font-size: 1.25rem;
-  /* height: 150%; */
-  /* padding-top: 20px; */
-  /* right: -15px; */
-  /* top: 20%;
-  position: relative; */
-  /* width: 102% */
 }
 
 .Task {
@@ -183,7 +113,6 @@ input, button {
 }
 
 .selectedTask {
-  /* background-color: aquamarine; */
   border-color: limegreen;
 }
 
@@ -217,27 +146,15 @@ input, button {
   font-size: 4em;
 }
 
-/* .TaskDashboard {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-} */
-
 .TaskDashContent {
   border-color: limegreen;
 }
 
 .TaskToolbar {
-  /* display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap; */
   white-space: nowrap;
   overflow-x: auto;
   margin: 0;
   padding: 0;
-  /* bottom: -15px;
-  position: relative; */
-  /* border: none; */
 }
 
 .toolbarIcon:first-child {
@@ -245,15 +162,9 @@ input, button {
 }
 
 .toolbarIcon {
-  /* padding: 1%;
-  margin: 1%; */
-  /* flex: 1; */
-  /* background-color: rgba(255, 255, 255, 0.25); */
   display: inline-block;
 }
 
 .toolChoice {
-  /* background-color: palevioletred; */
   border-color: limegreen;
-  /* background-color: rgba(255, 255, 255, 0); */
 }
