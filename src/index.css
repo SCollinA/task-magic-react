@@ -97,13 +97,17 @@ input:focus {
 
 .searchTasks {
   display: flex;
-  margin: 2% auto;
-  width: 100%;
+  justify-content: space-around;
+  /* margin: 2% auto; */
+  /* width: 100%; */
 }
 
-.searchTasks > * {
-  margin: 0 5%;
+.taskInput {
+  /* margin: 0 5%; */
+  display: flex;
+  align-items: center;
   border-radius: 15px;
+  white-space: nowrap;
 }
 
 .searchTasks > input:first-child {

@@ -21,14 +21,17 @@ export default function TaskForm(props) {
             }
             {/* <h1 onClick={() => props.editTask(props.currentTask)}>{props.currentTask ? props.currentTask.name : 'Login -->'}</h1> */}
             <div className="searchTasks">
-                <input
+                <div className="taskInput">
+                    <label name="inputTask">Input Task:</label>
+                    <input
                     value={props.searchTerm} 
                     onChange={props.onChange} 
                     type='text'
-                    placeholder='Input Task'
-                />
+                    name='inputTask'
+                    />
                 {/* <input type='submit' value='add'/> */}
                 {/* <button onClick={props.onReset}>Cancel</button> */}
+                </div>
                 <button type="reset">Cancel</button>
                 {/* <input type="reset" value="reset"/> */}
             </div>
