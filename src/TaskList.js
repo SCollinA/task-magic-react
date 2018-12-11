@@ -3,7 +3,7 @@ import Task from './Task'
 
 export default function TaskList(props){
     return (
-        <div className={`TaskList`}>
+        <div className={`TaskList stickyContain`}>
             {props.parents && props.parents.map(parent => {
                 return (
                 <Task
@@ -40,7 +40,6 @@ export default function TaskList(props){
                 currentChildren={props.currentChildren}
                 />)
             })}
-            
         </div>
     )
 }

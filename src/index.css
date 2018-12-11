@@ -72,6 +72,8 @@ input, button, label {
 .TaskContent {
   height: 100%;
   overflow: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .UserForm {
@@ -104,18 +106,16 @@ input, button, label {
   flex: 1;
 }
 
+.TaskList {
+  overflow: auto;
+}
+
 .currentTask .taskName {
   margin: auto;
 }
 
 .currentTask .taskName > * {
   margin: 0;
-}
-
-.Tasks {
-  overflow: auto;
-  flex: 1;
-  font-size: 1.25rem;
 }
 
 .Task {

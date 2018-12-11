@@ -24,7 +24,7 @@ export default function TaskContent(props) {
             currentChildren={props.currentChildren}
             onReset={props.onReset}
             />)}
-
+            
             {props.user && (
             <TaskList
             children={props.children}
