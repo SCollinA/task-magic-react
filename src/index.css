@@ -117,14 +117,17 @@ html, body {
 }
 
 .TaskToolbar {
-  display: flex;
+  /* display: flex;
   justify-content: space-around;
-  flex-wrap: wrap;
+  flex-wrap: wrap; */
+  white-space: nowrap;
+  overflow-x: auto;
 }
 
 .toolbarIcon {
   padding: 0 5%;
-  flex: 1;
+  /* flex: 1; */
+  display: inline-block;
 }
 
 .toolChoice {
