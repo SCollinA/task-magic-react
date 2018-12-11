@@ -4,21 +4,20 @@ import TaskShare from './TaskShare'
 
 export default function TaskContent(props) {
     const contentOptions = [
-        <div/>,
+        null,
         <TaskInfo task={props.task}/>,
-        <div/>,
-        <div/>,
-        <div/>,
-        <div/>,
-        <div/>,
-        <div/>,
-        <div/>,
-        <div/>,
-        <div/>,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
         <TaskShare shareTask={props.shareTask} />
     ]
     return (
-        <div className="TaskContent hackerStyle">
+        <div className={`TaskContent ${contentOptions[props.contentChoice] && 'hackerStyle'}`}>
             {contentOptions[props.contentChoice]}
         </div>
     )
