@@ -237,7 +237,8 @@ export default class TaskList extends Component {
         return (
             <div className="TaskList">
                 <div className="header">
-                    <TaskForm searchTerm={this.state.searchTerm} 
+                    <TaskForm className={(!this.state.taskToEdit || this.state.taskToEdit.id === this.state.currentTask.id) && 'selectedTask'}
+                    searchTerm={this.state.searchTerm} 
                     onSubmit={event => {
                         event.preventDefault()
                         this.state.taskToEdit ? this._updateName(this.state.taskToEdit) : this._addTask()}} 
@@ -278,13 +279,13 @@ export default class TaskList extends Component {
                 isSearching={this.state.searchTerm && !this.state.taskToEdit}
                 />
                 {/* <TaskDashboard task={this.state.taskToEdit || this.state.currentTask} goHome={this._goHome}/> */}
-                <TaskDashboard
+                {this.state.user && (<TaskDashboard
                 key={(this.state.taskToEdit && this.state.taskToEdit.id) || (this.state.currentTask && this.state.currentTask.id)}
                 task={this.state.taskToEdit || this.state.currentTask} 
                 goHome={this._goHome} 
                 deleteTask={this._deleteTask}
                 shareTask={this._shareTask}
-                />
+                />)}
             </div>
         )
     }

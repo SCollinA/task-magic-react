@@ -87,6 +87,8 @@ input:focus {
   margin-bottom: 2%; 
 } */
 
+/* .currentTask */
+
 .currentTask .taskName {
   margin: auto;
 }
@@ -120,6 +122,7 @@ input:focus {
 .UserForm {
   display: flex;
   flex-direction: column;
+  border-color: limegreen;
 }
 
 .Tasks {
@@ -176,6 +179,10 @@ input:focus {
   bottom: 0;
   width: 100%;
 } */
+
+.TaskContent {
+  border-color: limegreen;
+}
 
 .TaskToolbar {
   /* display: flex;
