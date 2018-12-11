@@ -26,7 +26,7 @@ export default function TaskToolbar(props) {
             })} */}
             {iconArray.map((icon, iconIndex) => {
                 return (
-                    <h1 className={iconIndex === props.contentChoice ? "toolbarIcon toolChoice" : "toolbarIcon"} 
+                    <h1 className={`${iconIndex === props.contentChoice ? "toolbarIcon toolChoice" : "toolbarIcon"} stickyContain`} 
                     key={iconIndex}
                     onClick={() => props.updateContent(iconIndex)}>
                         <span role="img" aria-label="">{icon}</span>
