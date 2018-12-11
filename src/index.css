@@ -24,6 +24,7 @@ html, body {
   height: 100%;
   /* 101% hides scrollbar at bottom */
   background-color: black;
+  font-size: 10px;
 }
 
 #root {
@@ -46,6 +47,7 @@ input, button {
   /* border-radius: 15px; */
   color: limegreen;
   font-family: 'Courier New', Courier, monospace;
+  font-size: 2rem;
   padding: 1%;
   margin: 1%;
   background-color: rgba(0, 0, 0, 0.95);
@@ -55,7 +57,7 @@ input, button {
 }
 
 *:focus {
-  outline: none;
+  outline: limegreen;
 }
 
 .stickyContain {
@@ -73,20 +75,21 @@ input, button {
   /* overflow: auto; */
 }
 
-.header {
+/* .header {
   display: flex;
   justify-content: space-around;
-  /* margin: 2%; */
-  /* position: absolute;
+  margin: 2%;
+  position: absolute;
   width: 100%;
-  z-index: 1; */
-}
+  z-index: 1;
+} */
 
 .TaskForm {
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  font-size: 2rem;
 }
 
 /* .currentTask {
@@ -110,8 +113,8 @@ input, button {
 
 .searchTasks {
   flex: 1;
-  display: flex;
-  justify-content: space-around;
+  /* display: flex;
+  justify-content: space-around; */
   margin: 0 2%;
   /* margin: 2% auto; */
   /* width: 100%; */
@@ -120,10 +123,19 @@ input, button {
 .taskInput {
   /* margin: 0 5%; */
   flex: 1;
-  display: flex;
-  align-items: center;
+  /* display: flex; */
+  /* align-items: center; */
   border-radius: 15px;
   white-space: nowrap;
+}
+
+.taskInput label {
+  display: flex;
+  align-items: center;
+}
+
+.taskInput label > input {
+  flex: 1;
 }
 
 /* .searchTasks > input:first-child {
@@ -145,6 +157,7 @@ input, button {
 .Tasks {
   overflow: auto;
   flex: 1;
+  font-size: 1.25rem;
   /* height: 150%; */
   /* padding-top: 20px; */
   /* right: -15px; */

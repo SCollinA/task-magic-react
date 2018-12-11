@@ -236,34 +236,34 @@ export default class TaskList extends Component {
     render() {
         return (
             <div className="TaskList">
-                <div className="header">
-                    {this.state.user && (<TaskForm className={(!this.state.taskToEdit || this.state.taskToEdit.id === this.state.currentTask.id) && 'selectedTask'}
-                    searchTerm={this.state.searchTerm} 
-                    onSubmit={event => {
-                        event.preventDefault()
-                        this.state.taskToEdit ? this._updateName(this.state.taskToEdit) : this._addTask()}} 
-                    editTask={this._editTask}
-                    completeTask={this._completeTask}
-                    onChange={event => this._updateSearch(event.target.value)}
-                    // currentTask={this.state.currentTask}
-                    // currentTask={this.state.taskToEdit || this.state.currentTask}
-                    currentTask={this.state.taskToEdit && this.state.taskToEdit.id === this.state.currentTask.id ? {...this.state.currentTask, name: this.state.searchTerm} : this.state.currentTask}
-                    currentChildren={this.state.children}
-                    onReset={this._resetSearch}
-                    />)}
-                    <UserForm user={this.state.user} 
-                    login={event => {
-                        event.preventDefault()
-                        this._login(event.target.username.value, event.target.password.value, true)
-                    }}
-                    register={event => {
-                        this._register(event.nativeEvent.path[1])
-                    }}
-                    logout={() => {
-                        this._logout()
-                    }
-                    }/>
-                </div>
+                <UserForm
+                user={this.state.user} 
+                login={event => {
+                    event.preventDefault()
+                    this._login(event.target.username.value, event.target.password.value, true)
+                }}
+                register={event => {
+                    this._register(event.nativeEvent.path[1])
+                }}
+                logout={() => {
+                    this._logout()
+                }
+                }/>
+                {/* {this.state.user && (
+                <TaskForm className={(!this.state.taskToEdit || this.state.taskToEdit.id === this.state.currentTask.id) && 'selectedTask'}
+                searchTerm={this.state.searchTerm} 
+                onSubmit={event => {
+                    event.preventDefault()
+                    this.state.taskToEdit ? this._updateName(this.state.taskToEdit) : this._addTask()}} 
+                editTask={this._editTask}
+                completeTask={this._completeTask}
+                onChange={event => this._updateSearch(event.target.value)}
+                // currentTask={this.state.currentTask}
+                // currentTask={this.state.taskToEdit || this.state.currentTask}
+                currentTask={this.state.taskToEdit && this.state.taskToEdit.id === this.state.currentTask.id ? {...this.state.currentTask, name: this.state.searchTerm} : this.state.currentTask}
+                currentChildren={this.state.children}
+                onReset={this._resetSearch}
+                />)} */}
                 {this.state.user && (
                 <Tasks
                 children={(this.state.searchTerm && !this.state.taskToEdit) ? this.state.userTasks.filter(task => task.name.includes(this.state.searchTerm)) : this.state.children}
