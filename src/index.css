@@ -30,7 +30,7 @@ html, body {
   height: 100%;
 }
 
-.hackerStyle, input[type="text"] {
+.hackerStyle {
   border: groove whitesmoke 5px;
   border-radius: 15px;
   color: limegreen;
@@ -38,6 +38,21 @@ html, body {
   padding: 1%;
   margin: 1%;
   background-color: rgba(0, 0, 0, 0.95)
+}
+
+input[type="text"], input[type="password"] {
+  /* border: groove whitesmoke 5px; */
+  /* border-radius: 15px; */
+  color: limegreen;
+  font-family: 'Courier New', Courier, monospace;
+  padding: 1%;
+  margin: 1%;
+  background-color: rgba(0, 0, 0, 0.95);
+  border: none;
+}
+
+input:focus {
+  outline: none;
 }
 
 .stickyContain {
@@ -121,7 +136,8 @@ html, body {
 }
 
 .selectedTask {
-  background-color: aquamarine;
+  /* background-color: aquamarine; */
+  border-color: limegreen;
 }
 
 .childNames {

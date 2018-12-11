@@ -20,8 +20,9 @@ export default function Task(props) {
             // {(!props.isCurrentTask && props.task.active) && (
             <div 
             className="childNames" 
-            onClick={() => {
+            onClick={event => {
                 console.log(`${props.task.name} selected`)
+                console.log(event.target.style)
                 props.selectTask(props.task)
             }}>
                 <p>
