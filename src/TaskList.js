@@ -2,7 +2,6 @@ import React from 'react'
 import Task from './Task'
 
 export default function TaskList(props){
-    console.log(props)
     return (
         <div className={`TaskList`}>
             {props.children && props.children.map((child, index, arr) => {
