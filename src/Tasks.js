@@ -3,7 +3,7 @@ import Task from './Task'
 
 export default function Tasks(props){
     return (
-        <div className="Tasks">
+        <div className={`Tasks ${props.className}`}>
             {props.children.map(child => {
             return (
             <Task

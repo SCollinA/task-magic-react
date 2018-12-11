@@ -17,6 +17,7 @@ html, body {
   overflow: hidden;
   height: 101%;
   /* 101% hides scrollbar at bottom */
+  background-color: black;
 }
 
 #root {
@@ -26,6 +27,8 @@ html, body {
 .hackerStyle > * {
   border: groove whitesmoke 5px;
   border-radius: 15px;
+  color: limegreen;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 .TaskList {
@@ -37,16 +40,16 @@ html, body {
 .header {
   display: flex;
   justify-content: space-around;
-  margin: 2%;
+  /* margin: 2%; */
 }
 
 .TaskForm {
   flex: 1;
 }
 
-.currentTask {
+/* .currentTask {
   margin-bottom: 2%; 
-}
+} */
 
 .currentTask .taskName {
   margin: auto;
@@ -58,7 +61,7 @@ html, body {
 
 .searchTasks {
   display: flex;
-  margin: auto;
+  margin: 2% auto;
   width: 100%;
 }
 
