@@ -68,13 +68,23 @@ input, button {
   right: 0;
 }
 
-.TaskList {
+/* .TaskList {
   height: 100%;
   display: flex;
   flex-direction: column;
-  /* overflow: auto; */
+  overflow: auto;
+} */
+
+.TaskDisplay {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
+.TaskContent {
+  height: 100%;
+  overflow: auto;
+}
 /* .header {
   display: flex;
   justify-content: space-around;
@@ -213,7 +223,7 @@ input, button {
   width: 100%;
 } */
 
-.TaskContent {
+.TaskDashContent {
   border-color: limegreen;
 }
 

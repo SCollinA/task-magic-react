@@ -1,294 +1,41 @@
-import React, {Component} from 'react'
-import TaskForm from './TaskForm'
-import UserForm from './UserForm'
-import Tasks from './Tasks'
-import TaskDashboard from './TaskDashboard'
-const urlPrefix = '/api'
+import React from 'react'
+import Task from './Task'
 
-export default class TaskList extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            searchTerm: '',
-            parents: [],
-            currentTask: null,
-            children: [],
-            user: null,
-            userTasks: [],
-            taskToEdit: null
-        }
-    }
-
-    componentDidMount() {
-        fetch(`${urlPrefix}/test-react`)
-        .then(res => res.json())
-        .then(data => this.setState({...data}))
-        // .then(() => this.state.user && this._getAllTasks())
-    }
-
-    _login = (username, password, login) => {
-        const url = login ? `${urlPrefix}/login` : `${urlPrefix}/register`
-        fetch(url, {
-            method: 'post',
-            body: JSON.stringify({username, password}),
-            headers: {'Content-Type': 'application/json'}
-        })
-        .then(res => res.json())
-        .then(data => this.setState({...data}))
-        .catch(console.log)
-        // .then(() => this.state.user && this._getAllTasks())
-    }
-
-    _register = (userForm) => { 
-        this._login(userForm.username.value, userForm.password.value, false)
-    }
-
-    _logout = () => {
-        fetch(`${urlPrefix}/logout`)
-        .then(res => res.json())
-        .then(data => this.setState({...data}))
-    }
-
-    _updateSearch = searchTerm => {
-        console.log(`Search Term: ${searchTerm}`)
-        const taskToEdit = this.state.taskToEdit ? {...this.state.taskToEdit, name: searchTerm} : null
-        this.setState({
-            searchTerm,
-            taskToEdit
-        }
-        // , () => {
-        //     console.log('updated search term')
-        //     if (this.state.taskToEdit) {
-        //         this.setState({
-        //             currentTask: {...this.state.currentTask, name: this.state.searchTerm}
-        //         }, () => console.log('edited current task name'))   
-        //     }
-        // }
-        )
-    }
-
-    _resetSearch = () => {
-        this.setState({
-            searchTerm: '',
-            taskToEdit: null,
-        })
-    }
-
-    _goHome = () => {
-        fetch('/home')
-        .then(res => res.json())
-        .then(data => this.setState({...data}))
-        .then(this._resetSearch)
-    }
-
-    _addTask() {
-        // find exact matches for search term in all of users tasks
-        const globalSearchResult = this.state.userTasks.filter(task => task.name === this.state.searchTerm)[0]
-        // if there are no matches
-        if (!globalSearchResult) { 
-            console.log(`adding new task ${this.state.searchTerm}`)
-            // then add the new task
-            fetch(`${urlPrefix}/test-react`, { 
-                method: 'post', 
-                body: JSON.stringify({taskName: this.state.searchTerm}),
-                headers: {'Content-Type': 'application/json'}
-            })
-            .then(res => res.json())
-            .then(data => {
-                this.setState({
-                    searchTerm: '',
-                    ...data
-                })
-            })
-        } else {
-            // some global search results found
-            // find exact matches for search result in current task
-            const localSearchResult = this.state.children.filter(task => task.name === this.state.searchTerm)[0]
-            // if there are no current children with search term, add global result
-            if (!localSearchResult) {
-                this._subTask(globalSearchResult)
-            } else {
-                // do nothing
-            }
-        }
-    }
-
-    _shareTask = userToShare => {
-        const taskToEdit = this.state.taskToEdit
-        const currentTask = this.state.currentTask
-        console.log(userToShare, taskToEdit, currentTask)
-        fetch(`${urlPrefix}/test-react-share-task`, {
-            method: 'post',
-            body: JSON.stringify({username: userToShare, taskID: (taskToEdit && taskToEdit.id) || (currentTask && currentTask.id)}),
-            headers: {'Content-Type': 'application/json'}
-        })
-        .then(res => res.json())
-        .then(data => {
-            this.setState({
-                ...data
-            })
-        })
-    }
-
-    _subTask = taskToSubtask => {
-        const taskExists = this.state.children.map(child => child.id).filter(childID => childID === taskToSubtask.id)
-        if (taskExists.length === 0) {
-            console.log(`adding existing task ${taskToSubtask.name}`)
-            fetch(`${urlPrefix}/test-react-sub-task`, { 
-                method: 'post', 
-                body: JSON.stringify({taskID: taskToSubtask.id}),
-                headers: {'Content-Type': 'application/json'}
-            })
-            .then(res => res.json())
-            .then(data => {
-                this.setState({
-                    searchTerm: '',
-                    ...data
-                })
-            })
-        } else {
-            console.log(`${taskToSubtask.name} already a child`)
-            this.setState({
-                searchTerm: ''
-            })
-        }
-    }
-
-    _selectTask = taskToSelect => {
-        console.log(`selecting task ${taskToSelect.name}`)
-        // update search box text to task name
-        fetch(`${urlPrefix}/test-react-task`, {
-            method: 'post',
-            body: JSON.stringify({taskToSelect}),
-            headers: {'Content-Type': 'application/json'}
-        })
-        .then(res => res.json())
-        .then(data => {
-            this.setState({
-                ...data,
-                searchTerm: '',
-                taskToEdit: null
-            })
-        })
-    }
-
-    _editTask = taskToEdit => {
-        console.log(`editing task ${taskToEdit.name}`)
-        // if there is no current task to edit, OR this is a new taskToEdit
-        if (!this.state.taskToEdit || taskToEdit.id !== this.state.taskToEdit.id) {
-            this.setState({
-                searchTerm: taskToEdit.name,
-                taskToEdit
-            })
-        } else {
-            // this._selectTask(taskToEdit)
-            // there is a current task and this task to edit is already being edited, so deselect
-            this.setState({
-                searchTerm: '',
-                taskToEdit: null
-            })
-        }
-    }
-
-    _updateName = taskToUpdate => {
-        fetch(`${urlPrefix}/test-react-name`, {
-            method: 'post',
-            body: JSON.stringify({taskToUpdate, name: this.state.searchTerm}),
-            headers: {'Content-Type': 'application/json'}
-        })
-        .then(res => res.json())
-        .then(data => {
-            this.setState({
-                searchTerm: '',
-                taskToEdit: null,
-                ...data
-            })
-        })
-    }
-
-    _completeTask = taskToComplete => {
-        fetch(`${urlPrefix}/test-react-complete`, {
-            method: 'post',
-            body: JSON.stringify(taskToComplete),
-            headers: {'Content-Type': 'application/json'}
-        })
-        .then(res => res.json())
-        .then(data => this.setState({...data}))
-        .then(() => {
-            // get the child task with task to edit id
-            const taskToEdit = this.state.taskToEdit && this.state.children.filter(child => child.id === this.state.taskToEdit.id)[0]
-            // set task to edit equal to that to update
-            this.setState({taskToEdit})
-        })
-    }
-
-    _deleteTask = iDToDelete => {
-        console.log(`deleting task id ${iDToDelete}`)
-        fetch(`${urlPrefix}/test-react-delete`, {
-            method: 'post', 
-            body: JSON.stringify({iDToDelete}),
-            headers: {'Content-Type': 'application/json'}
-        })
-        .then(res => res.json())
-        .then(data => { this.setState({...data})})
-    }
-
-    render() {
-        return (
-            <div className="TaskList">
-                <UserForm
-                user={this.state.user} 
-                login={event => {
-                    event.preventDefault()
-                    this._login(event.target.username.value, event.target.password.value, true)
-                }}
-                register={event => {
-                    this._register(event.nativeEvent.path[1])
-                }}
-                logout={() => {
-                    this._logout()
-                }
-                }/>
-                {/* {this.state.user && (
-                <TaskForm className={(!this.state.taskToEdit || this.state.taskToEdit.id === this.state.currentTask.id) && 'selectedTask'}
-                searchTerm={this.state.searchTerm} 
-                onSubmit={event => {
-                    event.preventDefault()
-                    this.state.taskToEdit ? this._updateName(this.state.taskToEdit) : this._addTask()}} 
-                editTask={this._editTask}
-                completeTask={this._completeTask}
-                onChange={event => this._updateSearch(event.target.value)}
-                // currentTask={this.state.currentTask}
-                // currentTask={this.state.taskToEdit || this.state.currentTask}
-                currentTask={this.state.taskToEdit && this.state.taskToEdit.id === this.state.currentTask.id ? {...this.state.currentTask, name: this.state.searchTerm} : this.state.currentTask}
-                currentChildren={this.state.children}
-                onReset={this._resetSearch}
-                />)} */}
-                {this.state.user && (
-                <Tasks
-                children={(this.state.searchTerm && !this.state.taskToEdit) ? this.state.userTasks.filter(task => task.name.includes(this.state.searchTerm)) : this.state.children}
-                currentChildren={this.state.children}
-                parents={(this.state.searchTerm && !this.state.taskToEdit) ? [] : this.state.parents}
-                currentTask={this.state.currentTask}
-                selectTask={this._selectTask}
-                subTask={this._subTask}
-                // selectTask={!this.state.taskToEdit || this._selectTask}
-                editTask={this.state.searchTerm && !this.state.taskToEdit ? this._selectTask : this._editTask}
-                completeTask={this.state.searchTerm && !this.state.taskToEdit ? this._subTask : this._completeTask}
-                deleteTask={this._deleteTask}
-                taskToEdit={this.state.taskToEdit}
-                isSearching={this.state.searchTerm && !this.state.taskToEdit}
-                />
-                )}
-                {/* <TaskDashboard task={this.state.taskToEdit || this.state.currentTask} goHome={this._goHome}/> */}
-                {this.state.user && (<TaskDashboard
-                key={(this.state.taskToEdit && this.state.taskToEdit.id) || (this.state.currentTask && this.state.currentTask.id)}
-                task={this.state.taskToEdit || this.state.currentTask} 
-                goHome={this._goHome} 
-                deleteTask={this._deleteTask}
-                shareTask={this._shareTask}
-                />)}
-            </div>
-        )
-    }
+export default function TaskList(props){
+    console.log(props)
+    return (
+        <div className={`TaskList`}>
+            {props.children && props.children.map((child, index, arr) => {
+                return (
+                <Task
+                // task={child}
+                task={props.taskToEdit && child.id === props.taskToEdit.id ? {...child, name: props.taskToEdit.name} : child} 
+                z_index={arr.length - index} 
+                key={child.id} 
+                currentTask={props.currentTask}
+                selectTask={props.selectTask}
+                editTask={props.editTask}
+                completeTask={props.completeTask}
+                subTask={props.subTask}
+                deleteTask={props.deleteTask} 
+                className={props.taskToEdit && child.id === props.taskToEdit.id ? 'selectedTask' : ''}
+                isSearching={props.isSearching}
+                currentChildren={props.currentChildren}
+                />)
+            })}
+            {props.parents && props.parents.map(parent => {
+                return (
+                <Task
+                task={parent} 
+                key={parent.id} 
+                selectTask={props.selectTask}
+                editTask={props.selectTask}
+                completeTask={props.completeTask}
+                deleteTask={props.deleteTask} 
+                className={'parent'/* this adds the parent class*/}
+                currentChildren={props.currentChildren}
+                />)
+            })}
+        </div>
+    )
 }

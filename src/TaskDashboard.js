@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import TaskContent from './TaskContent'
+import TaskDashContent from './TaskDashContent'
 import TaskToolbar from './TaskToolbar'
 
 // export default function TaskDashboard(props) {
@@ -35,7 +35,7 @@ export default class TaskDashboard extends Component {
         return (
             <div className={`TaskDashboard`}>
                 {/* <TaskContent task={props.task}/> */}
-                <TaskContent
+                <TaskDashContent
                 task={this.props.task} 
                 contentChoice={this.state.contentChoice}
                 shareTask={this.props.shareTask}/>
