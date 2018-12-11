@@ -237,7 +237,7 @@ export default class TaskList extends Component {
         return (
             <div className="TaskList">
                 <div className="header">
-                    <TaskForm className={(!this.state.taskToEdit || this.state.taskToEdit.id === this.state.currentTask.id) && 'selectedTask'}
+                    {this.state.user && (<TaskForm className={(!this.state.taskToEdit || this.state.taskToEdit.id === this.state.currentTask.id) && 'selectedTask'}
                     searchTerm={this.state.searchTerm} 
                     onSubmit={event => {
                         event.preventDefault()
@@ -250,7 +250,7 @@ export default class TaskList extends Component {
                     currentTask={this.state.taskToEdit && this.state.taskToEdit.id === this.state.currentTask.id ? {...this.state.currentTask, name: this.state.searchTerm} : this.state.currentTask}
                     currentChildren={this.state.children}
                     onReset={this._resetSearch}
-                    />
+                    />)}
                     <UserForm user={this.state.user} 
                     login={event => {
                         event.preventDefault()
@@ -264,6 +264,7 @@ export default class TaskList extends Component {
                     }
                     }/>
                 </div>
+                {this.state.user && (
                 <Tasks
                 children={(this.state.searchTerm && !this.state.taskToEdit) ? this.state.userTasks.filter(task => task.name.includes(this.state.searchTerm)) : this.state.children}
                 currentChildren={this.state.children}
@@ -278,6 +279,7 @@ export default class TaskList extends Component {
                 taskToEdit={this.state.taskToEdit}
                 isSearching={this.state.searchTerm && !this.state.taskToEdit}
                 />
+                )}
                 {/* <TaskDashboard task={this.state.taskToEdit || this.state.currentTask} goHome={this._goHome}/> */}
                 {this.state.user && (<TaskDashboard
                 key={(this.state.taskToEdit && this.state.taskToEdit.id) || (this.state.currentTask && this.state.currentTask.id)}

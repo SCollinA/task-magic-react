@@ -21,9 +21,10 @@ export default function TaskForm(props) {
                 currentChildren={props.currentChildren}/>
             )
             ||
-                <h1>Login --></h1>
+                <h2>Login --></h2>
             }
             {/* <h1 onClick={() => props.editTask(props.currentTask)}>{props.currentTask ? props.currentTask.name : 'Login -->'}</h1> */}
+            {props.currentTask && (
             <div className="searchTasks">
                 <div className="taskInput">
                     <label name="inputTask">Input Task:</label>
@@ -39,6 +40,7 @@ export default function TaskForm(props) {
                 <button type="reset">Cancel</button>
                 {/* <input type="reset" value="reset"/> */}
             </div>
+            )}
         </form>
     )
 }

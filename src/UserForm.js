@@ -12,11 +12,14 @@ export default function UserForm(props) {
             <input type="text" name="username"></input>
             <label name="password">Password:</label>
             <input type="password" name="password"></input>
-            <input type="submit" value="login" name="login"/>
-            <input type="button" 
-            value="register" 
-            name="register"
-            onClick={props.register}/>
+            <div className='loginRegister'>
+                <input type="submit" value="login" name="login"/>
+                |
+                <input type="button" 
+                value="register" 
+                name="register"
+                onClick={props.register}/>
+            </div>
         </form>
     )
     return userLogin
