@@ -31,6 +31,7 @@ html, body {
   font-family: 'Courier New', Courier, monospace;
   padding: 1%;
   margin: 1%;
+  background-color: rgba(0, 0, 0, 0.7)
 }
 
 .stickyContain {
@@ -93,7 +94,7 @@ html, body {
 .Tasks {
   overflow: auto;
   flex: 1;
-  padding-top: 20px;
+  /* padding-top: 20px; */
   right: -15px;
   position: relative;
   /* width: 102% */
@@ -142,6 +143,10 @@ html, body {
   flex-wrap: wrap; */
   white-space: nowrap;
   overflow-x: auto;
+  margin: 0;
+  padding: 0;
+  bottom: -15px;
+  position: relative;
   border: none;
 }
 
