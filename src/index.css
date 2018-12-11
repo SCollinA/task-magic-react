@@ -54,7 +54,7 @@ input, button {
   /* caret-color: mediumvioletred; */
 }
 
-input:focus {
+*:focus {
   outline: none;
 }
 
@@ -99,14 +99,20 @@ input:focus {
   margin: auto;
 }
 
-.TaskForm > *:first-child {
+.currentTask .taskName > * {
   margin: 0;
 }
+
+/* 
+.TaskForm > *:first-child {
+  margin: 0;
+} */
 
 .searchTasks {
   flex: 1;
   display: flex;
   justify-content: space-around;
+  margin: 0 2%;
   /* margin: 2% auto; */
   /* width: 100%; */
 }

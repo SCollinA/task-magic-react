@@ -22,7 +22,6 @@ export default function Task(props) {
             className="childNames" 
             onClick={event => {
                 console.log(`${props.task.name} selected`)
-                console.log(event.target.style)
                 props.selectTask(props.task)
             }}>
                 <p>

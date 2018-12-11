@@ -3,7 +3,7 @@ import React from 'react'
 export default function UserForm(props) {
     const userLogin = props.user ? (
             <div className="UserForm hackerStyle">
-                {props.user.name}
+                <h6>{props.user.name}</h6>
                 <button onClick={props.logout}>Logout</button>
             </div>
     ) : (

@@ -27,13 +27,15 @@ export default function TaskForm(props) {
             {props.currentTask && (
             <div className="searchTasks">
                 <div className="taskInput">
-                    <label name="inputTask">Input Task:</label>
-                    <input
-                    value={props.searchTerm} 
-                    onChange={props.onChange} 
-                    type='text'
-                    name='inputTask'
-                    />
+                    <label name="inputTask">
+                        Input Task:<input
+                        value={props.searchTerm} 
+                        onChange={props.onChange} 
+                        type='text'
+                        name='inputTask'
+                        />
+                    </label>
+                    
                 {/* <input type='submit' value='add'/> */}
                 {/* <button onClick={props.onReset}>Cancel</button> */}
                 </div>
