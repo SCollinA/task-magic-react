@@ -18,7 +18,7 @@ export default function TaskContent(props) {
         <TaskShare shareTask={props.shareTask} />
     ]
     return (
-        <div className="TaskContent">
+        <div className="TaskContent hackerStyle">
             {contentOptions[props.contentChoice]}
         </div>
     )

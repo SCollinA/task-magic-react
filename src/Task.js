@@ -2,8 +2,8 @@ import React from 'react'
 
 export default function Task(props) {
     return (
-        <div 
-        className={`Task stickyContain ${props.className || 'child'}`} 
+        <div style={{zIndex:props.z_index}}
+        className={`Task stickyContain ${props.isCurrentTask || 'hackerStyle'} ${props.className || 'child'}`} 
         id={props.id} 
         >
             <div className='taskName'

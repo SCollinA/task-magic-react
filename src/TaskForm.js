@@ -4,7 +4,7 @@ import Task from './Task'
 export default function TaskForm(props) {
     return (
         // <form className="TaskForm" onSubmit={props.onSubmit}>
-        <form className="TaskForm" onSubmit={props.onSubmit} onReset={props.onReset}>
+        <form className="TaskForm hackerStyle" onSubmit={props.onSubmit} onReset={props.onReset}>
             {(
                 props.currentTask 
                 && 

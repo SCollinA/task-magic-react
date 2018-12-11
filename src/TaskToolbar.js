@@ -20,13 +20,13 @@ export default function TaskToolbar(props) {
         
     // ]
     return (
-        <div className="TaskToolbar hackerStyle">
+        <div className="TaskToolbar">
             {/* {imgSrcArray.map((imgSrc, imgSrcIndex) => {
                 return <img src={imgSrc} onClick={() => props.updateContent(imgSrcIndex)} />
             })} */}
             {iconArray.map((icon, iconIndex) => {
                 return (
-                    <h1 className={`${iconIndex === props.contentChoice ? "toolbarIcon toolChoice" : "toolbarIcon"} stickyContain`} 
+                    <h1 className={`hackerStyle ${iconIndex === props.contentChoice ? "toolbarIcon toolChoice" : "toolbarIcon"} stickyContain`} 
                     key={iconIndex}
                     onClick={() => props.updateContent(iconIndex)}>
                         <span role="img" aria-label="">{icon}</span>

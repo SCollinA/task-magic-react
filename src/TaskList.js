@@ -236,7 +236,7 @@ export default class TaskList extends Component {
     render() {
         return (
             <div className="TaskList">
-                <div className="header hackerStyle">
+                <div className="header">
                     <TaskForm searchTerm={this.state.searchTerm} 
                     onSubmit={event => {
                         event.preventDefault()
@@ -263,7 +263,7 @@ export default class TaskList extends Component {
                     }
                     }/>
                 </div>
-                <Tasks className="hackerStyle"
+                <Tasks
                 children={(this.state.searchTerm && !this.state.taskToEdit) ? this.state.userTasks.filter(task => task.name.includes(this.state.searchTerm)) : this.state.children}
                 currentChildren={this.state.children}
                 parents={(this.state.searchTerm && !this.state.taskToEdit) ? [] : this.state.parents}
@@ -278,7 +278,7 @@ export default class TaskList extends Component {
                 isSearching={this.state.searchTerm && !this.state.taskToEdit}
                 />
                 {/* <TaskDashboard task={this.state.taskToEdit || this.state.currentTask} goHome={this._goHome}/> */}
-                <TaskDashboard className="hackerStyle"
+                <TaskDashboard
                 key={(this.state.taskToEdit && this.state.taskToEdit.id) || (this.state.currentTask && this.state.currentTask.id)}
                 task={this.state.taskToEdit || this.state.currentTask} 
                 goHome={this._goHome} 

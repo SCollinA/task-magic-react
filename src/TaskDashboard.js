@@ -33,9 +33,9 @@ export default class TaskDashboard extends Component {
 
     render() {
         return (
-            <div className={`TaskDashboard ${this.props.className}`}>
+            <div className={`TaskDashboard`}>
                 {/* <TaskContent task={props.task}/> */}
-                <TaskContent 
+                <TaskContent
                 task={this.props.task} 
                 contentChoice={this.state.contentChoice}
                 shareTask={this.props.shareTask}/>

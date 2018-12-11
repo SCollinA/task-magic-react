@@ -30,14 +30,14 @@ html, body {
   height: 100%;
 }
 
-.hackerStyle > * {
+.hackerStyle, input[type="text"] {
   border: groove whitesmoke 5px;
   border-radius: 15px;
   color: limegreen;
   font-family: 'Courier New', Courier, monospace;
   padding: 1%;
   margin: 1%;
-  background-color: rgba(0, 0, 0, 0.7)
+  background-color: rgba(0, 0, 0, 0.95)
 }
 
 .stickyContain {
@@ -167,16 +167,23 @@ html, body {
   padding: 0;
   /* bottom: -15px;
   position: relative; */
-  border: none;
+  /* border: none; */
+}
+
+.toolbarIcon:first-child {
+  z-index: 1;
 }
 
 .toolbarIcon {
   /* padding: 1%;
   margin: 1%; */
   /* flex: 1; */
+  /* background-color: rgba(255, 255, 255, 0.25); */
   display: inline-block;
 }
 
 .toolChoice {
-  background-color: palevioletred;
+  /* background-color: palevioletred; */
+  border-color: limegreen;
+  /* background-color: rgba(255, 255, 255, 0); */
 }

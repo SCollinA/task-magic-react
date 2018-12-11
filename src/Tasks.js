@@ -3,12 +3,13 @@ import Task from './Task'
 
 export default function Tasks(props){
     return (
-        <div className={`Tasks ${props.className}`}>
-            {props.children.map(child => {
+        <div className={`Tasks`}>
+            {props.children.map((child, index, arr) => {
             return (
             <Task
             // task={child}
             task={props.taskToEdit && child.id === props.taskToEdit.id ? {...child, name: props.taskToEdit.name} : child} 
+            z_index={arr.length - index} 
             key={child.id} 
             currentTask={props.currentTask}
             selectTask={props.selectTask}
