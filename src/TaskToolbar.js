@@ -20,7 +20,7 @@ export default function TaskToolbar(props) {
         
     // ]
     return (
-        <div className="TaskToolbar">
+        <div className="TaskToolbar hackerStyle">
             {/* {imgSrcArray.map((imgSrc, imgSrcIndex) => {
                 return <img src={imgSrc} onClick={() => props.updateContent(imgSrcIndex)} />
             })} */}
