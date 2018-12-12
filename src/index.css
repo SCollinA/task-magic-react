@@ -81,11 +81,6 @@ input, button, label {
 
 
 
-
-.TaskHeader {
-  overflow: auto;
-}
-
 .UserForm {
   border-color: limegreen;
   max-width: 500px;

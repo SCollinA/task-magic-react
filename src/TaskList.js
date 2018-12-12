@@ -1,5 +1,6 @@
 import React from 'react'
 import Task from './Task'
+import TaskSearch from './TaskSearch'
 
 export default function TaskList(props){
     return (
@@ -22,6 +23,17 @@ export default function TaskList(props){
                 task={props.currentTask}
                 />
             )}
+            {props.user && (
+            <TaskSearch
+            searchTerm={props.searchTerm} 
+            onSubmit={props.onSubmit} 
+            editTask={props.editTask}
+            completeTask={props.completeTask}
+            onChange={props.onChange}
+            currentTask={props.currentTask}
+            currentChildren={props.currentChildren}
+            onReset={props.onReset}
+            />)}
             {props.children && props.children.map((child, index, arr) => {
                 return (
                 <Task
