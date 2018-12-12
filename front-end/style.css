@@ -33,16 +33,26 @@ html, body {
     margin: auto;
     background-color: blue;
     overflow: auto;
+    display: flex;
+    flex-direction: column;
 }
 .innerInnerContainer {
-    height: 200%;
     background-color: green;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    flex: 0 1 auto;
 } 
 
-.group {
+.group1 {
     overflow: auto;
-    height: 10%;
+}
+
+.group2 {
+    overflow: auto;
+    /* flex: 1 1 auto; */
+}
+
+.item {
+    padding: 5%;
 }
