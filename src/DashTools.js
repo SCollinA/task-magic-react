@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function TaskToolbar(props) {
+export default function DashTools(props) {
     const iconArray = [
         '🏠',
         'ℹ️',
@@ -20,7 +20,7 @@ export default function TaskToolbar(props) {
         
     // ]
     return (
-        <div className="TaskToolbar">
+        <div className="DashTools">
             {/* {imgSrcArray.map((imgSrc, imgSrcIndex) => {
                 return <img src={imgSrc} onClick={() => props.updateContent(imgSrcIndex)} />
             })} */}

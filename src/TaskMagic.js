@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import UserInput from './UserInput'
 import Tasks from './Tasks';
-import TaskDashboard from './TaskDashboard'
+import Dashboard from './Dashboard'
 const urlPrefix = '/api'
 
 export default class TaskMagic extends Component {
@@ -25,9 +25,8 @@ export default class TaskMagic extends Component {
         // .then(() => this.state.user && this._getAllTasks())
     }
 
-    _login = (username, password, login) => {
-        const url = login ? `${urlPrefix}/login` : `${urlPrefix}/register`
-        fetch(url, {
+    _login = (username, password) => {
+        fetch(`${urlPrefix}/login`, {
             method: 'post',
             body: JSON.stringify({username, password}),
             headers: {'Content-Type': 'application/json'}
@@ -35,11 +34,17 @@ export default class TaskMagic extends Component {
         .then(res => res.json())
         .then(data => this.setState({...data}))
         .catch(console.log)
-        // .then(() => this.state.user && this._getAllTasks())
     }
 
-    _register = (userForm) => { 
-        this._login(userForm.username.value, userForm.password.value, false)
+    _register = (username, password) => { 
+        fetch(`${urlPrefix}/register`, {
+            method: 'post',
+            body: JSON.stringify({username, password}),
+            headers: {'Content-Type': 'application/json'}
+        })
+        .then(res => res.json())
+        .then(data => this.setState({...data}))
+        .catch(console.log)
     }
 
     _logout = () => {
@@ -235,6 +240,28 @@ export default class TaskMagic extends Component {
     render() {
         return (
             <div className="TaskMagic">
+                <UserInput 
+                user={this.state.user}
+                login={event => {
+                    event.preventDefault()
+                    this._login(event.target[0].value, event.target[1].value)
+                }}
+                register={event => this._register(event.target.form[0].value, event.target.form[1].value)}
+                logout={this._logout}
+                />
+
+                {this.state.user && 
+                <>
+                    <Tasks
+                    parents={this.state.parents}
+                    currentTask={this.state.currentTask}
+                    children={this.state.children}
+                    />
+                    <Dashboard
+                    
+                    />
+                </>
+                }
             </div>
         )
     }

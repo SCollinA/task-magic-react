@@ -2,7 +2,7 @@ import React from 'react'
 import TaskInfo from './TaskInfo'
 import TaskShare from './TaskShare'
 
-export default function TaskDashContent(props) {
+export default function DashContent(props) {
     const contentOptions = [
         null,
         <TaskInfo task={props.task}/>,
@@ -17,7 +17,7 @@ export default function TaskDashContent(props) {
         <TaskShare shareTask={props.shareTask} />
     ]
     return (
-        <div className={`TaskDashContent ${contentOptions[props.contentChoice] && 'hackerStyle'}`}>
+        <div className={`DashContent ${contentOptions[props.contentChoice] && 'hackerStyle'}`}>
             {contentOptions[props.contentChoice]}
         </div>
     )

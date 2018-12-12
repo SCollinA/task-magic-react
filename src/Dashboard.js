@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
-import TaskDashContent from './DashContent'
-import TaskToolbar from './DashTools'
+import DashContent from './DashContent'
+import DashTools from './DashTools'
 
 // export default function TaskDashboard(props) {
-export default class TaskDashboard extends Component {
+export default class Dashboard extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -33,15 +33,9 @@ export default class TaskDashboard extends Component {
 
     render() {
         return (
-            <div className={`TaskDashboard`}>
-                {/* <TaskContent task={props.task}/> */}
-                <TaskDashContent
-                task={this.props.task} 
-                contentChoice={this.state.contentChoice}
-                shareTask={this.props.shareTask}/>
-                <TaskToolbar 
-                updateContent={this._updateContent} 
-                contentChoice={this.state.contentChoice}/>
+            <div className={`Dashboard`}>
+                <DashContent/>
+                <DashTools/>
             </div>
         )
     }
