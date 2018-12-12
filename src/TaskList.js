@@ -3,7 +3,7 @@ import Task from './Task'
 
 export default function TaskList(props){
     return (
-        <div className={`TaskList stickyContain`}>
+        <div className={`TaskList`}>
             {props.parents && props.parents.map(parent => {
                 return (
                 <Task

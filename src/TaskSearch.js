@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function TaskSearch(props) {
     return (
-        <form className={`TaskSearch stickyContain`} 
+        <form className={`TaskSearch`} 
         style={props.style}
         onSubmit={props.onSubmit} 
         onReset={props.onReset}>

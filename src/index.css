@@ -63,24 +63,22 @@ input, button, label {
   right: 0;
 }
 
-.TaskDisplay {
+.TaskMagic {
   height: 100%;
   display: flex;
   flex-direction: column;
 }
 
-.TaskContent {
-  height: 100%;
-  overflow: auto;
+.TaskDisplay {
   display: flex;
   flex-direction: column;
+  overflow: auto;
 }
 
 .UserForm {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
   border-color: limegreen;
+  max-width: 500px;
+  margin: auto;
 }
 
 .TaskSearch {
@@ -88,14 +86,11 @@ input, button, label {
   flex-wrap: wrap;
   justify-content: space-around;
   font-size: 2rem;
-}
-
-.TaskSearch > * {
-  flex: 1;
+  min-height: fit-content;
 }
 
 .taskInput {
-  width: 100%;
+  flex: 1;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -106,16 +101,15 @@ input, button, label {
   flex: 1;
 }
 
+.TaskContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
 .TaskList {
+  flex: 1;
   overflow: auto;
-}
-
-.currentTask .taskName {
-  margin: auto;
-}
-
-.currentTask .taskName > * {
-  margin: 0;
 }
 
 .Task {
@@ -133,11 +127,6 @@ input, button, label {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-}
-
-.deleteTask {
-  margin: 2%;
-  border-radius: 15px;
 }
 
 .parent {

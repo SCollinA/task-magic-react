@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
-import TaskDisplay from './TaskDisplay';
+import TaskMagic from './TaskMagic';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <TaskDisplay/>
+        <TaskMagic/>
       </div>
     );
   }

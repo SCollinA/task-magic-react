@@ -1,17 +1,10 @@
 import React from 'react'
-import UserForm from './UserForm'
 import TaskSearch from './TaskSearch'
 import TaskList from './TaskList'
 
 export default function TaskContent(props) {
     return (
-        <div className='TaskContent'>
-
-`           <UserForm
-            user={props.user} 
-            login={props.login}
-            register={props.register}
-            logout={props.logout}/>
+        <div className='TaskContent stickyContain'>
 
             {props.user && (
             <TaskSearch
