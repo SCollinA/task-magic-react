@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
-import TaskDisplay from './TaskDisplay';
+import UserInput from './UserInput'
+import Tasks from './Tasks';
 import TaskDashboard from './TaskDashboard'
 const urlPrefix = '/api'
 
@@ -234,41 +235,6 @@ export default class TaskMagic extends Component {
     render() {
         return (
             <div className="TaskMagic">
-                <TaskDisplay
-                user={this.state.user} 
-                login={event => {
-                    event.preventDefault()
-                    this._login(event.target.username.value, event.target.password.value, true)
-                }}
-                register={event => this._register(event.nativeEvent.path[1])}
-                logout={() => this._logout()}
-                searchTerm={this.state.searchTerm} 
-                onSubmit={event => {
-                    event.preventDefault()
-                    this.state.taskToEdit ? this._updateName(this.state.taskToEdit) : this._addTask()
-                }} 
-                onChange={event => this._updateSearch(event.target.value)}
-                currentTask={this.state.taskToEdit && this.state.taskToEdit.id === this.state.currentTask.id ? {...this.state.currentTask, name: this.state.searchTerm} : this.state.currentTask}
-                currentChildren={this.state.children}
-                onReset={this._resetSearch}
-                children={(this.state.searchTerm && !this.state.taskToEdit) ? this.state.userTasks.filter(task => task.name.includes(this.state.searchTerm)) : this.state.children}
-                parents={(this.state.searchTerm && !this.state.taskToEdit) ? [] : this.state.parents}
-                selectTask={this._selectTask}
-                subTask={this._subTask}
-                editTask={this.state.searchTerm && !this.state.taskToEdit ? this._selectTask : this._editTask}
-                completeTask={this.state.searchTerm && !this.state.taskToEdit ? this._subTask : this._completeTask}
-                deleteTask={this._deleteTask}
-                taskToEdit={this.state.taskToEdit}
-                isSearching={this.state.searchTerm && !this.state.taskToEdit}
-                />
-                {this.state.user && (<TaskDashboard
-                key={(this.state.taskToEdit && this.state.taskToEdit.id) || (this.state.currentTask && this.state.currentTask.id)}
-                task={this.state.taskToEdit || this.state.currentTask} 
-                goHome={this._goHome} 
-                deleteTask={this._deleteTask}
-                shareTask={this._shareTask}
-                />)}
-
             </div>
         )
     }
