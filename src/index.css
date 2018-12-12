@@ -54,7 +54,7 @@ input, button, label {
 }
 
 .hackerStyle {
-  border: groove silver 5px;
+  border: groove grey 5px;
   border-radius: 15px;
   color: limegreen;
   font-family: 'Courier New', Courier, monospace;
@@ -68,16 +68,17 @@ input, button, label {
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  /* justify-content: space-around; */
+}
+
+.UserInput {
+  
 }
 
 .UserLogin {
-  border-color: limegreen;
-  max-width: 500px;
-  margin: auto;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
 
 .loginButtons {
@@ -94,28 +95,17 @@ input, button, label {
 
 .TaskSearch {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  font-size: 2rem;
-  min-height: fit-content;
+  justify-content: space-between;
+  /* font-size: 2rem; */
+  /* min-height: fit-content; */
 }
 
-.taskInput {
+.TaskSearch > input {
   flex: 1;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-}
-
-.taskInput > input {
-  flex: 1;
+  text-align: center;
 }
 
 .Tasks {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
   flex: 1;
   overflow: auto;
 }
@@ -126,8 +116,13 @@ input, button, label {
   padding: 0 5%;
 }
 
+.parentTask {
+  border-color: purple; 
+  background-color: rgba(59, 253, 0, 0.075);
+}
+
 .currentTask {
-  border-color: limegreen;
+  border-color: orange;
 }
 
 .childNames {
@@ -151,9 +146,7 @@ input, button, label {
   font-size: 4em;
 }
 
-.parent {
-  background-color: rgba(59, 253, 0, 0.075);
-}
+
 
 .DashContent {
   border-color: limegreen;

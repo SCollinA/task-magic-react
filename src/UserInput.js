@@ -10,8 +10,9 @@ export default function UserInput(props) {
             login={props.login}
             register={props.register} 
             logout={props.logout}/>
-            
-            <TaskSearch/>
+            {props.user && (
+                <TaskSearch prompt={props.prompt}/>
+            )}
         </div>
     )
 }
