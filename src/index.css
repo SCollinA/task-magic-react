@@ -30,16 +30,6 @@ code {
   background: transparent;  /* optional: just make scrollbar invisible */
 }
 
-.hackerStyle {
-  border: groove silver 5px;
-  border-radius: 15px;
-  color: limegreen;
-  font-family: 'Courier New', Courier, monospace;
-  padding: 1%;
-  margin: 1%;
-  background-color: rgba(0, 0, 0, 0.95)
-}
-
 input, button, label {
   color: limegreen;
   font-family: 'Courier New', Courier, monospace;
@@ -63,15 +53,36 @@ input, button, label {
   right: 0;
 }
 
+.hackerStyle {
+  border: groove silver 5px;
+  border-radius: 15px;
+  color: limegreen;
+  font-family: 'Courier New', Courier, monospace;
+  padding: 1%;
+  margin: 1%;
+  background-color: rgba(0, 0, 0, 0.95)
+}
+
+
 .TaskMagic {
   height: 100%;
   display: flex;
   flex-direction: column;
 }
 
+
+
+
 .TaskDisplay {
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
+}
+
+
+
+
+.TaskHeader {
   overflow: auto;
 }
 
@@ -101,11 +112,11 @@ input, button, label {
   flex: 1;
 }
 
-.TaskContent {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
+
+
+
+
+
 
 .TaskList {
   flex: 1;
@@ -146,6 +157,12 @@ input, button, label {
   margin-top: -30px;
   font-size: 4em;
 }
+
+
+
+
+
+
 
 .TaskDashContent {
   border-color: limegreen;
