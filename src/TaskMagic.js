@@ -56,6 +56,9 @@ export default class TaskMagic extends Component {
 
     _updateContent = contentIndex => {
         console.log(`updating content to ${contentIndex}`)
+        if (contentIndex === this.state.contentChoice) {
+            contentIndex = null
+        }
         this.setState({
             contentChoice: contentIndex
         }, () => {
@@ -84,7 +87,7 @@ export default class TaskMagic extends Component {
     _goHome = () => {
         fetch('/home')
         .then(res => res.json())
-        .then(data => this.setState({...data}))
+        .then(data => this.setState({...data, contentChoice: 1}))
         .then(this._resetSearch)
     }
 
