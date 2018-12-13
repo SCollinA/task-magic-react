@@ -115,7 +115,7 @@ input, button, label {
 
 .parentTask {
   border-color: purple; 
-  background-color: rgba(59, 253, 0, 0.075);
+  background-color: rgba(16, 66, 0, 0.75);
 }
 
 .currentTask {
@@ -124,7 +124,8 @@ input, button, label {
 }
 
 .childTask {
-  border-color: grey;
+  border-color: orange;
+  background-color: rgba(61, 35, 0, 0.75);
 }
 
 .childNames {
@@ -138,14 +139,14 @@ input, button, label {
 .checkbox {
   width: 20px;
   height: 20px;
-  background-color: rgba(0, 255, 76, 0.25);
+  background-color: rgba(0, 255, 76, 0.5);
   margin: auto 0;
 }
 
 .activeTask {}
 
 .completeTask {
-  background-color: rgba(255, 30, 0, 0.25);
+  background-color: rgba(255, 30, 0, 0.5);
 }
 
 .DashContent {

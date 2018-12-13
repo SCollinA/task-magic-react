@@ -243,60 +243,60 @@ export default class TaskMagic extends Component {
                 {(this.state.user && (
                 <>
                     <Tasks
-                    user={this.state.user}
-                    logout={this._logout}
-                    parents={(this.state.contentChoice !== 2 && this.state.contentChoice !== 3) ? this.state.parents : []}
-                    currentTask={this.state.contentChoice !== 2 ? this.state.currentTask : []}
-                    children={this.state.contentChoice!== 2 ?  this.state.children : []}
-                    tasks={
-                        (this.state.contentChoice === 2 && 
-                            this.state.userTasks.filter(task => task.name.includes(this.state.searchTerm)).sort((task1, task2) => task1.name > task2.name ? 1 : -1)
-                        ) ||
-                        (this.state.contentChoice === 3 && 
-                            this.state.userTasks.filter(task => !this.state.parents.map(parentTask => parentTask.id).includes(task.id))
-                            .filter(task => task.name.includes(this.state.searchTerm))
-                            .sort((task1, task2) => {
-                                return (task1.id !== this.state.currentTask.id || -1) || 
-                                (task1.name > task2.name ? 1 : -1)
-                            })
-                        ) ||
-                        ([...this.state.parents, this.state.currentTask, ...this.state.children])
-                    }
-                    isSearching={this.state.contentChoice === 2 || this.state.contentChoice === 3}
-                    selectTask={this._selectTask}
-                    completeTask={this._completeTask}
+                        user={this.state.user}
+                        logout={this._logout}
+                        parents={(this.state.contentChoice !== 2 && this.state.contentChoice !== 3) ? this.state.parents : []}
+                        currentTask={this.state.contentChoice !== 2 ? this.state.currentTask : []}
+                        children={this.state.contentChoice!== 2 ?  this.state.children : []}
+                        tasks={
+                            (this.state.contentChoice === 2 && 
+                                this.state.userTasks.filter(task => task.name.includes(this.state.searchTerm)).sort((task1, task2) => task1.name > task2.name ? 1 : -1)
+                            ) ||
+                            (this.state.contentChoice === 3 && 
+                                this.state.userTasks.filter(task => !this.state.parents.map(parentTask => parentTask.id).includes(task.id))
+                                .filter(task => task.name.includes(this.state.searchTerm))
+                                .sort((task1, task2) => {
+                                    return (task1.id !== this.state.currentTask.id || -1) || 
+                                    (task1.name > task2.name ? 1 : -1)
+                                })
+                            ) ||
+                            ([...this.state.parents, this.state.currentTask, ...this.state.children])
+                        }
+                        isSearching={this.state.contentChoice === 2 || this.state.contentChoice === 3}
+                        selectTask={this._selectTask}
+                        completeTask={this._completeTask}
                     />
+
                     <Dashboard
-                    task={this.state.currentTask}
-                    actions={[
-                        this._goHome, 
-                        this._searchTasks, 
-                        event => {
+                        task={this.state.currentTask}
+                        actions={[
+                            this._goHome, 
+                            this._searchTasks, 
+                            event => {
+                                event.preventDefault()
+                                this._addTask()
+                            }, 
+                            this._shareTask, 
+                            this._deleteTask]}
+                        contentChoice={this.state.contentChoice}
+                        updateContent={this._updateContent}
+                        prompt={'Input Task'}
+                        searchTerm={this.state.searchTerm}
+                        updateSearch={event => this._updateSearch(event.target.value)}
+                        searchSubmit={event => {
                             event.preventDefault()
                             this._addTask()
-                        }, 
-                        this._shareTask, 
-                        this._deleteTask]}
-                    contentChoice={this.state.contentChoice}
-                    updateContent={this._updateContent}
-                    prompt={'Input Task'}
-                    searchTerm={this.state.searchTerm}
-                    updateSearch={event => this._updateSearch(event.target.value)}
-                    searchSubmit={event => {
-                        event.preventDefault()
-                        this._addTask()
-                    }}
-                    onReset={() => this.setState({searchTerm: ''})}
+                        }}
+                        onReset={() => this.setState({searchTerm: ''})}
                     />
                 </>
                 )) || (
                     <UserInput 
-                    // user={this.state.user}
-                    login={event => {
-                        event.preventDefault()
-                        this._login(event.target[0].value, event.target[1].value)
-                    }}
-                    register={event => this._register(event.target.form[0].value, event.target.form[1].value)}
+                        login={event => {
+                            event.preventDefault()
+                            this._login(event.target[0].value, event.target[1].value)
+                        }}
+                        register={event => this._register(event.target.form[0].value, event.target.form[1].value)}
                     />
                 )}
             </div>
