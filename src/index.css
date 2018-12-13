@@ -60,7 +60,7 @@ input, button, label {
   font-family: 'Courier New', Courier, monospace;
   padding: 1%;
   margin: 1%;
-  background-color: rgba(0, 0, 0, 0.95)
+  background-color: rgba(0, 0, 0, 0.5)
 }
 
 
@@ -88,19 +88,9 @@ input, button, label {
   font-size: 2em;
 }
 
-.loggedIn {
-  flex-direction: row;
-  /* display: flex; */
-}
-
-.TaskSearch {
+.UserLogout {
   display: flex;
-  justify-content: space-between;
-  padding: 0 10%;
-}
-
-.TaskSearch > input {
-  flex: 1;
+  justify-content: space-around;
 }
 
 .Tasks {
@@ -125,15 +115,17 @@ input, button, label {
 
 .parentTask {
   border-color: purple; 
-  background-color: rgba(59, 253, 0, 0.075);
+  background-color: rgba(16, 66, 0, 0.75);
 }
 
 .currentTask {
-  border-color: orange;
+  border-color: limegreen;
+  background-color: rgba(30, 0, 54, 0.75);
 }
 
 .childTask {
-  border-color: grey;
+  border-color: orange;
+  background-color: rgba(61, 35, 0, 0.75);
 }
 
 .childNames {
@@ -147,18 +139,40 @@ input, button, label {
 .checkbox {
   width: 20px;
   height: 20px;
-  background-color: rgba(0, 255, 76, 0.25);
+  background-color: rgba(0, 255, 76, 0.5);
   margin: auto 0;
 }
 
 .activeTask {}
 
 .completeTask {
-  background-color: rgba(255, 30, 0, 0.25);
+  background-color: rgba(255, 30, 0, 0.5);
 }
 
 .DashContent {
   border-color: limegreen;
+}
+
+.TaskInfo {
+  font-size: 2em;
+  text-align: left;
+}
+
+.TaskSearch {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10%;
+}
+
+.TaskSearch > input {
+  flex: 1;
+}
+
+.TaskAdd {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .DashTools {
@@ -170,14 +184,20 @@ input, button, label {
 
 .toolbarIcon:first-child {
   z-index: 1;
+  border-color: purple;
+  background-color: rgba(51, 255, 0, 0.1);
 }
 
 .toolbarIcon {
   display: inline-block;
   padding: 2%;
   max-width: 50px;
+  /* border-color: grey; */
+  /* background-color: rgba(63, 63, 63, 0.25); */
 }
 
 .toolChoice {
   border-color: limegreen;
+  background-color: rgba(30, 0, 54, 0.75);
+  /* background-color: rgba(140, 0, 255, 0.1); */
 }

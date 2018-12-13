@@ -1,11 +1,19 @@
 import React from 'react'
 import TaskInfo from './TaskInfo'
+import TaskSearch from './TaskSearch'
+import TaskAdd from './TaskAdd'
 import TaskShare from './TaskShare'
 
 export default function DashContent(props) {
     const contentOptions = [
         null,
         <TaskInfo task={props.task}/>,
+        <TaskAdd 
+        addTask={props.action}
+        onReset={props.onReset}
+        searchTerm={props.searchTerm}
+        updateSearch={props.updateSearch}
+        />,
         null,
         null,
         null,
@@ -14,7 +22,15 @@ export default function DashContent(props) {
         null,
         null,
         null,
-        <TaskShare shareTask={props.shareTask} />
+        null,
+        <TaskShare shareTask={props.shareTask} />,
+        null,
+        null,
+        <TaskSearch 
+        onReset={props.onReset} 
+        searchTerm={props.searchTerm} 
+        updateSearch={props.updateSearch}
+        />
     ]
     return (
         <div className={`DashContent ${contentOptions[props.contentChoice] && 'hackerStyle'}`}>
