@@ -3,61 +3,28 @@ import UserLogout from './UserLogout'
 import Task from './Task'
 
 export default function Tasks(props) {
-    const family = [...props.parents, props.currentTask, ...props.children]
+    const parentIDs = props.parents.map(task => task.id)
+    const currentTaskID = props.currentTask.id
+    const childIDs = props.children.map(task => task.id)
     return (
         <div className={`Tasks`}>
             <UserLogout user={props.user} logout={props.logout}/>
             {props.tasks.map((task, index, arr) => {
-                const className = (props.parents.map(task => task.id).includes(task.id) && 'parentTask') ||
-                                  (props.currentTask.id === task.id && 'currentTask') ||
-                                  (props.children.map(task => task.id).includes(task.id) && 'childTask')
+                const className = (parentIDs.includes(task.id) && 'parentTask') ||
+                                  (currentTaskID === task.id && 'currentTask') ||
+                                  (childIDs.includes(task.id) && 'childTask')
+                const z_index = (props.isSearching && (arr.length - index)) ||
+                                (parentIDs.includes(task.id) && 1) ||
+                                (currentTaskID === task.id && 1000) ||
+                                (childIDs.includes(task.id) && (arr.length - index))
                 return (
-                    <Task key={task.id} className={`${className}`} z_index={1}
+                    <Task key={task.id} className={`${className}`} z_index={z_index}
                     task={task} 
-                    family={family}
+                    // family={family}
                     selectTask={props.selectTask}
                     completeTask={props.completeTask}/>
                 )
             })}
-            {/* {props.parents.map((task, index, arr) => {
-                return (
-                    <Task key={task.id} className='parentTask' z_index={1}
-                    task={task} 
-                    family={family}
-                    selectTask={props.selectTask}
-                    completeTask={props.completeTask}/>
-                )
-            })}
-
-            {(props.children.length !== 0 || props.parents.length !== 0) && (
-            <Task key={props.currentTask.id} className='currentTask' z_index={1000}
-            task={props.currentTask} 
-            family={family}
-            selectTask={props.selectTask}
-            completeTask={props.completeTask}
-            />)}
-
-            {props.children.map((task, index, arr) => {
-                return (
-                    <Task key={task.id} className='childTask' z_index={arr.length - index}
-                    task={task} 
-                    family={family}
-                    selectTask={props.selectTask}
-                    completeTask={props.completeTask}/>
-                )
-            })} */}
-            {/* {props.searchTasks.map(task => {
-                const searchClass = (props.parents.map(task => task.id).includes(task.id) && 'parentTask') ||
-                                    (props.currentTask.id === task.id && 'currentTask') ||
-                                    (props.children.map(task => task.id).includes(task.id) && 'childTask') || ''
-                return (
-                    <Task key={task.id} className={`${searchClass} searchTask`}
-                    task={task} 
-                    family={family}
-                    selectTask={props.selectTask}
-                    completeTask={props.completeTask}/>
-                )
-            })} */}
         </div>
     )
 }

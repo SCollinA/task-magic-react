@@ -253,6 +253,7 @@ export default class TaskMagic extends Component {
                             (this.state.contentChoice === 3 && 
                                 this.state.userTasks.filter(task => !this.state.parents.map(parentTask => parentTask.id).includes(task.id))) ||
                             ([...this.state.parents, this.state.currentTask, ...this.state.children])}
+                    isSearching={this.state.contentChoice === 2 || this.state.contentChoice === 3}
                     selectTask={this._selectTask}
                     completeTask={this._completeTask}
                     />
