@@ -93,23 +93,6 @@ input, button, label {
   justify-content: space-around;
 }
 
-.TaskSearch {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 10%;
-}
-
-.TaskSearch > input {
-  flex: 1;
-}
-
-.TaskAdd {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-
 .Tasks {
   flex: 1;
   overflow: auto;
@@ -167,6 +150,28 @@ input, button, label {
 
 .DashContent {
   border-color: limegreen;
+}
+
+.TaskInfo {
+  font-size: 2em;
+  text-align: left;
+}
+
+.TaskSearch {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10%;
+}
+
+.TaskSearch > input {
+  flex: 1;
+}
+
+.TaskAdd {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .DashTools {
