@@ -241,10 +241,10 @@ export default class TaskMagic extends Component {
                     <Tasks
                     user={this.state.user}
                     logout={this._logout}
-                    parents={this.state.parents}
-                    currentTask={this.state.currentTask}
-                    children={this.state.children}
-                    searchTasks={(this.state.searchTerm !== '' && this.state.userTasks.filter(task => task.name.includes(this.state.searchTerm))) || false}
+                    parents={(this.state.contentChoice !== 2 && this.state.contentChoice !== 3) ? this.state.parents : []}
+                    currentTask={this.state.contentChoice !==2 ? this.state.currentTask : []}
+                    children={this.state.contentChoice!== 2 ?  this.state.children : []}
+                    searchTasks={(this.state.contentChoice === 2 || this.state.contentChoice === 3) ? this.state.userTasks.filter(task => task.name.includes(this.state.searchTerm)) : []}
                     selectTask={this._selectTask}
                     completeTask={this._completeTask}
                     />
