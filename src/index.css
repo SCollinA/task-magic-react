@@ -111,21 +111,22 @@ input, button, label {
 
 .searchTask {
   border-color: limegreen;
+  background-color: rgba(36, 36, 36, 0.75)
 }
 
 .parentTask {
   border-color: purple; 
-  background-color: rgba(16, 66, 0, 0.75);
+  background-color: rgba(14, 54, 0, 0.75);
 }
 
 .currentTask {
   border-color: limegreen;
-  background-color: rgba(30, 0, 54, 0.75);
+  background-color: rgba(39, 0, 71, 0.75);
 }
 
 .childTask {
   border-color: orange;
-  background-color: rgba(61, 35, 0, 0.75);
+  background-color: rgba(41, 23, 0, 0.75);
 }
 
 .childNames {
