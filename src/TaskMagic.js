@@ -156,6 +156,9 @@ export default class TaskMagic extends Component {
             this._subTask(taskToSelect)
         } else if (this.state.contentChoice === 12) {
             this._shareTask()
+        } else if (this.state.contentChoice === 14) {
+            console.log(`deleting task ${taskToSelect.name}`)
+            this._deleteTask(taskToSelect.id)
         } else {
             fetch(`${urlPrefix}/test-react-task`, {
                 method: 'post',
@@ -207,7 +210,7 @@ export default class TaskMagic extends Component {
     }
 
     _deleteTask = iDToDelete => {
-        console.log(`deleting task ${this.state.currentTask.name}`)
+        console.log(`deleting task ${iDToDelete}`)
         fetch(`${urlPrefix}/test-react-delete`, {
             method: 'post', 
             body: JSON.stringify({iDToDelete}),
