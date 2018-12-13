@@ -2,7 +2,10 @@ import React from 'react'
 
 export default function TaskSearch(props) {
     return (
-        <form className={`TaskSearch`} onSubmit={props.searchSubmit} onReset={props.onReset} autoComplete='off'>
+        <form className={`TaskSearch`} 
+        onSubmit={props.searchSubmit} 
+        onReset={props.onReset} 
+        autoComplete='off'>
             <input type='text' 
             name='taskInput' 
             placeholder={props.prompt} 

@@ -9,34 +9,28 @@ export default class Dashboard extends Component {
         this.state = {
             contentChoice: 1
         }
-        this.goHome = props.actions[0]
-        this.shareTask = props.actions[1]
-        this.deleteTask = props.actions[2]
     }
 
-    componentDidMount() {
-        this.setState({
-            contentChoice: 1
-        })
-    }
+    // componentDidMount() {
+    //     this.setState({
+    //         contentChoice: 1
+    //     })
+    // }
 
     _updateContent = contentIndex => {
         console.log(`updating content to ${contentIndex}`)
         this.setState({
             contentChoice: contentIndex
-        }, () => {
-            if (contentIndex === 0) {
-                this.goHome()
-            } else if (contentIndex === 12){
-                this.deleteTask()
-            }
         })
     }
 
     render() {
         return (
             <div className={`Dashboard`}>
-                <DashContent/>
+                <DashContent 
+                action={this.props.actions[this.state.contentChoice]} 
+                contentChoice={this.state.contentChoice}
+                {...this.props}/>
                 <DashTools updateContent={this._updateContent}/>
             </div>
         )

@@ -1,12 +1,19 @@
 import React from 'react'
 import TaskInfo from './TaskInfo'
+import TaskSearch from './TaskSearch'
 import TaskShare from './TaskShare'
 
 export default function DashContent(props) {
     const contentOptions = [
         null,
         <TaskInfo task={props.task}/>,
-        null,
+        <TaskSearch 
+        searchSubmit={props.action}
+        onReset={props.onReset} 
+        prompt={props.prompt} 
+        searchTerm={props.searchTerm} 
+        updateSearch={props.updateSearch}
+        />,
         null,
         null,
         null,

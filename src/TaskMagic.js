@@ -223,7 +223,7 @@ export default class TaskMagic extends Component {
     render() {
         return (
             <div className="TaskMagic">
-                {this.state.user && (
+                {(this.state.user && (
                 <>
                     <Tasks
                     user={this.state.user}
@@ -237,7 +237,7 @@ export default class TaskMagic extends Component {
                     />
                     <Dashboard
                     task={this.state.currentTask}
-                    actions={[this._goHome, this._shareTask, this._deleteTask]}
+                    actions={[this._goHome, this._searchTasks, this._shareTask, this._deleteTask]}
                     prompt={'Input Task'}
                     searchTerm={this.state.searchTerm}
                     updateSearch={event => this._updateSearch(event.target.value)}
@@ -248,7 +248,7 @@ export default class TaskMagic extends Component {
                     onReset={() => this.setState({searchTerm: ''})}
                     />
                 </>
-                ) || (
+                )) || (
                     <UserInput 
                     // user={this.state.user}
                     login={event => {
