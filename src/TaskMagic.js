@@ -171,24 +171,6 @@ export default class TaskMagic extends Component {
         })
     }
 
-    // _editTask = taskToEdit => {
-    //     console.log(`editing task ${taskToEdit.name}`)
-    //     // if there is no current task to edit, OR this is a new taskToEdit
-    //     if (!this.state.taskToEdit || taskToEdit.id !== this.state.taskToEdit.id) {
-    //         this.setState({
-    //             searchTerm: taskToEdit.name,
-    //             taskToEdit
-    //         })
-    //     } else {
-    //         // this._selectTask(taskToEdit)
-    //         // there is a current task and this task to edit is already being edited, so deselect
-    //         this.setState({
-    //             searchTerm: '',
-    //             taskToEdit: null
-    //         })
-    //     }
-    // }
-
     _updateName = taskToUpdate => {
         fetch(`${urlPrefix}/test-react-name`, {
             method: 'post',
@@ -241,27 +223,11 @@ export default class TaskMagic extends Component {
     render() {
         return (
             <div className="TaskMagic">
-                <UserInput 
-                user={this.state.user}
-                login={event => {
-                    event.preventDefault()
-                    this._login(event.target[0].value, event.target[1].value)
-                }}
-                register={event => this._register(event.target.form[0].value, event.target.form[1].value)}
-                logout={this._logout}
-                prompt={'Input Task'}
-                searchTerm={this.state.searchTerm}
-                updateSearch={event => this._updateSearch(event.target.value)}
-                searchSubmit={event => {
-                    event.preventDefault()
-                    this._addTask()
-                }}
-                onReset={() => this.setState({searchTerm: ''})}
-                />
-
-                {this.state.user && 
+                {this.state.user && (
                 <>
                     <Tasks
+                    user={this.state.user}
+                    logout={this._logout}
                     parents={this.state.parents}
                     currentTask={this.state.currentTask}
                     children={this.state.children}
@@ -272,9 +238,26 @@ export default class TaskMagic extends Component {
                     <Dashboard
                     task={this.state.currentTask}
                     actions={[this._goHome, this._shareTask, this._deleteTask]}
+                    prompt={'Input Task'}
+                    searchTerm={this.state.searchTerm}
+                    updateSearch={event => this._updateSearch(event.target.value)}
+                    searchSubmit={event => {
+                        event.preventDefault()
+                        this._addTask()
+                    }}
+                    onReset={() => this.setState({searchTerm: ''})}
                     />
                 </>
-                }
+                ) || (
+                    <UserInput 
+                    // user={this.state.user}
+                    login={event => {
+                        event.preventDefault()
+                        this._login(event.target[0].value, event.target[1].value)
+                    }}
+                    register={event => this._register(event.target.form[0].value, event.target.form[1].value)}
+                    />
+                )}
             </div>
         )
     }

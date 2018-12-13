@@ -88,9 +88,9 @@ input, button, label {
   font-size: 2em;
 }
 
-.loggedIn {
-  flex-direction: row;
-  /* display: flex; */
+.UserLogout {
+  display: flex;
+  justify-content: space-around;
 }
 
 .TaskSearch {

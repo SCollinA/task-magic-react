@@ -1,10 +1,12 @@
 import React from 'react'
+import UserLogout from './UserLogout'
 import Task from './Task'
 
 export default function Tasks(props) {
     const family = [...props.parents, props.currentTask, ...props.children]
     return (
         <div className={`Tasks`}>
+            <UserLogout user={props.user} logout={props.logout}/>
             {(!props.searchTasks && 
                <>{props.parents.map((task, index, arr) => {
                     return (
