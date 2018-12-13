@@ -3,7 +3,10 @@ import React from 'react'
 export default function TaskAdd(props) {
     return (
         <form className={`TaskAdd`} 
-        onSubmit={props.addTask} 
+        onSubmit={event => {
+            event.preventDefault()
+            props.addTask()
+        }} 
         onReset={props.onReset} 
         autoComplete='off'>
             <input type='text' 
