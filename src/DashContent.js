@@ -2,6 +2,7 @@ import React from 'react'
 import TaskInfo from './TaskInfo'
 import TaskSearch from './TaskSearch'
 import TaskAdd from './TaskAdd'
+import TaskEdit from './TaskEdit'
 import TaskDelete from './TaskDelete'
 import TaskShare from './TaskShare'
 
@@ -15,7 +16,13 @@ export default function DashContent(props) {
         searchTerm={props.searchTerm}
         updateSearch={props.updateSearch}
         />,
-        null,
+        <TaskEdit 
+        task={props.task}
+        editTask={props.action}
+        onReset={props.onReset}
+        searchTerm={props.searchTerm}
+        updateSearch={props.updateSearch}
+        />,
         null,
         null,
         null,
