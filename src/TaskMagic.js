@@ -237,7 +237,15 @@ export default class TaskMagic extends Component {
                     />
                     <Dashboard
                     task={this.state.currentTask}
-                    actions={[this._goHome, this._searchTasks, this._addTask, this._shareTask, this._deleteTask]}
+                    actions={[
+                        this._goHome, 
+                        this._searchTasks, 
+                        event => {
+                            event.preventDefault()
+                            this._addTask()
+                        }, 
+                        this._shareTask, 
+                        this._deleteTask]}
                     prompt={'Input Task'}
                     searchTerm={this.state.searchTerm}
                     updateSearch={event => this._updateSearch(event.target.value)}

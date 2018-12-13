@@ -21,6 +21,10 @@ export default class Dashboard extends Component {
         console.log(`updating content to ${contentIndex}`)
         this.setState({
             contentChoice: contentIndex
+        }, () => {
+            if (this.state.contentChoice === 0) {
+                this.props.actions[0]()
+            }
         })
     }
 
