@@ -4,7 +4,7 @@ import Task from './Task'
 
 export default function Tasks(props) {
     const parentIDs = props.parents.map(task => task.id)
-    const currentTaskID = props.currentTask.id
+    const currentTaskID = props.currentTask && props.currentTask.id
     const childIDs = props.children.map(task => task.id)
     return (
         <div className={`Tasks`}>

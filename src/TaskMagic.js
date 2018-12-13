@@ -154,20 +154,24 @@ export default class TaskMagic extends Component {
     _selectTask = taskToSelect => {
         console.log(`selecting task ${taskToSelect.name}`)
         // update search box text to task name
-        fetch(`${urlPrefix}/test-react-task`, {
-            method: 'post',
-            body: JSON.stringify({taskToSelect}),
-            headers: {'Content-Type': 'application/json'}
-        })
-        .then(res => res.json())
-        .then(data => {
-            this.setState({
-                searchTerm: '',
-                contentChoice: null
-            }, this.setState({
-                ...data
-            }))
-        })
+        if (this.state.contentChoice === 2) {
+            this._subTask(taskToSelect)
+        } else {
+            fetch(`${urlPrefix}/test-react-task`, {
+                method: 'post',
+                body: JSON.stringify({taskToSelect}),
+                headers: {'Content-Type': 'application/json'}
+            })
+            .then(res => res.json())
+            .then(data => {
+                this.setState({
+                    searchTerm: '',
+                    contentChoice: this.state.contentChoice === 15 ? null : this.state.contentChoice
+                }, this.setState({
+                    ...data
+                }))
+            })
+        }
     }
 
     _updateName = taskToUpdate => {
@@ -225,14 +229,14 @@ export default class TaskMagic extends Component {
                     <Tasks
                         user={this.state.user}
                         logout={this._logout}
-                        parents={(this.state.contentChoice !== 2 && this.state.contentChoice !== 3) ? this.state.parents : []}
-                        currentTask={this.state.contentChoice !== 2 ? this.state.currentTask : []}
-                        children={this.state.contentChoice!== 2 ?  this.state.children : []}
+                        parents={(this.state.contentChoice !== 15 && this.state.contentChoice !== 2) ? this.state.parents : []}
+                        currentTask={this.state.contentChoice !== 15 ? this.state.currentTask : null}
+                        children={this.state.contentChoice!== 15 ?  this.state.children : []}
                         tasks={
-                            (this.state.contentChoice === 2 && 
+                            (this.state.contentChoice === 15 && 
                                 this.state.userTasks.filter(task => task.name.includes(this.state.searchTerm)).sort((task1, task2) => task1.name > task2.name ? 1 : -1)
                             ) ||
-                            (this.state.contentChoice === 3 && 
+                            (this.state.contentChoice === 2 && 
                                 this.state.userTasks.filter(task => !this.state.parents.map(parentTask => parentTask.id).includes(task.id))
                                 .filter(task => task.name.includes(this.state.searchTerm))
                                 .sort((task1, task2) => {
@@ -258,7 +262,7 @@ export default class TaskMagic extends Component {
                             ) ||
                             ([...this.state.parents, this.state.currentTask, ...this.state.children])
                         }
-                        isSearching={this.state.contentChoice === 2 || this.state.contentChoice === 3}
+                        isSearching={this.state.contentChoice === 2 || this.state.contentChoice === 15}
                         selectTask={this._selectTask}
                         completeTask={this._completeTask}
                     />
@@ -268,10 +272,20 @@ export default class TaskMagic extends Component {
                         actions={[
                             this._goHome, 
                             null,
-                            null,
                             this._addTask, 
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
                             this._shareTask, 
-                            this._deleteTask]}
+                            null,
+                            this._deleteTask,
+                            null]}
                         contentChoice={this.state.contentChoice}
                         updateContent={this._updateContent}
                         prompt={'Input Task'}

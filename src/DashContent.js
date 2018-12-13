@@ -8,11 +8,6 @@ export default function DashContent(props) {
     const contentOptions = [
         null,
         <TaskInfo task={props.task}/>,
-        <TaskSearch 
-        onReset={props.onReset} 
-        searchTerm={props.searchTerm} 
-        updateSearch={props.updateSearch}
-        />,
         <TaskAdd 
         addTask={props.action}
         onReset={props.onReset}
@@ -25,7 +20,17 @@ export default function DashContent(props) {
         null,
         null,
         null,
-        <TaskShare shareTask={props.shareTask} />
+        null,
+        null,
+        null,
+        <TaskShare shareTask={props.shareTask} />,
+        null,
+        null,
+        <TaskSearch 
+        onReset={props.onReset} 
+        searchTerm={props.searchTerm} 
+        updateSearch={props.updateSearch}
+        />
     ]
     return (
         <div className={`DashContent ${contentOptions[props.contentChoice] && 'hackerStyle'}`}>
