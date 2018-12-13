@@ -15,7 +15,7 @@ export default class TaskMagic extends Component {
             user: null,
             userTasks: [],
             previousTasks: [],
-            contentChoice: 1
+            contentChoice: null
         }
     }
 
@@ -87,7 +87,7 @@ export default class TaskMagic extends Component {
     _goHome = () => {
         fetch('/home')
         .then(res => res.json())
-        .then(data => this.setState({...data, contentChoice: 1}))
+        .then(data => this.setState({...data, contentChoice: null}))
         .then(this._resetSearch)
     }
 
@@ -181,7 +181,7 @@ export default class TaskMagic extends Component {
             this.setState({
                 searchTerm: '',
                 previousTasks: [this.state.currentTask, ...previousTasks],
-                contentChoice: 1
+                contentChoice: null
             }, this.setState({
                 ...data
             }))
