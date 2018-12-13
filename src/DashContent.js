@@ -32,9 +32,11 @@ export default function DashContent(props) {
         null,
         null,
         <TaskShare 
-        shareTask={props.action} 
         searchTerm={props.searchTerm}
-        updateSearch={props.updateSearch}/>,
+        updateSearch={props.updateSearch}
+        onReset={props.onReset}
+        shareTask={props.action} 
+        />,
         null,
         <TaskDelete/>,
         <TaskSearch 

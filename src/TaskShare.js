@@ -6,7 +6,8 @@ export default function TaskShare(props) {
         onSubmit={event => {
             event.preventDefault()
             props.shareTask()
-        }}>
+        }}
+        onReset={props.onReset}>
             <input type="text" 
             name='username' 
             placeholder='Enter user name'
