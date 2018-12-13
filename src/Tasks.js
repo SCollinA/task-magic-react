@@ -12,7 +12,8 @@ export default function Tasks(props) {
             {props.tasks.map((task, index, arr) => {
                 const className = (parentIDs.includes(task.id) && 'parentTask') ||
                                   (currentTaskID === task.id && 'currentTask') ||
-                                  (childIDs.includes(task.id) && 'childTask')
+                                  (childIDs.includes(task.id) && 'childTask') || 
+                                  (props.isSearching && 'searchTask')
                 const z_index = (props.isSearching && (arr.length - index)) ||
                                 (parentIDs.includes(task.id) && 1) ||
                                 (currentTaskID === task.id && 1000) ||

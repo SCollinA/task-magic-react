@@ -63,6 +63,10 @@ export default class TaskMagic extends Component {
         }, () => {
             if (this.state.contentChoice === 0) {
                 this._goHome()
+            } else if (this.state.contentChoice === 3) {
+                this.setState({
+                    searchTerm: this.state.currentTask.name,
+                })
             }
         })
     }
@@ -71,14 +75,26 @@ export default class TaskMagic extends Component {
         console.log(`Search Term: ${searchTerm}`)
         this.setState({
             searchTerm
+        }, () => {
+            if (this.state.contentChoice === 3) {
+                this.setState({
+                    currentTask: {...this.state.currentTask, name: this.state.searchTerm}
+                })
+            }
         })
     }
 
     _resetSearch = () => {
-        this.setState({
-            searchTerm: '',
-            taskToEdit: null,
-        })
+        console.log(this.state.searchTerm)
+        if (this.state.contentChoice === 3) {
+            this.setState({
+                searchTerm: this.state.currentTask.name
+            })
+        } else {
+            this.setState({
+                searchTerm: ''
+            })
+        }
     }
 
     _goHome = () => {
@@ -166,28 +182,27 @@ export default class TaskMagic extends Component {
                 headers: {'Content-Type': 'application/json'}
             })
             .then(res => res.json())
-            .then(data => {
+            .then(data => this.setState({...data}))
+            .then(() => {
                 this.setState({
-                    searchTerm: '',
+                    searchTerm: this.state.contentChoice === 3 ? this.state.currentTask.name : '',
                     contentChoice: this.state.contentChoice === 15 ? null : this.state.contentChoice
-                }, this.setState({
-                    ...data
-                }))
+                })
             })
         }
     }
 
-    _updateName = taskToUpdate => {
+    _updateName = () => {
         fetch(`${urlPrefix}/test-react-name`, {
             method: 'post',
-            body: JSON.stringify({taskToUpdate, name: this.state.searchTerm}),
+            body: JSON.stringify({taskToUpdate: this.state.currentTask, name: this.state.searchTerm}),
             headers: {'Content-Type': 'application/json'}
         })
         .then(res => res.json())
         .then(data => {
             this.setState({
                 searchTerm: '',
-                taskToEdit: null,
+                contentChoice: null,
                 ...data
             })
         })
@@ -233,7 +248,7 @@ export default class TaskMagic extends Component {
                         user={this.state.user}
                         logout={this._logout}
                         parents={(this.state.contentChoice !== 15 && this.state.contentChoice !== 2) ? this.state.parents : []}
-                        currentTask={this.state.contentChoice !== 15 ? this.state.currentTask : null}
+                        currentTask={(this.state.contentChoice !== 15 && this.state.currentTask) || null}
                         children={this.state.contentChoice!== 15 ?  this.state.children : []}
                         tasks={
                             (this.state.contentChoice === 15 && 
@@ -276,7 +291,7 @@ export default class TaskMagic extends Component {
                             this._goHome, 
                             null,
                             this._addTask, 
-                            null,
+                            this._updateName,
                             null,
                             null,
                             null,
@@ -293,7 +308,7 @@ export default class TaskMagic extends Component {
                         updateContent={this._updateContent}
                         searchTerm={this.state.searchTerm}
                         updateSearch={event => this._updateSearch(event.target.value)}
-                        onReset={() => this.setState({searchTerm: ''})}
+                        onReset={this._resetSearch}
                     />
                 </>
                 )) || (
