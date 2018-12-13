@@ -23,7 +23,10 @@ export default function DashContent(props) {
         null,
         null,
         null,
-        <TaskShare shareTask={props.shareTask} />,
+        <TaskShare 
+        shareTask={props.action} 
+        searchTerm={props.searchTerm}
+        updateSearch={props.updateSearch}/>,
         null,
         null,
         <TaskSearch 

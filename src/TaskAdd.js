@@ -16,7 +16,7 @@ export default function TaskAdd(props) {
             onChange={props.updateSearch}/>
             <div className='addTaskButtons'>
                 <input type='reset' value='reset'/>
-                <input type='submit' value='add task'/>
+                <input type='submit' value='add'/>
             </div>
         </form>
     )
