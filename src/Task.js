@@ -6,9 +6,9 @@ export default function Task(props) {
         onClick={() => {
             // should select task for editing
             console.log('clicked task div')
-            props.editTask(props.task)
+            props.selectTask(props.task)
         }}>
-            <h1>{props.task.name}</h1>
+            <h1 className='taskName'>{props.task.name}</h1>
             <div className="childNames" 
             onClick={() => {
                 console.log(`${props.task.name} selected`)
@@ -20,14 +20,12 @@ export default function Task(props) {
                 </p>
             </div>
             {(props.className !== 'searchTask' && (
-                <div className='Checkbox'
-                onClick={() => {
-                    console.log(`${props.task.name} changed`)
-                    props.completeTask(props.task)
-                }}>
-                    <h1>
-                        <span role="img" aria-label="sheep">{props.task.active ? '' : '✔️'}</span>
-                    </h1>
+                <div className={`checkbox hackerStyle ${(props.task.active && 'activeTask') || 'completeTask'}`}
+                    onClick={event => {
+                        event.stopPropagation()
+                        console.log(`${props.task.name} changed`)
+                        props.completeTask(props.task)
+                    }}>
                 </div>
             )) || ((props.className !== 'parentTask' && !props.family.map(task => task.id).includes(props.task.id)) && (
                 <div className='addButton'

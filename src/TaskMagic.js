@@ -262,7 +262,8 @@ export default class TaskMagic extends Component {
                     completeTask={this._completeTask}
                     />
                     <Dashboard
-                    
+                    task={this.state.currentTask}
+                    goHome={this._goHome}
                     />
                 </>
                 }

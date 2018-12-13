@@ -7,7 +7,6 @@ export default class Dashboard extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            // task: props.task,
             contentChoice: 1
         }
     }
@@ -35,7 +34,7 @@ export default class Dashboard extends Component {
         return (
             <div className={`Dashboard`}>
                 <DashContent/>
-                <DashTools/>
+                <DashTools updateContent={this._updateContent}/>
             </div>
         )
     }

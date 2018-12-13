@@ -113,7 +113,12 @@ input, button, label {
 .Task {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 0 5%;
+}
+
+.taskName {
+  font-size: 3em;
 }
 
 .parentTask {
@@ -130,22 +135,21 @@ input, button, label {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  font-size: 3em;
 }
 
-.Checkbox {
-  width: 40px;
-  height: 40px;
-  border-radius: 10%;
-  border: solid gray 4px;
-  background-color: lightgray;
+.checkbox {
+  width: 20px;
+  height: 20px;
+  background-color: rgba(0, 255, 76, 0.25);
   margin: auto 0;
 }
 
-.Checkbox > h1 {
-  margin-top: -30px;
-  font-size: 4em;
-}
+.activeTask {}
 
+.completeTask {
+  background-color: rgba(255, 30, 0, 0.25);
+}
 
 
 .DashContent {
