@@ -2,6 +2,7 @@ import React from 'react'
 import TaskInfo from './TaskInfo'
 import TaskSearch from './TaskSearch'
 import TaskAdd from './TaskAdd'
+import TaskDelete from './TaskDelete'
 import TaskShare from './TaskShare'
 
 export default function DashContent(props) {
@@ -23,9 +24,12 @@ export default function DashContent(props) {
         null,
         null,
         null,
-        <TaskShare shareTask={props.shareTask} />,
+        <TaskShare 
+        shareTask={props.action} 
+        searchTerm={props.searchTerm}
+        updateSearch={props.updateSearch}/>,
         null,
-        null,
+        <TaskDelete/>,
         <TaskSearch 
         onReset={props.onReset} 
         searchTerm={props.searchTerm} 

@@ -69,10 +69,8 @@ export default class TaskMagic extends Component {
 
     _updateSearch = searchTerm => {
         console.log(`Search Term: ${searchTerm}`)
-        const taskToEdit = this.state.taskToEdit ? {...this.state.taskToEdit, name: searchTerm} : null
         this.setState({
-            searchTerm,
-            taskToEdit
+            searchTerm
         })
     }
 
@@ -104,25 +102,25 @@ export default class TaskMagic extends Component {
             .then(data => {
                 this.setState({
                     searchTerm: '',
+                    contentChoice: null,
                     ...data
                 })
             })
         }
     }
 
-    _shareTask = userToShare => {
-        const taskToEdit = this.state.taskToEdit
-        const currentTask = this.state.currentTask
-        console.log(userToShare, taskToEdit, currentTask)
+    _shareTask = () => {
+        console.log(`sharing ${this.state.currentTask.name} with ${this.state.searchTerm}`)
         fetch(`${urlPrefix}/test-react-share-task`, {
             method: 'post',
-            body: JSON.stringify({username: userToShare, taskID: (taskToEdit && taskToEdit.id) || (currentTask && currentTask.id)}),
+            body: JSON.stringify({username: this.state.searchTerm, taskID: this.state.currentTask.id}),
             headers: {'Content-Type': 'application/json'}
         })
         .then(res => res.json())
         .then(data => {
             this.setState({
-                ...data
+                ...data,
+                contentChoice: null
             })
         })
     }
@@ -156,6 +154,11 @@ export default class TaskMagic extends Component {
         // update search box text to task name
         if (this.state.contentChoice === 2) {
             this._subTask(taskToSelect)
+        } else if (this.state.contentChoice === 12) {
+            this._shareTask()
+        } else if (this.state.contentChoice === 14) {
+            console.log(`deleting task ${taskToSelect.name}`)
+            this._deleteTask(taskToSelect.id)
         } else {
             fetch(`${urlPrefix}/test-react-task`, {
                 method: 'post',
@@ -207,7 +210,7 @@ export default class TaskMagic extends Component {
     }
 
     _deleteTask = iDToDelete => {
-        console.log(`deleting task ${this.state.currentTask.name}`)
+        console.log(`deleting task ${iDToDelete}`)
         fetch(`${urlPrefix}/test-react-delete`, {
             method: 'post', 
             body: JSON.stringify({iDToDelete}),
@@ -288,7 +291,6 @@ export default class TaskMagic extends Component {
                             null]}
                         contentChoice={this.state.contentChoice}
                         updateContent={this._updateContent}
-                        prompt={'Input Task'}
                         searchTerm={this.state.searchTerm}
                         updateSearch={event => this._updateSearch(event.target.value)}
                         onReset={() => this.setState({searchTerm: ''})}
