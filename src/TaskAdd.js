@@ -11,7 +11,7 @@ export default function TaskAdd(props) {
             placeholder={'new task name'} 
             value={props.searchTerm} 
             onChange={props.updateSearch}/>
-            <div className='addTakButtons'>
+            <div className='addTaskButtons'>
                 <input type='reset' value='reset'/>
                 <input type='submit' value='add task'/>
             </div>

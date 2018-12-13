@@ -9,7 +9,6 @@ export default function DashContent(props) {
         null,
         <TaskInfo task={props.task}/>,
         <TaskSearch 
-        searchSubmit={props.action}
         onReset={props.onReset} 
         searchTerm={props.searchTerm} 
         updateSearch={props.updateSearch}

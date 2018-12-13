@@ -3,7 +3,6 @@ import React from 'react'
 export default function TaskSearch(props) {
     return (
         <form className={`TaskSearch`} 
-        onSubmit={props.searchSubmit} 
         onReset={props.onReset} 
         autoComplete='off'>
             <input type='text' 
@@ -13,7 +12,6 @@ export default function TaskSearch(props) {
             onChange={props.updateSearch}/>
             <div className='searchButtons'>
                 <input type='reset' value='reset'/>
-                {/* <input type='submit' value='submit'/> */}
             </div>
         </form>
     )

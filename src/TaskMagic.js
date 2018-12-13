@@ -14,7 +14,6 @@ export default class TaskMagic extends Component {
             children: [],
             user: null,
             userTasks: [],
-            previousTasks: [],
             contentChoice: null
         }
     }
@@ -92,10 +91,8 @@ export default class TaskMagic extends Component {
     }
 
     _addTask() {
-        // find exact matches for search term in all of users tasks
-        const globalSearchResult = this.state.userTasks.filter(task => task.name === this.state.searchTerm)[0]
-        // if there are no matches
-        if (!globalSearchResult) { 
+        const family = [...this.state.parents, this.state.currentTask, ...this.state.children]
+        if (!family.map(task => task.name).includes(this.state.searchTerm)) {
             console.log(`adding new task ${this.state.searchTerm}`)
             // then add the new task
             fetch(`${urlPrefix}/test-react`, { 
@@ -110,16 +107,6 @@ export default class TaskMagic extends Component {
                     ...data
                 })
             })
-        } else {
-            // some global search results found
-            // find exact matches for search result in current task
-            const localSearchResult = this.state.children.filter(task => task.name === this.state.searchTerm)[0]
-            // if there are no current children with search term, add global result
-            if (!localSearchResult) {
-                this._subTask(globalSearchResult)
-            } else {
-                // do nothing
-            }
         }
     }
 
@@ -166,10 +153,6 @@ export default class TaskMagic extends Component {
 
     _selectTask = taskToSelect => {
         console.log(`selecting task ${taskToSelect.name}`)
-        const previousTasks = this.state.previousTasks
-        while (previousTasks.map(task => task.id).includes(taskToSelect.id)) {
-            previousTasks.shift()
-        }
         // update search box text to task name
         fetch(`${urlPrefix}/test-react-task`, {
             method: 'post',
@@ -180,7 +163,6 @@ export default class TaskMagic extends Component {
         .then(data => {
             this.setState({
                 searchTerm: '',
-                previousTasks: [this.state.currentTask, ...previousTasks],
                 contentChoice: null
             }, this.setState({
                 ...data
@@ -220,19 +202,17 @@ export default class TaskMagic extends Component {
         })
     }
 
-    _deleteTask = () => {
+    _deleteTask = iDToDelete => {
         console.log(`deleting task ${this.state.currentTask.name}`)
         fetch(`${urlPrefix}/test-react-delete`, {
             method: 'post', 
-            body: JSON.stringify({iDToDelete: this.state.previousTasks[0]}),
+            body: JSON.stringify({iDToDelete}),
             headers: {'Content-Type': 'application/json'}
         })
         .then(res => res.json())
         .then(data => { 
             this.setState({
-                ...data, 
-                currentTask: this.state.previousTasks[0] || this.state.currentTask, 
-                previousTasks: [...this.state.previousTasks.slice(1, this.state.previousTasks.length - 1)]
+                ...data,
             })
         })
     }
@@ -271,8 +251,9 @@ export default class TaskMagic extends Component {
                         task={this.state.currentTask}
                         actions={[
                             this._goHome, 
-                            this._searchTasks, 
+                            null,
                             event => {
+                                console.log(event)
                                 event.preventDefault()
                                 this._addTask()
                             }, 
@@ -283,10 +264,6 @@ export default class TaskMagic extends Component {
                         prompt={'Input Task'}
                         searchTerm={this.state.searchTerm}
                         updateSearch={event => this._updateSearch(event.target.value)}
-                        searchSubmit={event => {
-                            event.preventDefault()
-                            this._addTask()
-                        }}
                         onReset={() => this.setState({searchTerm: ''})}
                     />
                 </>

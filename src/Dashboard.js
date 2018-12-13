@@ -7,7 +7,6 @@ export default function Dashboard(props) {
         <div className={`Dashboard`}>
             <DashContent 
             action={props.actions[props.contentChoice]} 
-            contentChoice={props.contentChoice}
             {...props}/>
             <DashTools 
             updateContent={props.updateContent} 
