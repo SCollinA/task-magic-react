@@ -177,10 +177,10 @@ export default class TaskMagic extends Component {
         }
     }
 
-    _updateName = taskToUpdate => {
+    _updateName = () => {
         fetch(`${urlPrefix}/test-react-name`, {
             method: 'post',
-            body: JSON.stringify({taskToUpdate, name: this.state.searchTerm}),
+            body: JSON.stringify({taskToUpdate: this.state.currentTask, name: this.state.searchTerm}),
             headers: {'Content-Type': 'application/json'}
         })
         .then(res => res.json())
@@ -276,7 +276,7 @@ export default class TaskMagic extends Component {
                             this._goHome, 
                             null,
                             this._addTask, 
-                            null,
+                            this._updateName,
                             null,
                             null,
                             null,
