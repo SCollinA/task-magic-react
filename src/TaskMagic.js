@@ -251,7 +251,8 @@ export default class TaskMagic extends Component {
                     tasks={(this.state.contentChoice === 2 && 
                                 this.state.userTasks.filter(task => task.name.includes(this.state.searchTerm)).sort((task1, task2) => task1.name > task2.name ? 1 : -1)) ||
                             (this.state.contentChoice === 3 && 
-                                this.state.userTasks.filter(task => !this.state.parents.map(parentTask => parentTask.id).includes(task.id))) ||
+                                this.state.userTasks.filter(task => !this.state.parents.map(parentTask => parentTask.id).includes(task.id))
+                                .filter(task => task.name.includes(this.state.searchTerm)).sort((task1, task2) => task1.name > task2.name ? 1 : -1)) ||
                             ([...this.state.parents, this.state.currentTask, ...this.state.children])}
                     isSearching={this.state.contentChoice === 2 || this.state.contentChoice === 3}
                     selectTask={this._selectTask}
