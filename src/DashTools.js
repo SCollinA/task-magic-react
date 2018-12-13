@@ -4,6 +4,8 @@ export default function DashTools(props) {
     const iconArray = [
         '🏠',
         'ℹ️',
+        '🔎',
+        '➕',
         '💬',
         '🗺',
         '📅',

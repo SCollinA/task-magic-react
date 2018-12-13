@@ -8,12 +8,12 @@ export default function TaskSearch(props) {
         autoComplete='off'>
             <input type='text' 
             name='taskInput' 
-            placeholder={props.prompt} 
+            placeholder={'search task names'} 
             value={props.searchTerm} 
             onChange={props.updateSearch}/>
             <div className='searchButtons'>
                 <input type='reset' value='reset'/>
-                <input type='submit' value='submit'/>
+                {/* <input type='submit' value='submit'/> */}
             </div>
         </form>
     )

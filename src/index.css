@@ -96,11 +96,18 @@ input, button, label {
 .TaskSearch {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 0 10%;
 }
 
 .TaskSearch > input {
   flex: 1;
+}
+
+.TaskAdd {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .Tasks {
@@ -130,6 +137,7 @@ input, button, label {
 
 .currentTask {
   border-color: orange;
+  background-color: rgba(140, 0, 255, 0.1);
 }
 
 .childTask {
@@ -170,14 +178,19 @@ input, button, label {
 
 .toolbarIcon:first-child {
   z-index: 1;
+  border-color: purple;
+  background-color: rgba(51, 255, 0, 0.1);
 }
 
 .toolbarIcon {
   display: inline-block;
   padding: 2%;
   max-width: 50px;
+  /* border-color: grey; */
+  /* background-color: rgba(63, 63, 63, 0.25); */
 }
 
 .toolChoice {
-  border-color: limegreen;
+  border-color: orange;
+  background-color: rgba(140, 0, 255, 0.1);
 }

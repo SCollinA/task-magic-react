@@ -31,7 +31,7 @@ export default class Dashboard extends Component {
                 action={this.props.actions[this.state.contentChoice]} 
                 contentChoice={this.state.contentChoice}
                 {...this.props}/>
-                <DashTools updateContent={this._updateContent}/>
+                <DashTools updateContent={this._updateContent} contentChoice={this.state.contentChoice}/>
             </div>
         )
     }

@@ -1,6 +1,7 @@
 import React from 'react'
 import TaskInfo from './TaskInfo'
 import TaskSearch from './TaskSearch'
+import TaskAdd from './TaskAdd'
 import TaskShare from './TaskShare'
 
 export default function DashContent(props) {
@@ -10,11 +11,15 @@ export default function DashContent(props) {
         <TaskSearch 
         searchSubmit={props.action}
         onReset={props.onReset} 
-        prompt={props.prompt} 
         searchTerm={props.searchTerm} 
         updateSearch={props.updateSearch}
         />,
-        null,
+        <TaskAdd 
+        addTask={props.action}
+        onReset={props.onReset}
+        searchTerm={props.searchTerm}
+        updateSearch={props.updateSearch}
+        />,
         null,
         null,
         null,
