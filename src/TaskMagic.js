@@ -249,6 +249,13 @@ export default class TaskMagic extends Component {
                 register={event => this._register(event.target.form[0].value, event.target.form[1].value)}
                 logout={this._logout}
                 prompt={'Input Task'}
+                searchTerm={this.state.searchTerm}
+                updateSearch={event => this._updateSearch(event.target.value)}
+                searchSubmit={event => {
+                    event.preventDefault()
+                    this._addTask()
+                }}
+                onReset={() => this.setState({searchTerm: ''})}
                 />
 
                 {this.state.user && 
@@ -257,7 +264,7 @@ export default class TaskMagic extends Component {
                     parents={this.state.parents}
                     currentTask={this.state.currentTask}
                     children={this.state.children}
-                    searchTasks={(this.state.searchTerm !== '' && this.state.userTasks.filter(task => task.name.includes(this.state.searchTerm))) || []}
+                    searchTasks={(this.state.searchTerm !== '' && this.state.userTasks.filter(task => task.name.includes(this.state.searchTerm))) || false}
                     selectTask={this._selectTask}
                     completeTask={this._completeTask}
                     />

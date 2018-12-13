@@ -11,7 +11,12 @@ export default function UserInput(props) {
             register={props.register} 
             logout={props.logout}/>
             {props.user && (
-                <TaskSearch prompt={props.prompt}/>
+                <TaskSearch 
+                prompt={props.prompt} 
+                searchTerm={props.searchTerm} 
+                updateSearch={props.updateSearch} 
+                searchSubmit={props.searchSubmit}
+                onReset={props.onReset}/>
             )}
         </div>
     )

@@ -96,13 +96,11 @@ input, button, label {
 .TaskSearch {
   display: flex;
   justify-content: space-between;
-  /* font-size: 2rem; */
-  /* min-height: fit-content; */
+  padding: 0 10%;
 }
 
 .TaskSearch > input {
   flex: 1;
-  text-align: center;
 }
 
 .Tasks {
@@ -121,6 +119,10 @@ input, button, label {
   font-size: 3em;
 }
 
+.searchTask {
+  border-color: limegreen;
+}
+
 .parentTask {
   border-color: purple; 
   background-color: rgba(59, 253, 0, 0.075);
@@ -128,6 +130,10 @@ input, button, label {
 
 .currentTask {
   border-color: orange;
+}
+
+.childTask {
+  border-color: grey;
 }
 
 .childNames {
