@@ -14,7 +14,8 @@ export default class TaskMagic extends Component {
             children: [],
             user: null,
             userTasks: [],
-            previousTasks: []
+            previousTasks: [],
+            contentChoice: 1
         }
     }
 
@@ -50,6 +51,18 @@ export default class TaskMagic extends Component {
         fetch(`${urlPrefix}/logout`)
         .then(res => res.json())
         .then(data => this.setState({...data}))
+    }
+
+
+    _updateContent = contentIndex => {
+        console.log(`updating content to ${contentIndex}`)
+        this.setState({
+            contentChoice: contentIndex
+        }, () => {
+            if (this.state.contentChoice === 0) {
+                this._goHome()
+            }
+        })
     }
 
     _updateSearch = searchTerm => {
@@ -246,6 +259,8 @@ export default class TaskMagic extends Component {
                         }, 
                         this._shareTask, 
                         this._deleteTask]}
+                    contentChoice={this.state.contentChoice}
+                    updateContent={this._updateContent}
                     prompt={'Input Task'}
                     searchTerm={this.state.searchTerm}
                     updateSearch={event => this._updateSearch(event.target.value)}
