@@ -175,6 +175,7 @@ input, button, label {
 
 .toolbarIcon {
   display: inline-block;
+  padding: 5%;
 }
 
 .toolChoice {

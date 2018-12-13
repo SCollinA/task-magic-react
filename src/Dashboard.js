@@ -9,6 +9,9 @@ export default class Dashboard extends Component {
         this.state = {
             contentChoice: 1
         }
+        this.goHome = props.actions[0]
+        this.shareTask = props.actions[1]
+        this.deleteTask = props.actions[2]
     }
 
     componentDidMount() {
@@ -23,9 +26,9 @@ export default class Dashboard extends Component {
             contentChoice: contentIndex
         }, () => {
             if (contentIndex === 0) {
-                this.props.goHome()
+                this.goHome()
             } else if (contentIndex === 12){
-                this.props.deleteTask(this.props.task.id)
+                this.deleteTask()
             }
         })
     }

@@ -6,9 +6,9 @@ export default function Tasks(props) {
     return (
         <div className={`Tasks`}>
             {(!props.searchTasks && 
-               <>{props.parents.map(task => {
+               <>{props.parents.map((task, index, arr) => {
                     return (
-                        <Task key={task.id} className='parentTask' 
+                        <Task key={task.id} className='parentTask' z_index={1}
                         task={task} 
                         family={family}
                         selectTask={props.selectTask}
@@ -16,16 +16,16 @@ export default function Tasks(props) {
                     )
                 })}
 
-                <Task key={props.currentTask.id} className='currentTask' 
+                <Task key={props.currentTask.id} className='currentTask' z_index={1000}
                 task={props.currentTask} 
                 family={family}
                 selectTask={props.selectTask}
                 completeTask={props.completeTask}
                 />
 
-                {props.children.map(task => {
+                {props.children.map((task, index, arr) => {
                     return (
-                        <Task key={task.id} className='childTask' 
+                        <Task key={task.id} className='childTask' z_index={arr.length - index}
                         task={task} 
                         family={family}
                         selectTask={props.selectTask}

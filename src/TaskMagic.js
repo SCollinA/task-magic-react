@@ -14,7 +14,7 @@ export default class TaskMagic extends Component {
             children: [],
             user: null,
             userTasks: [],
-            taskToEdit: null
+            previousTasks: []
         }
     }
 
@@ -22,7 +22,6 @@ export default class TaskMagic extends Component {
         fetch(`${urlPrefix}/test-react`)
         .then(res => res.json())
         .then(data => this.setState({...data}))
-        // .then(() => this.state.user && this._getAllTasks())
     }
 
     _login = (username, password) => {
@@ -59,16 +58,7 @@ export default class TaskMagic extends Component {
         this.setState({
             searchTerm,
             taskToEdit
-        }
-        // , () => {
-        //     console.log('updated search term')
-        //     if (this.state.taskToEdit) {
-        //         this.setState({
-        //             currentTask: {...this.state.currentTask, name: this.state.searchTerm}
-        //         }, () => console.log('edited current task name'))   
-        //     }
-        // }
-        )
+        })
     }
 
     _resetSearch = () => {
@@ -160,6 +150,10 @@ export default class TaskMagic extends Component {
 
     _selectTask = taskToSelect => {
         console.log(`selecting task ${taskToSelect.name}`)
+        const previousTasks = this.state.previousTasks
+        while (previousTasks.map(task => task.id).includes(taskToSelect.id)) {
+            previousTasks.shift()
+        }
         // update search box text to task name
         fetch(`${urlPrefix}/test-react-task`, {
             method: 'post',
@@ -169,30 +163,31 @@ export default class TaskMagic extends Component {
         .then(res => res.json())
         .then(data => {
             this.setState({
-                ...data,
                 searchTerm: '',
-                taskToEdit: null
-            })
+                previousTasks: [this.state.currentTask, ...previousTasks]
+            }, this.setState({
+                ...data
+            }))
         })
     }
 
-    _editTask = taskToEdit => {
-        console.log(`editing task ${taskToEdit.name}`)
-        // if there is no current task to edit, OR this is a new taskToEdit
-        if (!this.state.taskToEdit || taskToEdit.id !== this.state.taskToEdit.id) {
-            this.setState({
-                searchTerm: taskToEdit.name,
-                taskToEdit
-            })
-        } else {
-            // this._selectTask(taskToEdit)
-            // there is a current task and this task to edit is already being edited, so deselect
-            this.setState({
-                searchTerm: '',
-                taskToEdit: null
-            })
-        }
-    }
+    // _editTask = taskToEdit => {
+    //     console.log(`editing task ${taskToEdit.name}`)
+    //     // if there is no current task to edit, OR this is a new taskToEdit
+    //     if (!this.state.taskToEdit || taskToEdit.id !== this.state.taskToEdit.id) {
+    //         this.setState({
+    //             searchTerm: taskToEdit.name,
+    //             taskToEdit
+    //         })
+    //     } else {
+    //         // this._selectTask(taskToEdit)
+    //         // there is a current task and this task to edit is already being edited, so deselect
+    //         this.setState({
+    //             searchTerm: '',
+    //             taskToEdit: null
+    //         })
+    //     }
+    // }
 
     _updateName = taskToUpdate => {
         fetch(`${urlPrefix}/test-react-name`, {
@@ -226,15 +221,21 @@ export default class TaskMagic extends Component {
         })
     }
 
-    _deleteTask = iDToDelete => {
-        console.log(`deleting task id ${iDToDelete}`)
+    _deleteTask = () => {
+        console.log(`deleting task ${this.state.currentTask.name}`)
         fetch(`${urlPrefix}/test-react-delete`, {
             method: 'post', 
-            body: JSON.stringify({iDToDelete}),
+            body: JSON.stringify({iDToDelete: this.state.previousTasks[0]}),
             headers: {'Content-Type': 'application/json'}
         })
         .then(res => res.json())
-        .then(data => { this.setState({...data})})
+        .then(data => { 
+            this.setState({
+                ...data, 
+                currentTask: this.state.previousTasks[0] || this.state.currentTask, 
+                previousTasks: [...this.state.previousTasks.slice(1, this.state.previousTasks.length - 1)]
+            })
+        })
     }
 
     render() {
@@ -270,7 +271,7 @@ export default class TaskMagic extends Component {
                     />
                     <Dashboard
                     task={this.state.currentTask}
-                    goHome={this._goHome}
+                    actions={[this._goHome, this._shareTask, this._deleteTask]}
                     />
                 </>
                 }
