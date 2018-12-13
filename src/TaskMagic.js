@@ -177,7 +177,8 @@ export default class TaskMagic extends Component {
         .then(data => {
             this.setState({
                 searchTerm: '',
-                previousTasks: [this.state.currentTask, ...previousTasks]
+                previousTasks: [this.state.currentTask, ...previousTasks],
+                contentChoice: 1
             }, this.setState({
                 ...data
             }))

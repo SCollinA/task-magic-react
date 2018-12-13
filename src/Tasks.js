@@ -17,7 +17,7 @@ export default function Tasks(props) {
                 )
             })}
 
-            {props.children.length !== 0 && (
+            {(props.children.length !== 0 || props.parents.length !== 0) && (
             <Task key={props.currentTask.id} className='currentTask' z_index={1000}
             task={props.currentTask} 
             family={family}

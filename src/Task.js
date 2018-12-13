@@ -9,7 +9,7 @@ export default function Task(props) {
             props.selectTask(props.task)
         }}>
             <h1 className='taskName'>{props.task.name}</h1>
-            <div className="childNames" 
+            {/* <div className="childNames" 
             onClick={() => {
                 console.log(`${props.task.name} selected`)
                 props.selectTask(props.task)
@@ -18,7 +18,7 @@ export default function Task(props) {
                         props.task.children.map(child => child.active && child.name)
                         .filter(child => child !== false).join(', ')}
                 </p>
-            </div>
+            </div> */}
             {(props.className !== 'searchTask' && (
                 <div className={`checkbox hackerStyle ${(props.task.active && 'activeTask') || 'completeTask'}`}
                     onClick={event => {
