@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import UserInput from './UserInput'
 import Tasks from './Tasks';
 import Dashboard from './Dashboard'
-const urlPrefix = '/api'
 
 export default class TaskMagic extends Component {
     constructor(props) {
@@ -19,13 +18,13 @@ export default class TaskMagic extends Component {
     }
 
     componentDidMount() {
-        fetch(`${urlPrefix}/test-react`)
+        fetch(`test-react`)
         .then(res => res.json())
         .then(data => this.setState({...data}))
     }
 
     _login = (username, password) => {
-        fetch(`${urlPrefix}/login`, {
+        fetch(`login`, {
             method: 'post',
             body: JSON.stringify({username, password}),
             headers: {'Content-Type': 'application/json'}
@@ -36,7 +35,7 @@ export default class TaskMagic extends Component {
     }
 
     _register = (username, password) => { 
-        fetch(`${urlPrefix}/register`, {
+        fetch(`register`, {
             method: 'post',
             body: JSON.stringify({username, password}),
             headers: {'Content-Type': 'application/json'}
@@ -47,7 +46,7 @@ export default class TaskMagic extends Component {
     }
 
     _logout = () => {
-        fetch(`${urlPrefix}/logout`)
+        fetch(`logout`)
         .then(res => res.json())
         .then(data => this.setState({...data}))
     }
@@ -109,13 +108,13 @@ export default class TaskMagic extends Component {
         if (!family.map(task => task.name).includes(this.state.searchTerm)) {
             console.log(`adding new task ${this.state.searchTerm}`)
             // then add the new task
-            fetch(`${urlPrefix}/test-react`, { 
+            fetch(`test-react`, { 
                 method: 'post', 
                 body: JSON.stringify({taskName: this.state.searchTerm}),
                 headers: {'Content-Type': 'application/json'}
             })
             .then(res => res.json())
-            .then(data => {
+            .then(data => { 
                 this.setState({
                     searchTerm: '',
                     contentChoice: null,
@@ -127,7 +126,7 @@ export default class TaskMagic extends Component {
 
     _shareTask = () => {
         console.log(`sharing ${this.state.currentTask.name} with ${this.state.searchTerm}`)
-        fetch(`${urlPrefix}/test-react-share-task`, {
+        fetch(`test-react-share-task`, {
             method: 'post',
             body: JSON.stringify({username: this.state.searchTerm, taskID: this.state.currentTask.id}),
             headers: {'Content-Type': 'application/json'}
@@ -145,7 +144,7 @@ export default class TaskMagic extends Component {
         const taskExists = this.state.children.map(child => child.id).filter(childID => childID === taskToSubtask.id)
         if (taskExists.length === 0) {
             console.log(`adding existing task ${taskToSubtask.name}`)
-            fetch(`${urlPrefix}/test-react-sub-task`, { 
+            fetch(`test-react-sub-task`, { 
                 method: 'post', 
                 body: JSON.stringify({taskID: taskToSubtask.id}),
                 headers: {'Content-Type': 'application/json'}
@@ -176,7 +175,7 @@ export default class TaskMagic extends Component {
             console.log(`deleting task ${taskToSelect.name}`)
             this._deleteTask(taskToSelect.id)
         } else {
-            fetch(`${urlPrefix}/test-react-task`, {
+            fetch(`test-react-task`, {
                 method: 'post',
                 body: JSON.stringify({taskToSelect}),
                 headers: {'Content-Type': 'application/json'}
@@ -193,7 +192,7 @@ export default class TaskMagic extends Component {
     }
 
     _updateName = () => {
-        fetch(`${urlPrefix}/test-react-name`, {
+        fetch(`test-react-name`, {
             method: 'post',
             body: JSON.stringify({taskToUpdate: this.state.currentTask, name: this.state.searchTerm}),
             headers: {'Content-Type': 'application/json'}
@@ -209,7 +208,7 @@ export default class TaskMagic extends Component {
     }
 
     _completeTask = taskToComplete => {
-        fetch(`${urlPrefix}/test-react-complete`, {
+        fetch(`test-react-complete`, {
             method: 'post',
             body: JSON.stringify(taskToComplete),
             headers: {'Content-Type': 'application/json'}
@@ -226,7 +225,7 @@ export default class TaskMagic extends Component {
 
     _deleteTask = iDToDelete => {
         console.log(`deleting task ${iDToDelete}`)
-        fetch(`${urlPrefix}/test-react-delete`, {
+        fetch(`test-react-delete`, {
             method: 'post', 
             body: JSON.stringify({iDToDelete}),
             headers: {'Content-Type': 'application/json'}
